@@ -1,0 +1,14 @@
+format_version: v1.0
+configName: default
+folderName: Purnell
+frameworkPath: C:\Users\IEC120266\Desktop\Purnell_PDB
+processor: ATSAMD20J18
+projectName: Purnell
+settings:
+  PackageFilter: ''
+  FORCE_OPTIMIZATION: 'false'
+  GENERATE_BACKUP: 'true'
+  TRUSTZONE: 'false'
+  CMSISPath: dev_packs\arm\CMSIS\5.8.0
+  MERGE_STRATEGY: USER_ALL
+  DFPPath: dev_packs\Microchip\SAMD20_DFP\3.6.112\samd20\atdf\ATSAMD20J18.atdf
