@@ -130,6 +130,8 @@ void CLOCK_Initialize (void)
     GCLK0_Initialize();
 
 
+    /* Selection of the Generator and write Lock for SERCOM0_CORE */
+    GCLK_REGS->GCLK_CLKCTRL = GCLK_CLKCTRL_ID(13U) | GCLK_CLKCTRL_GEN(0x0U)  | GCLK_CLKCTRL_CLKEN_Msk;
 
     /* Configure the AHB Bridge Clocks */
     PM_REGS->PM_AHBMASK = 0x1fU;
@@ -138,6 +140,9 @@ void CLOCK_Initialize (void)
     /* Configure the APBB Bridge Clocks */
     PM_REGS->PM_APBBMASK = 0x1fU;
 
+
+    /* Configure the APBC Bridge Clocks */
+    PM_REGS->PM_APBCMASK = 0x10004U;
 
 
 

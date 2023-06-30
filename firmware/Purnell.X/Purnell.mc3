@@ -1304,6 +1304,10 @@
          <hash>1ff149b6d30be0d51a015b7700f1ef85b6fa3169c1246944108803b9a85905f8</hash>
       </entry>
       <entry>
+         <file>..\src\config\default\peripheral\sercom\i2c_master\plib_sercom0_i2c_master.c</file>
+         <hash>d722d4dce81e340a17e0d0464c11683e12d3f269567c4c4ee54b2a97203de70a</hash>
+      </entry>
+      <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\sercom0.h</file>
          <hash>5471314d5c687d893c6f0e729daf8f9505cdb2efd9ee48e30403b6a48f9194c0</hash>
       </entry>
@@ -1313,7 +1317,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\nvic\plib_nvic.c</file>
-         <hash>056a589ef1f8f3bbb9c37fd4685b97207b957116104636b2ead4e442cc135a46</hash>
+         <hash>4a808506b4008dedec6eb8827d729fd98c758c5dfc85772332c3ae4a61cc3221</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\fuses.h</file>
@@ -1328,8 +1332,16 @@
          <hash>f28119adbc81fb0e3c957c9aebe8fb423ad93634e76ead3caa2b0818d2e123ae</hash>
       </entry>
       <entry>
+         <file>..\src\config\default\peripheral\sercom\i2c_master\plib_sercom_i2c_master_common.h</file>
+         <hash>f167b04b3c6a0f83fe41b7b6f810cbf0a48b8ca7d5a747b76463dd53d3c1a2a2</hash>
+      </entry>
+      <entry>
          <file>..\src\config\default\device_cache.h</file>
          <hash>e2914501b361bbc93a56d6915b1bf4fac00277e61f31fdee87a587bc15dea5b6</hash>
+      </entry>
+      <entry>
+         <file>..\src\config\default\peripheral\sercom\i2c_master\plib_sercom0_i2c_master.h</file>
+         <hash>fdcff8b434a7a24c6b9af1f83c5bb45b281a4fdfc8f338b2c3a5691f1790775a</hash>
       </entry>
       <entry>
          <file>..\src\packs\CMSIS\CMSIS\Core\Include\core_cm0plus.h</file>
@@ -1353,7 +1365,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\interrupts.h</file>
-         <hash>82c38c865926d077afa6cf0ba929acdaad72aed83c3b52dacd93e912a2d671d8</hash>
+         <hash>b5e92a181c9682e74aeaa8317dd9d16ba41d3ddade731de8dad36fa944056563</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\gclk.h</file>
@@ -1381,7 +1393,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\clock\plib_clock.c</file>
-         <hash>1ba552774d3a377beee3e477505edca34843d30c686636a4fcb4978804eaee83</hash>
+         <hash>702255bd81cb7fbc8c4a25173a17cea4961aeede560373fcb9189ba74be41ac8</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\tc3.h</file>
@@ -1393,7 +1405,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\interrupts.c</file>
-         <hash>85a2a06c91ce0b54b9084a319fa713953f2824b23f1b060e4e3ba31116ff20fa</hash>
+         <hash>09598d9812da2c1591e4e3f72aabb26e8dbe692c74b752968bef3347ea332d1c</hash>
       </entry>
       <entry>
          <file>..\src\packs\CMSIS\CMSIS\Core\Include\cmsis_armclang_ltm.h</file>
@@ -1413,7 +1425,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\port\plib_port.h</file>
-         <hash>0c59b2ad28840768668144480a9be17ee83ecc468fac3863da2d69cb670e1517</hash>
+         <hash>0012ac1ae2f64b66b179598bb6710c0f6ac3a09902cc15efc06cc3ebf319f488</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\adc.h</file>
@@ -1449,7 +1461,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\port\plib_port.c</file>
-         <hash>989c0672607ff55b62b6f7d7733b24d7b4b2f9b0d95959ba29ba44a85a2a0a9b</hash>
+         <hash>e0f1f4c54a60ff6400036a24980bacd9b15f917473e78cc7c50fb0022e4e34dd</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\dsu.h</file>
@@ -1489,7 +1501,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\pin_configurations.csv</file>
-         <hash>638806ff5f63e1f18fbb25a785725c7098e300fc472df0cfcde82fbbc7b5caaa</hash>
+         <hash>89224d2a1584d7d6377944b571158c06384bed0bead6fff2493382db68715f05</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\eic.h</file>
@@ -1505,7 +1517,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\initialization.c</file>
-         <hash>63957e04a6825219908da2a6e7afb4966c0c2921512601effbe17f0bacc9f551</hash>
+         <hash>3a4ff7b3e42c0b3975f668a5ca7c49b96902995a11cb60b68644ea5c80e57965</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\dac.h</file>
@@ -1545,7 +1557,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\definitions.h</file>
-         <hash>86d3c99f619eec3756c4b8f854221dafd21ae2e1e8abd28b27e867883be2ee4a</hash>
+         <hash>1cd2ce9400996ab8af1db93f2bfae6a333e51e1f965baf00aa4991ab1054a075</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\tc.h</file>
