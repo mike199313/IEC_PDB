@@ -1,0 +1,8 @@
+firmware/Purnell.X/nbproject/*.mk
+firmware/Purnell.X/nbproject/Makefile-genesis.properties
+
+firmware/Purnell.X/.generated_files/flags/default/
+
+# Biuld 
+firmware/Purnell.X/build/
+firmware/Purnell.X/dist/
