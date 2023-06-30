@@ -53,6 +53,7 @@
             <itemPath>../src/packs/ATSAMD20J18_DFP/component/adc.h</itemPath>
             <itemPath>../src/packs/ATSAMD20J18_DFP/component/tc.h</itemPath>
             <itemPath>../src/packs/ATSAMD20J18_DFP/component/rtc.h</itemPath>
+            <itemPath>../src/packs/ATSAMD20J18_DFP/component/wdt.h</itemPath>
           </logicalFolder>
           <logicalFolder name="instance" displayName="instance" projectFiles="true">
             <itemPath>../src/packs/ATSAMD20J18_DFP/instance/sercom3.h</itemPath>
@@ -85,8 +86,31 @@
             <itemPath>../src/packs/ATSAMD20J18_DFP/instance/sercom2.h</itemPath>
             <itemPath>../src/packs/ATSAMD20J18_DFP/instance/dsu.h</itemPath>
             <itemPath>../src/packs/ATSAMD20J18_DFP/instance/ptc.h</itemPath>
+            <itemPath>../src/packs/ATSAMD20J18_DFP/instance/rtc.h</itemPath>
+            <itemPath>../src/packs/ATSAMD20J18_DFP/instance/sysctrl.h</itemPath>
+          </logicalFolder>
+          <logicalFolder name="pio" displayName="pio" projectFiles="true">
+            <itemPath>../src/packs/ATSAMD20J18_DFP/pio/samd20j18.h</itemPath>
           </logicalFolder>
           <itemPath>../src/packs/ATSAMD20J18_DFP/samd20j18.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
+          <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
+            <logicalFolder name="Core" displayName="Core" projectFiles="true">
+              <logicalFolder name="Include" displayName="Include" projectFiles="true">
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cachel1_armv7.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/core_cm0plus.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang_ltm.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_iccarm.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armcc.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_version.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_gcc.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/mpu_armv7.h</itemPath>
+              </logicalFolder>
+            </logicalFolder>
+          </logicalFolder>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
