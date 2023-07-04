@@ -29,16 +29,16 @@
 32,PA15,GPIO_PA15,GPIO,Digital,High Impedance,n/a,No,No,NORMAL
 35,PA16,,SERCOM1_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
 36,PA17,,SERCOM1_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
-37,PA18,,Available,,,,,,NORMAL
-38,PA19,,Available,,,,,,NORMAL
+37,PA18,GPIO_PA18,GPIO,Digital,High Impedance,n/a,No,No,NORMAL
+38,PA19,GPIO_PA19,GPIO,Digital,High Impedance,n/a,No,No,NORMAL
 39,PB16,,SERCOM5_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
 40,PB17,,SERCOM5_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
-41,PA20,,Available,,,,,,NORMAL
-42,PA21,,Available,,,,,,NORMAL
+41,PA20,GPIO_PA20,GPIO,Digital,High Impedance,n/a,No,No,NORMAL
+42,PA21,GPIO_PA21,GPIO,Digital,High Impedance,n/a,No,No,NORMAL
 43,PA22,,SERCOM3_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
 44,PA23,,SERCOM3_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
-45,PA24,,Available,,,,,,NORMAL
-46,PA25,,Available,,,,,,NORMAL
+45,PA24,GPIO_PA24,GPIO,Digital,High Impedance,n/a,No,No,NORMAL
+46,PA25,GPIO_PA25,GPIO,Digital,High Impedance,n/a,No,No,NORMAL
 49,PB22,,Available,,,,,,NORMAL
 50,PB23,,Available,,,,,,NORMAL
 51,PA27,,Available,,,,,,NORMAL
