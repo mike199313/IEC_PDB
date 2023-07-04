@@ -8839,7 +8839,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\port\plib_port.h</file>
-         <hash>b5d06286fc48a49e6083ebe3f8342cd829020760f49a0e97e741deeb2b20c960</hash>
+         <hash>2f087124cd0772583e2d8736aa93cc07be0f8d8286028f1e5fcda62d2b4c0645</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\adc.h</file>
@@ -8875,7 +8875,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\port\plib_port.c</file>
-         <hash>40c24f5cb81f0107bf6c1ef74b948f9b44647bd19f6051a1266bbe2d4814558a</hash>
+         <hash>29bbd9b964d080bc7623db524eca07f11d9e7c3f245f133ec098f1929663d886</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\dsu.h</file>
@@ -8903,7 +8903,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\pin_configurations.csv</file>
-         <hash>00a3b1f40d305c7d7a74e26d7b380d2df00d2aa6d4fad553a760bf4f60bf04d7</hash>
+         <hash>b063bc374c1f125a3b5a27a78c5854ecc3df06f1f532bdca46716925885c9e30</hash>
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\usart\plib_sercom5_usart.h</file>
