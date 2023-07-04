@@ -48,6 +48,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include "peripheral/sercom/i2c_slave/plib_sercom3_i2c_slave.h"
 #include "peripheral/nvmctrl/plib_nvmctrl.h"
 #include "peripheral/sercom/i2c_slave/plib_sercom2_i2c_slave.h"
 #include "peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.h"
