@@ -27,6 +27,10 @@
                 <itemPath>../src/config/default/peripheral/sercom/i2c_master/plib_sercom_i2c_master_common.h</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_master/plib_sercom0_i2c_master.h</itemPath>
               </logicalFolder>
+              <logicalFolder name="i2c_slave" displayName="i2c_slave" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom_i2c_slave_common.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.h</itemPath>
+              </logicalFolder>
             </logicalFolder>
           </logicalFolder>
           <itemPath>../src/config/default/device_cache.h</itemPath>
@@ -59,7 +63,6 @@
             <itemPath>../src/packs/ATSAMD20J18_DFP/component/adc.h</itemPath>
             <itemPath>../src/packs/ATSAMD20J18_DFP/component/tc.h</itemPath>
             <itemPath>../src/packs/ATSAMD20J18_DFP/component/rtc.h</itemPath>
-            <itemPath>../src/packs/ATSAMD20J18_DFP/component/wdt.h</itemPath>
           </logicalFolder>
           <logicalFolder name="instance" displayName="instance" projectFiles="true">
             <itemPath>../src/packs/ATSAMD20J18_DFP/instance/sercom3.h</itemPath>
@@ -92,31 +95,8 @@
             <itemPath>../src/packs/ATSAMD20J18_DFP/instance/sercom2.h</itemPath>
             <itemPath>../src/packs/ATSAMD20J18_DFP/instance/dsu.h</itemPath>
             <itemPath>../src/packs/ATSAMD20J18_DFP/instance/ptc.h</itemPath>
-            <itemPath>../src/packs/ATSAMD20J18_DFP/instance/rtc.h</itemPath>
-            <itemPath>../src/packs/ATSAMD20J18_DFP/instance/sysctrl.h</itemPath>
-          </logicalFolder>
-          <logicalFolder name="pio" displayName="pio" projectFiles="true">
-            <itemPath>../src/packs/ATSAMD20J18_DFP/pio/samd20j18.h</itemPath>
           </logicalFolder>
           <itemPath>../src/packs/ATSAMD20J18_DFP/samd20j18.h</itemPath>
-        </logicalFolder>
-        <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
-          <logicalFolder name="CMSIS" displayName="CMSIS" projectFiles="true">
-            <logicalFolder name="Core" displayName="Core" projectFiles="true">
-              <logicalFolder name="Include" displayName="Include" projectFiles="true">
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cachel1_armv7.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/core_cm0plus.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang_ltm.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_iccarm.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armcc.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_version.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_gcc.h</itemPath>
-                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/mpu_armv7.h</itemPath>
-              </logicalFolder>
-            </logicalFolder>
-          </logicalFolder>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
@@ -153,6 +133,9 @@
             <logicalFolder name="sercom" displayName="sercom" projectFiles="true">
               <logicalFolder name="i2c_master" displayName="i2c_master" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/i2c_master/plib_sercom0_i2c_master.c</itemPath>
+              </logicalFolder>
+              <logicalFolder name="i2c_slave" displayName="i2c_slave" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.c</itemPath>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>

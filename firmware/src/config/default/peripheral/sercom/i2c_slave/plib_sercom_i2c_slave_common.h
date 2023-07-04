@@ -6,20 +6,19 @@
     Microchip Technology Inc.
 
   File Name
-    plib_sercom_i2c_master.h
+    plib_sercom_i2c_slave_common.h
 
   Summary
-    SERCOM I2C peripheral library interface.
+    SERCOM I2C Slave Common definitions file.
 
   Description
-    This file defines the interface to the SERCOM I2C peripheral library. This
+    This file defines the definitions for the SERCOM I2C Slave interface. This
     library provides access to and control of the associated peripheral
     instance.
 
   Remarks:
 
 *******************************************************************************/
-
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
 * Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
@@ -45,8 +44,8 @@
 *******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef PLIB_SERCOM_I2C_MASTER_H
-#define PLIB_SERCOM_I2C_MASTER_H
+#ifndef PLIB_SERCOM_I2C_SLAVE_COMMON_H
+#define PLIB_SERCOM_I2C_SLAVE_COMMON_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -69,6 +68,22 @@
 
 // *****************************************************************************
 // *****************************************************************************
+// Section:Preprocessor macros
+// *****************************************************************************
+// *****************************************************************************
+// *****************************************************************************
+
+// *****************************************************************************
+/* I2C Error convenience macros */
+// *****************************************************************************
+// *****************************************************************************
+
+#define SERCOM_I2C_SLAVE_ERROR_BUSERR  SERCOM_I2CS_STATUS_BUSERR_Msk
+#define SERCOM_I2C_SLAVE_ERROR_COLL SERCOM_I2CS_STATUS_COLL_Msk
+#define SERCOM_I2C_SLAVE_ERROR_ALL (SERCOM_I2C_SLAVE_ERROR_BUSERR | SERCOM_I2C_SLAVE_ERROR_COLL  )
+
+// *****************************************************************************
+// *****************************************************************************
 // Section: Data Types
 // *****************************************************************************
 // *****************************************************************************
@@ -86,77 +101,57 @@
     None.
 */
 
-enum
+typedef enum
 {
-    I2C_TRANSFER_WRITE = 0,
-    I2C_TRANSFER_READ  = 1,
-};
+    /* I2C Master is writing to slave */
+    SERCOM_I2C_SLAVE_TRANSFER_DIR_WRITE = 0,
 
-// *****************************************************************************
-/* SERCOM I2C Error.
-
-  Summary:
-    Defines the possible errors that the SERCOM I2C peripheral can generate.
-
-  Description:
-    This enum defines the possible error the SERCOM I2C peripheral can generate.
-    An error of this type is returned by the SERCOMx_I2C_ErrorGet() function.
-
-  Remarks:
-    None.
-*/
+    /* I2C Master is reading from slave */
+    SERCOM_I2C_SLAVE_TRANSFER_DIR_READ  = 1,
+}SERCOM_I2C_SLAVE_TRANSFER_DIR;
 
 typedef enum
 {
-    /* No error has occurred. */
-    SERCOM_I2C_ERROR_NONE,
-
-    /* A bus transaction was NAK'ed */
-    SERCOM_I2C_ERROR_NAK,
-
-    /* A bus error has occurred. */
-    SERCOM_I2C_ERROR_BUS,
-
-} SERCOM_I2C_ERROR;
-
-// *****************************************************************************
-/* SERCOM I2C State.
-
-   Summary:
-    SERCOM I2C PLib Task State.
-
-   Description:
-    This data type defines the SERCOM I2C PLib Task State.
-
-   Remarks:
-    None.
-*/
+    SERCOM_I2C_SLAVE_ACK_ACTION_SEND_ACK = 0,
+    SERCOM_I2C_SLAVE_ACK_ACTION_SEND_NAK,
+}SERCOM_I2C_SLAVE_ACK_ACTION_SEND;
 
 typedef enum
 {
-    /* SERCOM PLib Task Error State */
-    SERCOM_I2C_STATE_ERROR = -1,
+    SERCOM_I2C_SLAVE_INTFLAG_PREC = SERCOM_I2CS_INTFLAG_PREC_Msk,
+    SERCOM_I2C_SLAVE_INTFLAG_AMATCH = SERCOM_I2CS_INTFLAG_AMATCH_Msk,
+    SERCOM_I2C_SLAVE_INTFLAG_DRDY = SERCOM_I2CS_INTFLAG_DRDY_Msk,
+}SERCOM_I2C_SLAVE_INTFLAG;
 
-    /* SERCOM PLib Task Idle State */
-    SERCOM_I2C_STATE_IDLE,
+typedef enum
+{
+    SERCOM_I2C_SLAVE_ACK_STATUS_RECEIVED_ACK = 0,
+    SERCOM_I2C_SLAVE_ACK_STATUS_RECEIVED_NAK,
+}SERCOM_I2C_SLAVE_ACK_STATUS;
 
-    /* SERCOM PLib Task Address Send State */
-    SERCOM_I2C_STATE_ADDR_SEND,
+typedef enum
+{
+    SERCOM_I2C_SLAVE_TRANSFER_EVENT_NONE = 0,
+    SERCOM_I2C_SLAVE_TRANSFER_EVENT_ADDR_MATCH,
 
-    SERCOM_I2C_REINITIATE_TRANSFER,
-    /* SERCOM PLib Task Read Transfer State */
-    SERCOM_I2C_STATE_TRANSFER_READ,
+    /* Data sent by I2C Master is available */
+    SERCOM_I2C_SLAVE_TRANSFER_EVENT_RX_READY,
 
-    /* SERCOM PLib Task Write Transfer State */
-    SERCOM_I2C_STATE_TRANSFER_WRITE,
+    /* I2C slave can respond to data read request from I2C Master */
+    SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY,
 
-    /* SERCOM PLib Task High Speed Slave Address Send State */
-    SERCOM_I2C_STATE_TRANSFER_ADDR_HS,
+    SERCOM_I2C_SLAVE_TRANSFER_EVENT_STOP_BIT_RECEIVED,
+}SERCOM_I2C_SLAVE_TRANSFER_EVENT;
 
-    /* SERCOM PLib Task Transfer Done State */
-    SERCOM_I2C_STATE_TRANSFER_DONE,
+typedef enum
+{
+    SERCOM_I2C_SLAVE_COMMAND_SEND_ACK = 0,
+    SERCOM_I2C_SLAVE_COMMAND_SEND_NAK,
+    SERCOM_I2C_SLAVE_COMMAND_RECEIVE_ACK_NAK,
+    SERCOM_I2C_SLAVE_COMMAND_WAIT_FOR_START,
+}SERCOM_I2C_SLAVE_COMMAND;
 
-} SERCOM_I2C_STATE;
+typedef uint32_t SERCOM_I2C_SLAVE_ERROR;
 
 // *****************************************************************************
 /* SERCOM I2C Callback
@@ -171,12 +166,7 @@ typedef enum
     None.
 */
 
-typedef void (*SERCOM_I2C_CALLBACK)
-(
-    /*Transfer context*/
-    uintptr_t contextHandle
-
-);
+typedef bool (*SERCOM_I2C_SLAVE_CALLBACK) ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
 
 // *****************************************************************************
 /* SERCOM I2C PLib Instance Object
@@ -193,61 +183,19 @@ typedef void (*SERCOM_I2C_CALLBACK)
 
 typedef struct
 {
-    bool                        isHighSpeed;
+    bool                        isBusy;
 
-    bool                        txMasterCode;
+    bool                        isRepeatedStart;
 
-    bool                        transferDir;
-
-    uint16_t                    address;
-
-    uint8_t                     masterCode;
-
-    uint8_t*                    writeBuffer;
-
-    uint8_t*                    readBuffer;
-
-    size_t                      writeSize;
-
-    size_t                      readSize;
-
-    size_t                      writeCount;
-
-    size_t                      readCount;
-
-    /* State */
-    volatile SERCOM_I2C_STATE   state;
-
-    /* Transfer status */
-    volatile SERCOM_I2C_ERROR   error;
+    bool                        isFirstRxAfterAddressPending;
 
     /* Transfer Event Callback */
-    SERCOM_I2C_CALLBACK         callback;
+    SERCOM_I2C_SLAVE_CALLBACK   callback;
 
     /* Transfer context */
-    uintptr_t context;
+    uintptr_t                   context;
 
-} SERCOM_I2C_OBJ;
-
-// *****************************************************************************
-/* Transaction Request Block
-
-   Summary:
-    Transaction Request Block Structure.
-
-   Description:
-    This data structure defines the Transaction Request Block.
-
-   Remarks:
-    None.
-*/
-
-typedef struct
-{
-    /* SERCOM I2C Clock Speed */
-    uint32_t clkSpeed;
-
-} SERCOM_I2C_TRANSFER_SETUP;
+} SERCOM_I2C_SLAVE_OBJ;
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -257,4 +205,4 @@ typedef struct
 #endif
 // DOM-IGNORE-END
 
-#endif /* PLIB_SERCOM_I2C_MASTER_H */
+#endif /* PLIB_SERCOM_I2C_SLAVE_COMMON_H */

@@ -65,9 +65,6 @@ extern void __attribute__((weak,long_call, alias("Dummy_App_Func"))) __xc32_on_b
 
 /* Linker defined variables */
 extern uint32_t __svectors;
-#if defined (__REINIT_STACK_POINTER)
-extern uint32_t _stack;
-#endif
 
 /* MISRAC 2012 deviation block end */
 
@@ -96,7 +93,7 @@ void __attribute__((optimize("-O1"), section(".text.Reset_Handler"), long_call, 
 
 #if defined (__REINIT_STACK_POINTER)
     /* Initialize SP from linker-defined _stack symbol. */
-    __set_MSP((uint32_t)&_stack);
+    __asm__ volatile ("ldr sp, =_stack" : : : "sp");
 
 #ifdef SCB_VTOR_TBLOFF_Msk
     /* Buy stack for locals */

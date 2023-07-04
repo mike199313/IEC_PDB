@@ -65,7 +65,7 @@
 #define SERCOM0_I2CM_BAUD_VALUE         (0xE8U)
 
 
-volatile static SERCOM_I2C_OBJ sercom0I2CObj;
+static SERCOM_I2C_OBJ sercom0I2CObj;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -200,7 +200,7 @@ bool SERCOM0_I2C_TransferSetup(SERCOM_I2C_TRANSFER_SETUP* setup, uint32_t srcClk
 
 
     /* Baud rate - Master Baud Rate*/
-    SERCOM0_REGS->I2CM.SERCOM_BAUD = (uint16_t)baudValue;
+    SERCOM0_REGS->I2CM.SERCOM_BAUD = baudValue;
 
 
     /* Re-enable the I2C module */
@@ -252,7 +252,7 @@ static void SERCOM0_I2C_SendAddress(uint16_t address, bool dir)
     }
 
 
-    SERCOM0_REGS->I2CM.SERCOM_ADDR = ((uint8_t)address << 1U) | (dir ? 1U :0U);
+    SERCOM0_REGS->I2CM.SERCOM_ADDR = ((uint32_t)address << 1U) | (dir ? 1UL :0UL);
 
     /* Wait for synchronization */
     while((SERCOM0_REGS->I2CM.SERCOM_STATUS & (uint16_t)SERCOM_I2CM_STATUS_SYNCBUSY_Msk) == (uint16_t)SERCOM_I2CM_STATUS_SYNCBUSY_Msk)
@@ -383,12 +383,10 @@ void SERCOM0_I2C_TransferAbort( void )
     }
 }
 
-void __attribute__((used)) SERCOM0_I2C_InterruptHandler(void)
+void SERCOM0_I2C_InterruptHandler(void)
 {
     if(SERCOM0_REGS->I2CM.SERCOM_INTENSET != 0U)
     {
-        uintptr_t context = sercom0I2CObj.context;
-
         /* Checks if the arbitration lost in multi-master scenario */
         if((SERCOM0_REGS->I2CM.SERCOM_STATUS & SERCOM_I2CM_STATUS_ARBLOST_Msk) == SERCOM_I2CM_STATUS_ARBLOST_Msk)
         {
@@ -437,16 +435,14 @@ void __attribute__((used)) SERCOM0_I2C_InterruptHandler(void)
 
 
                 case SERCOM_I2C_STATE_TRANSFER_WRITE:
-                {
-                    size_t writeCount = sercom0I2CObj.writeCount;
 
-                    if (writeCount == (sercom0I2CObj.writeSize))
+                    if (sercom0I2CObj.writeCount == (sercom0I2CObj.writeSize))
                     {
                         if(sercom0I2CObj.readSize != 0U)
                         {
 
                             /* Write 7bit address with direction (ADDR.ADDR[0]) equal to 1*/
-                            SERCOM0_REGS->I2CM.SERCOM_ADDR =  ((uint8_t)(sercom0I2CObj.address) << 1U) | (uint8_t)I2C_TRANSFER_READ;
+                            SERCOM0_REGS->I2CM.SERCOM_ADDR =  ((uint32_t)(sercom0I2CObj.address) << 1U) | (uint32_t)I2C_TRANSFER_READ;
 
                             /* Wait for synchronization */
                             while((SERCOM0_REGS->I2CM.SERCOM_STATUS & (uint16_t)SERCOM_I2CM_STATUS_SYNCBUSY_Msk) == (uint16_t)SERCOM_I2CM_STATUS_SYNCBUSY_Msk)
@@ -474,25 +470,20 @@ void __attribute__((used)) SERCOM0_I2C_InterruptHandler(void)
                     /* Write next byte */
                     else
                     {
-                        SERCOM0_REGS->I2CM.SERCOM_DATA = sercom0I2CObj.writeBuffer[writeCount];
-                        writeCount++;
+                        SERCOM0_REGS->I2CM.SERCOM_DATA = sercom0I2CObj.writeBuffer[sercom0I2CObj.writeCount];
+                        sercom0I2CObj.writeCount++;
                         /* Wait for synchronization */
                             while((SERCOM0_REGS->I2CM.SERCOM_STATUS & (uint16_t)SERCOM_I2CM_STATUS_SYNCBUSY_Msk) == (uint16_t)SERCOM_I2CM_STATUS_SYNCBUSY_Msk)
                             {
                                 /* Do nothing */
                             }
-                        sercom0I2CObj.writeCount = writeCount;
                     }
-                }
 
                     break;
 
                 case SERCOM_I2C_STATE_TRANSFER_READ:
-                {
-                    size_t readCount = sercom0I2CObj.readCount;
 
-
-                    if(readCount == (sercom0I2CObj.readSize - 1U))
+                    if(sercom0I2CObj.readCount == (sercom0I2CObj.readSize - 1U))
                     {
                         /* Set NACK and send stop condition to the slave from master */
                         SERCOM0_REGS->I2CM.SERCOM_CTRLB |= SERCOM_I2CM_CTRLB_ACKACT_Msk | SERCOM_I2CM_CTRLB_CMD(3UL);
@@ -513,11 +504,8 @@ void __attribute__((used)) SERCOM0_I2C_InterruptHandler(void)
                         }
 
                     /* Read the received data */
-                    sercom0I2CObj.readBuffer[readCount] = (uint8_t) SERCOM0_REGS->I2CM.SERCOM_DATA;
-                    readCount++;
-
-                    sercom0I2CObj.readCount = readCount;
-                }
+                    sercom0I2CObj.readBuffer[sercom0I2CObj.readCount] = (uint8_t) SERCOM0_REGS->I2CM.SERCOM_DATA;
+                    sercom0I2CObj.readCount++;
 
                     break;
 
@@ -548,7 +536,7 @@ void __attribute__((used)) SERCOM0_I2C_InterruptHandler(void)
 
             if (sercom0I2CObj.callback != NULL)
             {
-                sercom0I2CObj.callback(context);
+                sercom0I2CObj.callback(sercom0I2CObj.context);
             }
         }
         /* Transfer Complete */
@@ -568,7 +556,7 @@ void __attribute__((used)) SERCOM0_I2C_InterruptHandler(void)
 
             if(sercom0I2CObj.callback != NULL)
             {
-                sercom0I2CObj.callback(context);
+                sercom0I2CObj.callback(sercom0I2CObj.context);
             }
 
         }
