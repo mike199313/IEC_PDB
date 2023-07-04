@@ -135,6 +135,8 @@ void CLOCK_Initialize (void)
     GCLK_REGS->GCLK_CLKCTRL = GCLK_CLKCTRL_ID(15U) | GCLK_CLKCTRL_GEN(0x0U)  | GCLK_CLKCTRL_CLKEN_Msk;
     /* Selection of the Generator and write Lock for SERCOM3_CORE */
     GCLK_REGS->GCLK_CLKCTRL = GCLK_CLKCTRL_ID(16U) | GCLK_CLKCTRL_GEN(0x0U)  | GCLK_CLKCTRL_CLKEN_Msk;
+    /* Selection of the Generator and write Lock for SERCOM4_CORE */
+    GCLK_REGS->GCLK_CLKCTRL = GCLK_CLKCTRL_ID(17U) | GCLK_CLKCTRL_GEN(0x0U)  | GCLK_CLKCTRL_CLKEN_Msk;
 
     /* Configure the AHB Bridge Clocks */
     PM_REGS->PM_AHBMASK = 0x1fU;
@@ -145,6 +147,6 @@ void CLOCK_Initialize (void)
 
 
     /* Configure the APBC Bridge Clocks */
-    PM_REGS->PM_APBCMASK = 0x1003cU;
+    PM_REGS->PM_APBCMASK = 0x1007cU;
 
 }

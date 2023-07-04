@@ -64,6 +64,7 @@ void SERCOM0_I2C_InterruptHandler (void);
 void SERCOM1_I2C_InterruptHandler (void);
 void SERCOM2_I2C_InterruptHandler (void);
 void SERCOM3_I2C_InterruptHandler (void);
+void SERCOM4_I2C_InterruptHandler (void);
 
 
 

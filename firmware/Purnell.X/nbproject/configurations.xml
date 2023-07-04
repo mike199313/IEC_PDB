@@ -32,6 +32,7 @@
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.h</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom2_i2c_slave.h</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom3_i2c_slave.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom4_i2c_slave.h</itemPath>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>
@@ -140,6 +141,7 @@
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.c</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom2_i2c_slave.c</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom3_i2c_slave.c</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom4_i2c_slave.c</itemPath>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>
