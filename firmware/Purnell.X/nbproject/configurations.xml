@@ -30,6 +30,7 @@
               <logicalFolder name="i2c_slave" displayName="i2c_slave" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom_i2c_slave_common.h</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom2_i2c_slave.h</itemPath>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>
@@ -136,6 +137,7 @@
               </logicalFolder>
               <logicalFolder name="i2c_slave" displayName="i2c_slave" projectFiles="true">
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.c</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom2_i2c_slave.c</itemPath>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>

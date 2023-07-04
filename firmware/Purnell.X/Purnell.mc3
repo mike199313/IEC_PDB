@@ -2688,7 +2688,14 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="sercom2" name="I2CS_SLAVE_ADDDRESS"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sercom2&gt;
   &lt;sercom2 dnOrder=&quot;0&quot; id=&quot;I2CS_SLAVE_ADDDRESS&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;/&gt;
+    &lt;Attributes dnOrder=&quot;0&quot;&gt;
+      &lt;Boolean dnOrder=&quot;0&quot; id=&quot;visible&quot;&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+      &lt;/Boolean&gt;
+    &lt;/Attributes&gt;
+    &lt;Values dnOrder=&quot;1&quot;&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;85&quot;/&gt;
+    &lt;/Values&gt;
   &lt;/sercom2&gt;
 &lt;/sercom2&gt;
 </value>
@@ -3513,6 +3520,14 @@
          <hash>3dd33bfc6c4a78d84f2540b0d8d7aea139afb8cccf39e0713ff6340b7f01b8b9</hash>
       </entry>
       <entry>
+         <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom2_i2c_slave.c</file>
+         <hash>ce9bb8ff3d00ee487ca37fd32a3de6ae90c35c04c2d534e7e8b3a6761d890ed6</hash>
+      </entry>
+      <entry>
+         <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom2_i2c_slave.h</file>
+         <hash>12b4febcac3e0f81690b843c6ccc1befa9831680209dfdcf8b591a2dac975088</hash>
+      </entry>
+      <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\pm.h</file>
          <hash>79afa2578a6a9fe33d2f48947714a13698a669f47d706144c0157d9eeb97e4ea</hash>
       </entry>
@@ -3566,7 +3581,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\nvic\plib_nvic.c</file>
-         <hash>918a0c97693d5bb65980aaec88f25ff0d349c02f68c28759fd39fe8ece3ebe1f</hash>
+         <hash>f08b564043a5a8ec057f702cf1ac34efc792ee8730a4e265bb3c2e5c1188cd14</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\fuses.h</file>
@@ -3602,7 +3617,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\interrupts.h</file>
-         <hash>d5feb7a2a23be729898dc060c17ceb8e9346fea58d7f65096a28f49d2b4bab61</hash>
+         <hash>a4fe9684218a088fca05fae4de1e833c09c61fdae3e9452b46ac413c34d9ccaa</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\gclk.h</file>
@@ -3622,7 +3637,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\clock\plib_clock.c</file>
-         <hash>ee4963e37bea29d1bbac440043cd97a2da6f9458faae6c61aa7904bba79b4164</hash>
+         <hash>679bbd352873acf24fcbd00db300d02eaea1656538bfd04621cbd78e593d611a</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\tc3.h</file>
@@ -3634,7 +3649,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\interrupts.c</file>
-         <hash>71d6b77066a4645cc832cc9937b727c54387a8444f9dcfe4724d97e454d40791</hash>
+         <hash>1326d3229553d776c5682b488f65d629fe0a12acfeb071d1dcc9bc35ba11a248</hash>
       </entry>
       <entry>
          <file>..\src\config\default\libc_syscalls.c</file>
@@ -3686,7 +3701,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\port\plib_port.c</file>
-         <hash>900c24f422f1ac6a5dc8a989c6d7bff69bd30ebad881d1736502f61521c5c9a5</hash>
+         <hash>28bf7cf91eec4ddd99189b40766bce9e19bf924a10447f0698e4b6ca480cd5ef</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\dsu.h</file>
@@ -3710,7 +3725,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\pin_configurations.csv</file>
-         <hash>8cb6d91053302a577a60a6b4366b55e222bc6f47084c95b8c4ca1e328b6a31be</hash>
+         <hash>3c4486bc2723ba1ab3c3cdc9e155d2c702879cc0a42187edacb94a385618eca4</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\eic.h</file>
@@ -3726,7 +3741,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\initialization.c</file>
-         <hash>ef6d146e5b3fe55f325b33c7668a1a38dd4830dbd2d7041cc48f1b7cf7b8be7a</hash>
+         <hash>3d62457029503913f5f434f60e0d809c203a4a0848ef547561e705696268e9f3</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\dac.h</file>
@@ -3762,7 +3777,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\definitions.h</file>
-         <hash>2e73abe4f50054622dae444e58fcd792853c501f3071d1827228e64f28a25fa4</hash>
+         <hash>737bffc5ebddc7b5bf0eafc1ae3c8e43fae07c2ca35a60e2d724b2d9babfe61f</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\tc.h</file>
