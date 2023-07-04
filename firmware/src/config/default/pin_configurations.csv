@@ -31,8 +31,8 @@
 36,PA17,,SERCOM1_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
 37,PA18,,Available,,,,,,NORMAL
 38,PA19,,Available,,,,,,NORMAL
-39,PB16,,Available,,,,,,NORMAL
-40,PB17,,Available,,,,,,NORMAL
+39,PB16,,SERCOM5_PAD0,Digital,High Impedance,n/a,No,No,NORMAL
+40,PB17,,SERCOM5_PAD1,Digital,High Impedance,n/a,No,No,NORMAL
 41,PA20,,Available,,,,,,NORMAL
 42,PA21,,Available,,,,,,NORMAL
 43,PA22,,SERCOM3_PAD0,Digital,High Impedance,n/a,No,No,NORMAL

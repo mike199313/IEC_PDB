@@ -6936,7 +6936,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\nvic\plib_nvic.c</file>
-         <hash>0e900b560739f61c46ac8b1b6793aeab3239f41ae79481f02583eb378cd9304d</hash>
+         <hash>3a4608e5ec490dd55f6414ba61b161afdf5be8a927ebe8fac14cefdc25d3b142</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\fuses.h</file>
@@ -6972,7 +6972,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\interrupts.h</file>
-         <hash>7bb7483583e742182d7df9225d820129f0c4bb9567baeb21ec54cdbd6ce20df0</hash>
+         <hash>2d2ff5e9586e03b48ff35f7657bd478e242b577932847145735f836c92e5f015</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\gclk.h</file>
@@ -6987,12 +6987,16 @@
          <hash>cde0a99a6aa326911ee9d936ce8b766d77080107accf2c405a4749eb1d77e5cb</hash>
       </entry>
       <entry>
+         <file>..\src\config\default\peripheral\sercom\usart\plib_sercom_usart_common.h</file>
+         <hash>1dbf674e2bc9708afe2cacc75141707c42b89f166e0f1d6f81c04b1b2fa166b8</hash>
+      </entry>
+      <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\gclk.h</file>
          <hash>dfcd421a916984ca5b5a9348ac7a658258b59ff94c3ac1f34f3fbd478b84e26f</hash>
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\clock\plib_clock.c</file>
-         <hash>27ff9e704de00a2b13229d839bd931373796a665b005e9eed79bc4d3a0b0b4ec</hash>
+         <hash>0f976ccd8ef2addea10dd7464ad1e907b3ba6ccf59016ee92d1493aa6f7c206a</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\tc3.h</file>
@@ -7004,7 +7008,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\interrupts.c</file>
-         <hash>6fde07caa764f529e1489e598b91b8753bb143c5927d294846cb08277a2d8b09</hash>
+         <hash>97ea110a11c0414d9a8f75b60f0c6f6b594f39775f22f3e0d6967ee70ab7b275</hash>
       </entry>
       <entry>
          <file>..\src\config\default\libc_syscalls.c</file>
@@ -7056,7 +7060,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\port\plib_port.c</file>
-         <hash>564cf28eafb76da6d68a1bc4501ea0d5ff2b582a330282428860e6d643dbe33d</hash>
+         <hash>dfc72d045787134ff290bcb36676b7f323251f4aa232268993f3007e5b0e31d3</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\dsu.h</file>
@@ -7079,8 +7083,16 @@
          <hash>470554386ead6e765f9e6b564afc14cc30d06906239fdeb86e58bb66fdf1cef0</hash>
       </entry>
       <entry>
+         <file>..\src\config\default\peripheral\sercom\usart\plib_sercom5_usart.c</file>
+         <hash>e433db463b786564a776dd9cb896cde731c34b7c1bcba8ec119ac19034d813cb</hash>
+      </entry>
+      <entry>
          <file>..\src\config\default\pin_configurations.csv</file>
-         <hash>faa033ac5be04c34634f5e5e15e45829034b16fdb54b31958134f1ab4fd16db6</hash>
+         <hash>9dc5116cfe88e54747fc6792df767ebd0436f8933fa3861e987bdc2da3f8a1c7</hash>
+      </entry>
+      <entry>
+         <file>..\src\config\default\peripheral\sercom\usart\plib_sercom5_usart.h</file>
+         <hash>2b220a1a9e25b3fc45f4a6965741a660038070eedd49ffc788558aa230921414</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\eic.h</file>
@@ -7096,7 +7108,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\initialization.c</file>
-         <hash>c3b3e5a2619eba85adc770fd623ea6be976dd882829dd853f3c7b675af4b5620</hash>
+         <hash>d67bdffe96db5c07c0437f359ef87b7d83910ee702595324f7f63552772737d0</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\dac.h</file>
@@ -7132,7 +7144,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\definitions.h</file>
-         <hash>928a65d41ba3f53f273780ffaae3dc980516df45db92bf254bf8f74b11edebd1</hash>
+         <hash>18398a565fcaa6289ad64716b844a1c68bb0244cde90b18808a8b8ed8eccf5a3</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\tc.h</file>

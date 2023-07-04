@@ -34,6 +34,10 @@
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom3_i2c_slave.h</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom4_i2c_slave.h</itemPath>
               </logicalFolder>
+              <logicalFolder name="usart" displayName="usart" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom_usart_common.h</itemPath>
+                <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom5_usart.h</itemPath>
+              </logicalFolder>
             </logicalFolder>
           </logicalFolder>
           <itemPath>../src/config/default/device_cache.h</itemPath>
@@ -142,6 +146,9 @@
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom2_i2c_slave.c</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom3_i2c_slave.c</itemPath>
                 <itemPath>../src/config/default/peripheral/sercom/i2c_slave/plib_sercom4_i2c_slave.c</itemPath>
+              </logicalFolder>
+              <logicalFolder name="usart" displayName="usart" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/sercom/usart/plib_sercom5_usart.c</itemPath>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>
