@@ -52,6 +52,8 @@
 #include "interrupts.h"
 #include "plib_sercom4_i2c_slave.h"
 
+#include "../../i2c_address.h"
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data
@@ -100,7 +102,7 @@ void SERCOM4_I2C_Initialize(void)
 
 
     /* Set the slave address */
-    SERCOM4_REGS->I2CS.SERCOM_ADDR = SERCOM_I2CS_ADDR_ADDR(0x55UL) ;
+    SERCOM4_REGS->I2CS.SERCOM_ADDR = SERCOM_I2CS_ADDR_ADDR(0x55UL)|(I2C_SLAVE_ADDR_MASK<<17);
 
     /* Enable Smart Mode */
     SERCOM4_REGS->I2CS.SERCOM_CTRLB |= SERCOM_I2CS_CTRLB_SMEN_Msk;
@@ -206,7 +208,9 @@ void SERCOM4_I2C_InterruptHandler(void)
             sercom4I2CSObj.isFirstRxAfterAddressPending = true;
 
             sercom4I2CSObj.isRepeatedStart = ((SERCOM4_REGS->I2CS.SERCOM_STATUS & SERCOM_I2CS_STATUS_SR_Msk)  != 0U) ? true : false;
-
+            
+            I2C_Got_Addr_NOW = (SERCOM4_REGS->I2CS.SERCOM_DATA>>1);
+            
             event = SERCOM_I2C_SLAVE_TRANSFER_EVENT_ADDR_MATCH;
         }
         if ((intFlags & SERCOM_I2CS_INTFLAG_DRDY_Msk) != 0U)
