@@ -58,7 +58,7 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="core" name="!@#harmonyUserData"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;UserData&gt;
   &lt;UserData dnOrder=&quot;0&quot;&gt;
-    &lt;GraphSettings canvasHeight=&quot;270&quot; canvasWidth=&quot;469&quot; dnOrder=&quot;0&quot;/&gt;
+    &lt;GraphSettings canvasHeight=&quot;393&quot; canvasWidth=&quot;469&quot; dnOrder=&quot;0&quot;/&gt;
     &lt;ComponentGraph dnOrder=&quot;1&quot; id=&quot;__ROOTVIEW&quot;&gt;
       &lt;ElementPositions dnOrder=&quot;0&quot;&gt;
         &lt;ElementPosition dnOrder=&quot;0&quot; id=&quot;core&quot; x=&quot;30&quot; y=&quot;200&quot;/&gt;
@@ -66,11 +66,11 @@
         &lt;ElementPosition dnOrder=&quot;2&quot; id=&quot;evsys&quot; x=&quot;30&quot; y=&quot;100&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;3&quot; id=&quot;nvmctrl&quot; x=&quot;20&quot; y=&quot;20&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;4&quot; id=&quot;sercom0&quot; x=&quot;180&quot; y=&quot;20&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;5&quot; id=&quot;sercom1&quot; x=&quot;183&quot; y=&quot;45&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;6&quot; id=&quot;sercom2&quot; x=&quot;184&quot; y=&quot;1&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;5&quot; id=&quot;sercom1&quot; x=&quot;186&quot; y=&quot;88&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;6&quot; id=&quot;sercom2&quot; x=&quot;62&quot; y=&quot;233&quot;/&gt;
         &lt;ElementPosition dnOrder=&quot;7&quot; id=&quot;sercom3&quot; x=&quot;332&quot; y=&quot;24&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;8&quot; id=&quot;sercom4&quot; x=&quot;351&quot; y=&quot;154&quot;/&gt;
-        &lt;ElementPosition dnOrder=&quot;9&quot; id=&quot;sercom5&quot; x=&quot;195&quot; y=&quot;187&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;8&quot; id=&quot;sercom4&quot; x=&quot;317&quot; y=&quot;171&quot;/&gt;
+        &lt;ElementPosition dnOrder=&quot;9&quot; id=&quot;sercom5&quot; x=&quot;191&quot; y=&quot;233&quot;/&gt;
       &lt;/ElementPositions&gt;
     &lt;/ComponentGraph&gt;
   &lt;/UserData&gt;
@@ -7753,7 +7753,14 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="sercom1" name="I2CS_SMEN"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sercom1&gt;
   &lt;sercom1 dnOrder=&quot;0&quot; id=&quot;I2CS_SMEN&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;/&gt;
+    &lt;Attributes dnOrder=&quot;0&quot;&gt;
+      &lt;Boolean dnOrder=&quot;0&quot; id=&quot;visible&quot;&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+      &lt;/Boolean&gt;
+    &lt;/Attributes&gt;
+    &lt;Values dnOrder=&quot;1&quot;&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;true&quot;/&gt;
+    &lt;/Values&gt;
   &lt;/sercom1&gt;
 &lt;/sercom1&gt;
 </value>
@@ -8626,7 +8633,14 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="sercom2" name="I2CS_SMEN"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sercom2&gt;
   &lt;sercom2 dnOrder=&quot;0&quot; id=&quot;I2CS_SMEN&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;/&gt;
+    &lt;Attributes dnOrder=&quot;0&quot;&gt;
+      &lt;Boolean dnOrder=&quot;0&quot; id=&quot;visible&quot;&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+      &lt;/Boolean&gt;
+    &lt;/Attributes&gt;
+    &lt;Values dnOrder=&quot;1&quot;&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;true&quot;/&gt;
+    &lt;/Values&gt;
   &lt;/sercom2&gt;
 &lt;/sercom2&gt;
 </value>
@@ -9499,7 +9513,14 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="sercom3" name="I2CS_SMEN"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sercom3&gt;
   &lt;sercom3 dnOrder=&quot;0&quot; id=&quot;I2CS_SMEN&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;/&gt;
+    &lt;Attributes dnOrder=&quot;0&quot;&gt;
+      &lt;Boolean dnOrder=&quot;0&quot; id=&quot;visible&quot;&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+      &lt;/Boolean&gt;
+    &lt;/Attributes&gt;
+    &lt;Values dnOrder=&quot;1&quot;&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;true&quot;/&gt;
+    &lt;/Values&gt;
   &lt;/sercom3&gt;
 &lt;/sercom3&gt;
 </value>
@@ -10372,7 +10393,14 @@
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="sercom4" name="I2CS_SMEN"/>
          <value>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;sercom4&gt;
   &lt;sercom4 dnOrder=&quot;0&quot; id=&quot;I2CS_SMEN&quot;&gt;
-    &lt;Values dnOrder=&quot;0&quot;/&gt;
+    &lt;Attributes dnOrder=&quot;0&quot;&gt;
+      &lt;Boolean dnOrder=&quot;0&quot; id=&quot;visible&quot;&gt;
+        &lt;Value dnOrder=&quot;0&quot;&gt;true&lt;/Value&gt;
+      &lt;/Boolean&gt;
+    &lt;/Attributes&gt;
+    &lt;Values dnOrder=&quot;1&quot;&gt;
+      &lt;User dnOrder=&quot;0&quot; value=&quot;true&quot;/&gt;
+    &lt;/Values&gt;
   &lt;/sercom4&gt;
 &lt;/sercom4&gt;
 </value>
@@ -11963,7 +11991,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom3_i2c_slave.c</file>
-         <hash>550a9ab8d19dccece19309f2c470c9f2afd93c63c5e3fd0859323af63eda9627</hash>
+         <hash>cea27fbc3200d3f21820a10d2b4093b41ffbe51160691eadf9bae6d118ed2666</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\tc6.h</file>
@@ -11971,7 +11999,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom4_i2c_slave.h</file>
-         <hash>116a16ed6a3dcae573b09e6140df3c380ba11880229be4c8ef642b870563cab4</hash>
+         <hash>986c9e2ca94ca6e25901a8bfd9f394b43f2573d9bb1d45faf2066706ee7823c5</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\dac.h</file>
@@ -11983,11 +12011,11 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom2_i2c_slave.c</file>
-         <hash>ce9bb8ff3d00ee487ca37fd32a3de6ae90c35c04c2d534e7e8b3a6761d890ed6</hash>
+         <hash>d8916e0aeb787dcc4a027e98a8c4648c929ded71f2c5825ba313678344e42c51</hash>
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom2_i2c_slave.h</file>
-         <hash>12b4febcac3e0f81690b843c6ccc1befa9831680209dfdcf8b591a2dac975088</hash>
+         <hash>434c4bb29642920e46c8dd8e2344f61fec30282f6228aa79f1bdca03403d8f6f</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\instance\pm.h</file>
@@ -12003,11 +12031,11 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom3_i2c_slave.h</file>
-         <hash>dad647bee5bf743b6e42e1807f0a02afe896222c8b1c88d049bf615e8d2593ba</hash>
+         <hash>eff7d9d41246a7c7585c0fd7d5cc3030a1f8cd6f87cec8ee0481bac1ea6fedf0</hash>
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom4_i2c_slave.c</file>
-         <hash>8af5eb3293fefa66bc988c8d6fd2100d7633e186c9c2fad97aa3a377038f60e7</hash>
+         <hash>256536d1987caf950d23bb79d107af569820c2afc32ebc78d871be56137af8ce</hash>
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\nvic\plib_nvic.h</file>
@@ -12039,7 +12067,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom1_i2c_slave.h</file>
-         <hash>40d7f0251e6a0410e4d358eca6acb0f247ceffa6d9ff28bffbd003e2143b75cb</hash>
+         <hash>cac24a00cd3a8343bbe130a529530797971ea850081588611ddc667b91abedad</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\dsu.h</file>
@@ -12047,7 +12075,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\sercom\i2c_slave\plib_sercom1_i2c_slave.c</file>
-         <hash>34bb5a7604723b2cb5309125420303196a25c8bc6c960f158a5684504a0fb761</hash>
+         <hash>2ca6361aee89a20195583d3ec28d4dd63adb4c721a6e4df07a301f9da4ca02cc</hash>
       </entry>
       <entry>
          <file>..\src\config\default\peripheral\nvic\plib_nvic.c</file>
@@ -12194,12 +12222,12 @@
          <hash>c84db16b155d61d1668eef06144595eb596ed986d18c195baa0e1716381f8cc3</hash>
       </entry>
       <entry>
-         <file>..\src\packs\ATSAMD20J18_DFP\component\ac.h</file>
-         <hash>470554386ead6e765f9e6b564afc14cc30d06906239fdeb86e58bb66fdf1cef0</hash>
-      </entry>
-      <entry>
          <file>..\src\config\default\peripheral\sercom\usart\plib_sercom5_usart.c</file>
          <hash>e433db463b786564a776dd9cb896cde731c34b7c1bcba8ec119ac19034d813cb</hash>
+      </entry>
+      <entry>
+         <file>..\src\packs\ATSAMD20J18_DFP\component\ac.h</file>
+         <hash>470554386ead6e765f9e6b564afc14cc30d06906239fdeb86e58bb66fdf1cef0</hash>
       </entry>
       <entry>
          <file>..\src\config\default\pin_configurations.csv</file>
@@ -12223,7 +12251,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\initialization.c</file>
-         <hash>51f5290929358e6f2c29bb5e1eb8dead5f666c990699340c35887799360a0ab0</hash>
+         <hash>2ee75d0189df75a33f8e3a1a313f53f2e0826e96a2ccc45a49b705b2bc5deeb2</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\dac.h</file>
@@ -12259,7 +12287,7 @@
       </entry>
       <entry>
          <file>..\src\config\default\definitions.h</file>
-         <hash>88aec45633074a2123374b1008d24fb7d7dd14be2956130d85f9dd63a061d398</hash>
+         <hash>795b8064dedf8b34159ab3cb0e8c6178a19dbabebddb337207a55dfdf471a7c4</hash>
       </entry>
       <entry>
          <file>..\src\packs\ATSAMD20J18_DFP\component\tc.h</file>
