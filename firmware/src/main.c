@@ -26,8 +26,12 @@
 #include <stdbool.h>                    // Defines true
 #include <stdlib.h>                     // Defines EXIT_FAILURE
 #include "definitions.h"                // SYS function prototypes
+#include "i2c_address.h"
 
 
+uint8_t FRUWriteData[1] = {0x00};
+uint32_t FRUwrLength = 1;
+uint32_t FRUrdLength = 265;
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -38,6 +42,13 @@ int main ( void )
 {
     /* Initialize all modules */
     SYS_Initialize ( NULL );
+    
+    SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
+    
+    SERCOM1_I2C_CallbackRegister(SERCOM1_I2C_Callback, 0);
+    SERCOM2_I2C_CallbackRegister(SERCOM1_I2C_Callback, 0);
+    SERCOM3_I2C_CallbackRegister(SERCOM1_I2C_Callback, 0);
+    SERCOM4_I2C_CallbackRegister(SERCOM1_I2C_Callback, 0);
 
     while ( true )
     {
