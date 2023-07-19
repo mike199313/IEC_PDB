@@ -112,7 +112,6 @@ bool SERCOM1_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t con
             else
             {
                 fruData.wrBuffer[(fruData.wrBufferIndex & FRU_SIZE_MASK)] = SERCOM1_I2C_ReadByte();
-//                fruData.wrBuffer[(fruData.wrBufferIndex)] = SERCOM1_I2C_ReadByte();
                 fruData.wrBufferIndex++;
             }
             break;
@@ -156,6 +155,227 @@ bool SERCOM1_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t con
     return isSuccess;
 }
 
+bool SERCOM2_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle )
+{
+    bool isSuccess = true;
+
+    if(I2C_Got_Addr_NOW==PSU1_FRU_Slave_ADDR)
+    {
+        switch(event)
+        {
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_ADDR_MATCH:
+                if ((SERCOM2_I2C_TransferDirGet() == SERCOM_I2C_SLAVE_TRANSFER_DIR_WRITE) && (fruData.internalWriteInProgress == true))
+                {
+                    /* FRU is busy. Send NAK */
+                    isSuccess = false;
+                }
+                else
+                {
+                    /* Reset the indexes */
+                    fruData.addrIndex = 0;
+                    fruData.wrBufferIndex = 0;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_RX_READY:
+                /* Read the data sent by I2C Master */
+                if (fruData.addrIndex < 2)
+                {
+                    ((uint8_t*)&fruData.currentAddrPtr)[fruData.addrIndex++] = SERCOM2_I2C_ReadByte();
+                }
+                else
+                {
+                    fruData.wrBuffer[(fruData.wrBufferIndex & FRU_SIZE_MASK)] = SERCOM2_I2C_ReadByte();
+                    fruData.wrBufferIndex++;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
+                /* Provide the FRU data requested by the I2C Master */
+                SERCOM2_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                {
+                    fruData.currentAddrPtr = 0;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_STOP_BIT_RECEIVED:
+                if (fruData.wrBufferIndex > 0)
+                {
+                    if (fruData.wrBufferIndex > FRU_SIZE_BYTES)
+                    {
+                        fruData.wrBufferIndex = FRU_SIZE_BYTES;
+                    }
+                    fruData.wrAddr = fruData.currentAddrPtr;
+                    fruData.nWrBytes = fruData.wrBufferIndex;
+
+                    /* Update the current address pointer to allow for sequential read */
+                    fruData.currentAddrPtr += fruData.wrBufferIndex;
+
+                    /* Reset the indexes */
+                    fruData.addrIndex = 0;
+                    fruData.wrBufferIndex = 0;
+
+                    /* Set busy flag to send NAK for any write requests */
+                    fruData.internalWriteInProgress = true;
+                    fruData.i2cCommand = I2C_CMD_WRITE;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    return isSuccess;
+}
+
+bool SERCOM3_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle )
+{
+    bool isSuccess = true;
+
+    if(I2C_Got_Addr_NOW==PSU1_FRU_Slave_ADDR)
+    {
+        switch(event)
+        {
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_ADDR_MATCH:
+                if ((SERCOM3_I2C_TransferDirGet() == SERCOM_I2C_SLAVE_TRANSFER_DIR_WRITE) && (fruData.internalWriteInProgress == true))
+                {
+                    /* FRU is busy. Send NAK */
+                    isSuccess = false;
+                }
+                else
+                {
+                    /* Reset the indexes */
+                    fruData.addrIndex = 0;
+                    fruData.wrBufferIndex = 0;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_RX_READY:
+                /* Read the data sent by I2C Master */
+                if (fruData.addrIndex < 2)
+                {
+                    ((uint8_t*)&fruData.currentAddrPtr)[fruData.addrIndex++] = SERCOM3_I2C_ReadByte();
+                }
+                else
+                {
+                    fruData.wrBuffer[(fruData.wrBufferIndex & FRU_SIZE_MASK)] = SERCOM3_I2C_ReadByte();
+                    fruData.wrBufferIndex++;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
+                /* Provide the FRU data requested by the I2C Master */
+                SERCOM3_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                {
+                    fruData.currentAddrPtr = 0;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_STOP_BIT_RECEIVED:
+                if (fruData.wrBufferIndex > 0)
+                {
+                    if (fruData.wrBufferIndex > FRU_SIZE_BYTES)
+                    {
+                        fruData.wrBufferIndex = FRU_SIZE_BYTES;
+                    }
+                    fruData.wrAddr = fruData.currentAddrPtr;
+                    fruData.nWrBytes = fruData.wrBufferIndex;
+
+                    /* Update the current address pointer to allow for sequential read */
+                    fruData.currentAddrPtr += fruData.wrBufferIndex;
+
+                    /* Reset the indexes */
+                    fruData.addrIndex = 0;
+                    fruData.wrBufferIndex = 0;
+
+                    /* Set busy flag to send NAK for any write requests */
+                    fruData.internalWriteInProgress = true;
+                    fruData.i2cCommand = I2C_CMD_WRITE;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    return isSuccess;
+}
+
+bool SERCOM4_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle )
+{
+    bool isSuccess = true;
+
+    if(I2C_Got_Addr_NOW==PSU1_FRU_Slave_ADDR)
+    {
+        switch(event)
+        {
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_ADDR_MATCH:
+                if ((SERCOM4_I2C_TransferDirGet() == SERCOM_I2C_SLAVE_TRANSFER_DIR_WRITE) && (fruData.internalWriteInProgress == true))
+                {
+                    /* FRU is busy. Send NAK */
+                    isSuccess = false;
+                }
+                else
+                {
+                    /* Reset the indexes */
+                    fruData.addrIndex = 0;
+                    fruData.wrBufferIndex = 0;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_RX_READY:
+                /* Read the data sent by I2C Master */
+                if (fruData.addrIndex < 2)
+                {
+                    ((uint8_t*)&fruData.currentAddrPtr)[fruData.addrIndex++] = SERCOM4_I2C_ReadByte();
+                }
+                else
+                {
+                    fruData.wrBuffer[(fruData.wrBufferIndex & FRU_SIZE_MASK)] = SERCOM4_I2C_ReadByte();
+                    fruData.wrBufferIndex++;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
+                /* Provide the FRU data requested by the I2C Master */
+                SERCOM4_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                {
+                    fruData.currentAddrPtr = 0;
+                }
+                break;
+
+            case SERCOM_I2C_SLAVE_TRANSFER_EVENT_STOP_BIT_RECEIVED:
+                if (fruData.wrBufferIndex > 0)
+                {
+                    if (fruData.wrBufferIndex > FRU_SIZE_BYTES)
+                    {
+                        fruData.wrBufferIndex = FRU_SIZE_BYTES;
+                    }
+                    fruData.wrAddr = fruData.currentAddrPtr;
+                    fruData.nWrBytes = fruData.wrBufferIndex;
+
+                    /* Update the current address pointer to allow for sequential read */
+                    fruData.currentAddrPtr += fruData.wrBufferIndex;
+
+                    /* Reset the indexes */
+                    fruData.addrIndex = 0;
+                    fruData.wrBufferIndex = 0;
+
+                    /* Set busy flag to send NAK for any write requests */
+                    fruData.internalWriteInProgress = true;
+                    fruData.i2cCommand = I2C_CMD_WRITE;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    
+    return isSuccess;
+}
 /* *****************************************************************************
  End of File
  */

@@ -46,6 +46,9 @@ int main ( void )
     SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
     
     SERCOM1_I2C_CallbackRegister(SERCOM1_I2C_Callback, 0);
+    SERCOM2_I2C_CallbackRegister(SERCOM1_I2C_Callback, 0);
+    SERCOM3_I2C_CallbackRegister(SERCOM1_I2C_Callback, 0);
+    SERCOM4_I2C_CallbackRegister(SERCOM1_I2C_Callback, 0);
 
     while ( true )
     {
