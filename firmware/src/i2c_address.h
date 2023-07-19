@@ -22,7 +22,8 @@
 #define FRU_SIZE_BYTES              256  // it must be a multiple of ROW (FLASH_ROW_SIZE_BYTES) 
 #define FRU_START_ADDR              (FLASH_END_ADDR-FRU_SIZE_BYTES)
 #define FRU_SIZE_MASK               0xFF
-#define FRU_addr                    0x55
+#define PSU1_FRU_ADDR               0x52 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
+#define PSU1_FRU_Slave_ADDR         0x51 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
 
 #define I2C_SLAVE_ADDR_MASK         0x0d
 
@@ -56,9 +57,9 @@ typedef struct
 
 extern FRU_DATA   fruData;
 
-extern const uint8_t  FRU_Buffer[FRU_SIZE_BYTES];
+extern uint8_t PSU_FRU_Data[FRU_SIZE_BYTES];
 
-bool APP_SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM1_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
 
 #endif /* _I2C_ADDRESS_H */
 
