@@ -30,7 +30,17 @@
 
 FRU_DATA   fruData;
 
-
+uint8_t PIC_FRU_Data[PIC_FRU_SIZE_BYTES] __attribute__((address(PIC_FRU_START_ADDR)))=        
+{
+    0xff,0x30,0x2e,0x30,0x0e,0x31,0xff,0xff,0xff,0x07,0x18,0xff,0xff,0xff,0xff,0xff,
+    0xff,0xff,0xff,0xff,0x69,0x6e,0x76,0x65,0x6e,0x74,0x65,0x63,0xff,0xff,0xff,0xff,
+    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,
+    0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff        
+};
 
 uint8_t PSU_FRU_Data[FRU_SIZE_BYTES] __attribute__((address(FRU_START_ADDR)))=   //data from trn_ac-dc_csu2400ap_release_1_1581520397_techref page48~54     
 {
@@ -89,13 +99,30 @@ bool SERCOM1_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
                 /* Provide the FRU data requested by the I2C Master */
-                
-                SERCOM1_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
-                if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                if(I2C_Got_Addr_NOW == PSU1_FRU_ADDR)
                 {
-                    fruData.currentAddrPtr = 0;
+                    SERCOM1_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
                 }
-                
+                else if(I2C_Got_Addr_NOW == PSU0_FRU_ADDR)
+                {
+                    SERCOM1_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
+                }
+                else if(I2C_Got_Addr_NOW == PIC_FRU_Slave_ADDR)
+                {
+                    SERCOM1_I2C_WriteByte(PIC_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= PIC_FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
+                }
                 break;
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_STOP_BIT_RECEIVED:
@@ -163,10 +190,29 @@ bool SERCOM2_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
                 /* Provide the FRU data requested by the I2C Master */
-                SERCOM2_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
-                if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                if(I2C_Got_Addr_NOW == PSU1_FRU_ADDR)
                 {
-                    fruData.currentAddrPtr = 0;
+                    SERCOM2_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
+                }
+                else if(I2C_Got_Addr_NOW == PSU0_FRU_ADDR)
+                {
+                    SERCOM2_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
+                }
+                else if(I2C_Got_Addr_NOW == PIC_FRU_Slave_ADDR)
+                {
+                    SERCOM2_I2C_WriteByte(PIC_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= PIC_FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
                 }
                 break;
 
@@ -235,10 +281,29 @@ bool SERCOM3_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
                 /* Provide the FRU data requested by the I2C Master */
-                SERCOM3_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
-                if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                if(I2C_Got_Addr_NOW == PSU1_FRU_ADDR)
                 {
-                    fruData.currentAddrPtr = 0;
+                    SERCOM3_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
+                }
+                else if(I2C_Got_Addr_NOW == PSU0_FRU_ADDR)
+                {
+                    SERCOM3_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
+                }
+                else if(I2C_Got_Addr_NOW == PIC_FRU_Slave_ADDR)
+                {
+                    SERCOM3_I2C_WriteByte(PIC_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= PIC_FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
                 }
                 break;
 
@@ -307,10 +372,29 @@ bool SERCOM4_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
                 /* Provide the FRU data requested by the I2C Master */
-                SERCOM4_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
-                if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                if(I2C_Got_Addr_NOW == PSU1_FRU_ADDR)
                 {
-                    fruData.currentAddrPtr = 0;
+                    SERCOM4_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
+                }
+                else if(I2C_Got_Addr_NOW == PSU0_FRU_ADDR)
+                {
+                    SERCOM4_I2C_WriteByte(PSU_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
+                }
+                else if(I2C_Got_Addr_NOW == PIC_FRU_Slave_ADDR)
+                {
+                    SERCOM4_I2C_WriteByte(PIC_FRU_Data[fruData.currentAddrPtr++]);
+                    if (fruData.currentAddrPtr >= PIC_FRU_SIZE_BYTES)
+                    {
+                        fruData.currentAddrPtr = 0;
+                    }
                 }
                 break;
 

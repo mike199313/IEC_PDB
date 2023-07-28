@@ -29,7 +29,7 @@
 #define PSU0_FRU_Slave_ADDR         0x50 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
 
 #define PIC_FRU_SIZE_BYTES          128 //at least 1 page(1 page 64byte 2page 128byte)
-
+#define PIC_FRU_START_ADDR          (FRU_START_ADDR-PIC_FRU_SIZE_BYTES)
 #define I2C_SLAVE_ADDR_MASK         0x0d
 
 extern uint8_t I2C_Got_Addr_NOW;
