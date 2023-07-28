@@ -24,6 +24,11 @@
 #define FRU_SIZE_MASK               0xFF
 #define PSU1_FRU_ADDR               0x52 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
 #define PSU1_FRU_Slave_ADDR         0x51 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
+#define PIC_FRU_Slave_ADDR          0x55 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
+#define PSU0_FRU_ADDR               0x50 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
+#define PSU0_FRU_Slave_ADDR         0x50 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
+
+#define PIC_FRU_SIZE_BYTES          128 //at least 1 page(1 page 64byte 2page 128byte)
 
 #define I2C_SLAVE_ADDR_MASK         0x0d
 
@@ -60,9 +65,18 @@ extern FRU_DATA   fruData;
 extern uint8_t PSU_FRU_Data[FRU_SIZE_BYTES];
 
 bool SERCOM1_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM1_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+
 bool SERCOM2_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM2_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+
 bool SERCOM3_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM3_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+
 bool SERCOM4_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM4_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+
+
 
 #endif /* _I2C_ADDRESS_H */
 
