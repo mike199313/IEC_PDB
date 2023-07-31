@@ -23,10 +23,10 @@
 #define FRU_START_ADDR              (FLASH_END_ADDR-FRU_SIZE_BYTES)
 #define FRU_SIZE_MASK               0xFF
 #define PSU1_FRU_ADDR               0x52 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
-#define PSU1_FRU_Slave_ADDR         0x51 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
-#define PIC_FRU_Slave_ADDR          0x55 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
+#define PSU1_FRU_SLAVE_ADDR         0x51 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
+#define PIC_FRU_SLAVE_ADDR          0x55 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
 #define PSU0_FRU_ADDR               0x50 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
-#define PSU0_FRU_Slave_ADDR         0x50 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
+#define PSU0_FRU_SLAVE_ADDR         0x50 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
 
 #define PIC_FRU_SIZE_BYTES          128 //at least 1 page(1 page 64byte 2page 128byte)
 #define PIC_FRU_START_ADDR          (FRU_START_ADDR-PIC_FRU_SIZE_BYTES)
