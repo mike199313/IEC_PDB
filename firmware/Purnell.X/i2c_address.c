@@ -59,56 +59,22 @@
 uint8_t I2C_Got_Addr_NOW;
 
 
-bool SERCOM1_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle )
+bool SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t SERCOM_NOW )
 {
     bool isSuccess = true;
 
     if((I2C_Got_Addr_NOW == PSU1_FRU_SLAVE_ADDR) || (I2C_Got_Addr_NOW == PSU0_FRU_SLAVE_ADDR) || (I2C_Got_Addr_NOW == PIC_FRU_SLAVE_ADDR))
+    {   
+        SERCOM_FRU_Callback(event , I2C_Got_Addr_NOW , SERCOM_NOW);
+                
+    }else if(I2C_Got_Addr_NOW == PIC_OPCODE_SLAVE_ADDR)
     {
-        SERCOM1_FRU_Callback(event , I2C_Got_Addr_NOW);
+        SERCOM_PIC_OPcode_Callback(event , I2C_Got_Addr_NOW , SERCOM_NOW);
     }
     
     return isSuccess;
 }
 
-bool SERCOM2_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle )
-{
-    bool isSuccess = true;
-
-    if((I2C_Got_Addr_NOW == PSU1_FRU_SLAVE_ADDR) || (I2C_Got_Addr_NOW == PSU0_FRU_SLAVE_ADDR) || (I2C_Got_Addr_NOW == PIC_FRU_SLAVE_ADDR))
-    {
-        SERCOM2_FRU_Callback(event , I2C_Got_Addr_NOW);
-    }
-    
-    
-    return isSuccess;
-}
-
-bool SERCOM3_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle )
-{
-    bool isSuccess = true;
-
-    if((I2C_Got_Addr_NOW == PSU1_FRU_SLAVE_ADDR) || (I2C_Got_Addr_NOW == PSU0_FRU_SLAVE_ADDR) || (I2C_Got_Addr_NOW == PIC_FRU_SLAVE_ADDR))
-    {
-        SERCOM3_FRU_Callback(event , I2C_Got_Addr_NOW);
-    }
-    
-    
-    return isSuccess;
-}
-
-bool SERCOM4_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle )
-{
-    bool isSuccess = true;
-
-    if((I2C_Got_Addr_NOW == PSU1_FRU_SLAVE_ADDR) || (I2C_Got_Addr_NOW == PSU0_FRU_SLAVE_ADDR) || (I2C_Got_Addr_NOW == PIC_FRU_SLAVE_ADDR))
-    {
-        SERCOM4_FRU_Callback(event , I2C_Got_Addr_NOW);
-    }
-    
-    
-    return isSuccess;
-}
 /* *****************************************************************************
  End of File
  */
