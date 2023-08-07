@@ -90,14 +90,14 @@ bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C_
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_RX_READY:
                 /* Receive request data from BMC*/
                 
-                if (fruData.addrIndex < 2)
+                if (fruData.addrIndex < ADDR_BYTE)
                 {
-                    FRU_ADDR = SERCOM_PIC_CMD(SERCOM_NOW);
+                    FRU_ADDR = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
                     ((uint8_t*)&fruData.currentAddrPtr)[fruData.addrIndex++] = FRU_ADDR;
                 }
                 else
                 {
-                    FRU_ADDR = SERCOM_PIC_CMD(SERCOM_NOW);
+                    FRU_ADDR = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
                     fruData.wrBuffer[(fruData.wrBufferIndex & FRU_SIZE_MASK)] = FRU_ADDR;
                     fruData.wrBufferIndex++;
                 }
@@ -105,17 +105,10 @@ bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C_
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
                 /* Provide response data to BMC */
-                if(I2C_Got_Addr_NOW == PSU1_FRU_SLAVE_ADDR)
+                if ((I2C_Got_Addr_NOW == PSU0_FRU_SLAVE_ADDR) ||
+                    (I2C_Got_Addr_NOW == PSU1_FRU_SLAVE_ADDR))
                 {
-                    SERCOM_Select_Data(fruData.currentAddrPtr++,I2C_Got_Addr_NOW , SERCOM_NOW , FRU_ADDR ,fruData.addrIndex);
-                    if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
-                    {
-                        fruData.currentAddrPtr = 0;
-                    }
-                }
-                else if(I2C_Got_Addr_NOW == PSU0_FRU_SLAVE_ADDR)
-                {
-                    SERCOM_Select_Data(fruData.currentAddrPtr++,I2C_Got_Addr_NOW , SERCOM_NOW , FRU_ADDR ,fruData.addrIndex);
+                    Select_SERCOM(fruData.currentAddrPtr++ , I2C_Got_Addr_NOW , SERCOM_NOW , FRU_ADDR , fruData.addrIndex);
                     if (fruData.currentAddrPtr >= FRU_SIZE_BYTES)
                     {
                         fruData.currentAddrPtr = 0;
@@ -123,7 +116,7 @@ bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C_
                 }
                 else if(I2C_Got_Addr_NOW == PIC_FRU_SLAVE_ADDR)
                 {
-                    SERCOM_Select_Data(fruData.currentAddrPtr++,I2C_Got_Addr_NOW , SERCOM_NOW , FRU_ADDR ,fruData.addrIndex);
+                    Select_SERCOM(fruData.currentAddrPtr++ , I2C_Got_Addr_NOW , SERCOM_NOW , FRU_ADDR , fruData.addrIndex);
                     if (fruData.currentAddrPtr >= PIC_FRU_SIZE_BYTES)
                     {
                         fruData.currentAddrPtr = 0;

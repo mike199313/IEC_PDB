@@ -25,6 +25,10 @@
 /* Section: Included Files                                                    */
 /* ************************************************************************** */
 /* ************************************************************************** */
+//VERSION Data
+#define MAJOR_VERSION               0x00
+#define MINOR_VERSION               0x01
+
 //i2c address
 #define PSU1_FRU_ADDR               0x52 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 8
 #define PSU1_FRU_SLAVE_ADDR         0x51 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 9
@@ -41,7 +45,7 @@
 #define DATA_LENGTH_INVALID         0xC7//Purnell_PDB_PIC_FW_Spec_V0.06.docx page 13
 #define INVALID_COMMAND             0xc1//Purnell_PDB_PIC_FW_Spec_V0.06.docx page 13
 #define INVALID_ADDRESS             0xcc//Purnell_PDB_PIC_FW_Spec_V0.06.docx page 13
-
+#define CC_SUCCESS                  0x00//Purnell_PDB_PIC_FW_Spec_V0.06.docx page 13
 
 
 #endif /* _PURNELL_OEM_H */

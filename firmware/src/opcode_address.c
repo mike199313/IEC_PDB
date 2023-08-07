@@ -27,18 +27,19 @@
 /* TODO:  Include other files here if needed. */
 
 #include "i2c_address.h"
+#include "Purnell_OEM.h"
 
-uint8_t PIC_CMD;
 
 FRU_DATA   picData;
 
-uint8_t PIC_MAJOR_Data[PIC_OPCODE_SIZE_BYTES] = {0xff , 0x00 , 0x00 , 0xff , 0xff};
-uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES] = {0xff , 0xff , 0x00 , 0x01 , 0xff};
+uint8_t PIC_MAJOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MAJOR_VERSION};
+uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MINOR_VERSION};
 
 
 
 bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW )
 {
+    uint8_t PIC_CMD = UN_KONW_STATUS;
     bool isSuccess = true;
 
         switch(event)
@@ -63,14 +64,15 @@ bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr
                 if (picData.addrIndex < ADDR_BYTE)
                 {
                    
-                    PIC_CMD = SERCOM_PIC_CMD(SERCOM_NOW);
+                    PIC_CMD = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
                     ((uint8_t*)&picData.currentAddrPtr)[picData.addrIndex++] = PIC_CMD;
+                    picData.currentAddrPtr = PIC_OPCODE_START_ADDR;
                     
                 }
                 else
                 {   
                     
-                    PIC_CMD = SERCOM_PIC_CMD(SERCOM_NOW);
+                    PIC_CMD = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
                     picData.wrBuffer[(picData.wrBufferIndex & FRU_SIZE_MASK)] = PIC_CMD;
                     picData.wrBufferIndex++;
                 }
@@ -78,7 +80,7 @@ bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
                 /* Provide response data to BMC */
-                SERCOM_Select_Data(picData.currentAddrPtr++ ,I2C_Got_Addr_NOW ,SERCOM_NOW ,PIC_CMD ,picData.addrIndex); 
+                Select_SERCOM(picData.currentAddrPtr++ , I2C_Got_Addr_NOW , SERCOM_NOW , PIC_CMD , picData.addrIndex); 
                 if (picData.currentAddrPtr >= PIC_OPCODE_SIZE_BYTES)
                 {
                     picData.currentAddrPtr = 0;

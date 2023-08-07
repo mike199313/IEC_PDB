@@ -44,7 +44,7 @@ int main ( void )
     /* Initialize all modules */
     SYS_Initialize ( NULL );
     
-    SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
+    
     
     SERCOM1_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM1);
     SERCOM2_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM2);
@@ -55,6 +55,7 @@ int main ( void )
     {
         /* Maintain state machines of all polled MPLAB Harmony modules. */
         SYS_Tasks ( );
+        SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
     }
 
     /* Execution should not come here during normal operation */

@@ -22,10 +22,10 @@
 #define FRU_SIZE_BYTES              256  // it must be a multiple of ROW (FLASH_ROW_SIZE_BYTES) 
 #define FRU_START_ADDR              (FLASH_END_ADDR-FRU_SIZE_BYTES)
 #define FRU_SIZE_MASK               0xFF
-
 #define PIC_OPCODE_SIZE_BYTES       5  //at least 1 page(1 page 64byte 2page 128byte)
 #define PIC_FRU_SIZE_BYTES          128 //at least 1 page(1 page 64byte 2page 128byte)
 #define PIC_FRU_START_ADDR          (FRU_START_ADDR-PIC_FRU_SIZE_BYTES)
+#define PIC_OPCODE_START_ADDR       0x00
 #define I2C_SLAVE_ADDR_MASK         0x0d
 
 #define SERCOM1                     1
@@ -33,7 +33,11 @@
 #define SERCOM3                     3
 #define SERCOM4                     4
 
+#define UN_KONW_STATUS              -1
+#define ODM_OK                      0
+#define ODM_FAIL                    -1
 #define ADDR_BYTE                   2
+#define CMD_SIZE_ONE_BYTE           1
 
 extern uint8_t I2C_Got_Addr_NOW;
 
@@ -60,7 +64,7 @@ typedef struct
     volatile uint8_t            nWrBytes;
     /* internalWriteInProgress - indicates that FRU is busy with internal writes */
     bool                        internalWriteInProgress;
-    /* fruCommand - used to trigger write to the FRU emulation buffer */
+    /* i2cCommand - used to trigger write to the FRU emulation buffer */
     I2C_CMD                     i2cCommand;
 }FRU_DATA;
 
@@ -74,11 +78,11 @@ extern uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES];
 extern uint8_t PSU_FRU_Data[FRU_SIZE_BYTES];
 extern const uint8_t PIC_FRU_Data[PIC_FRU_SIZE_BYTES];
 
-bool Event_ADDR_Match( uintptr_t SERCOM_NOW );
-uint8_t Select_FRU_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
-bool SERCOM_Select_Data(uint16_t CurrentADDR, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
-uint8_t SERCOM_PIC_CMD(uintptr_t SERCOM_NOW);
+uint8_t GET_SERCOM_I2C_OFFSET(uintptr_t SERCOM_NOW);
+uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
 
+bool Event_ADDR_Match( uintptr_t SERCOM_NOW );
+bool Select_SERCOM(uint16_t CurrentADDR, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
 bool SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
 bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
 bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );

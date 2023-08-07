@@ -57,7 +57,7 @@
 #include "i2c_address.h"
 #include "Purnell_OEM.h"
 
-
+//Confirm the I2C transfer direction
 bool Event_ADDR_Match( uintptr_t SERCOM_NOW )
 {
     switch(SERCOM_NOW)
@@ -78,42 +78,44 @@ bool Event_ADDR_Match( uintptr_t SERCOM_NOW )
             return SERCOM4_I2C_TransferDirGet();
             break;
         default:
-            return 0;
+            return ODM_FAIL;
             break;
     }   
 }
 
-uint8_t SERCOM_PIC_CMD( uintptr_t SERCOM)
+//Get the Offset or CMD
+uint8_t GET_SERCOM_I2C_OFFSET( uintptr_t SERCOM_NOW)
 {
-    uint8_t PIC_CMD_NOW = 1;
-    if(SERCOM == SERCOM1)
+    uint8_t PIC_CMD_NOW = UN_KONW_STATUS;
+    if(SERCOM_NOW == SERCOM1)
     {
         PIC_CMD_NOW = SERCOM1_I2C_ReadByte();
     }
-    else if(SERCOM == SERCOM2)
+    else if(SERCOM_NOW == SERCOM2)
     {
         PIC_CMD_NOW = SERCOM2_I2C_ReadByte();
     }
-    else if(SERCOM == SERCOM3)
+    else if(SERCOM_NOW == SERCOM3)
     {
         PIC_CMD_NOW = SERCOM3_I2C_ReadByte();
     }
-    else if(SERCOM == SERCOM4)
+    else if(SERCOM_NOW == SERCOM4)
     {
         PIC_CMD_NOW = SERCOM4_I2C_ReadByte();
     }
     return PIC_CMD_NOW;
 }
 
-uint8_t Select_FRU_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size)
+//Get the Packing Payload Data
+uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size)
 {
     switch(I2C_Got_Addr_NOW)
     {
-        case PSU1_FRU_SLAVE_ADDR:
+        case PSU0_FRU_SLAVE_ADDR:
             return PSU_FRU_Data[CurrentADDR];
             break;
         
-        case PSU0_FRU_SLAVE_ADDR:
+        case PSU1_FRU_SLAVE_ADDR:
             return PSU_FRU_Data[CurrentADDR];
             break;
             
@@ -122,20 +124,21 @@ uint8_t Select_FRU_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint
             break;
             
         case PIC_OPCODE_SLAVE_ADDR:
-            if(PIC_CMD_Size < 2 )
+            if(PIC_CMD_Size < CMD_SIZE_ONE_BYTE ) //PIC CMD Size is 0 base 
             {
-                if(PIC_CMD == 0x01)
+                if(PIC_CMD == GET_PIC_MAJOR)
                 {
                     return PIC_MAJOR_Data[CurrentADDR];
                     break;
                 }
-                else if(PIC_CMD == 0x02)
+                else if(PIC_CMD == GET_PIC_MINOR)
                 {
                     return PIC_MINOR_Data[CurrentADDR];
                     break;
                 }
                 else
                 {
+                    //TODO debug message
                     return INVALID_COMMAND;
                     break;
                 }
@@ -147,29 +150,33 @@ uint8_t Select_FRU_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint
             }
                 
         default:
-            return 0;
+            return INVALID_ADDRESS;
             break;
     }   
 }
 
-bool SERCOM_Select_Data(uint16_t CurrentADDR, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size)
+bool Select_SERCOM(uint16_t CurrentADDR, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size)
 {
-    bool isSuccess = true;
+    bool isSuccess = false;
     if(SERCOM_NOW == SERCOM1)
     {
-        SERCOM1_I2C_WriteByte(Select_FRU_Data(CurrentADDR , I2C_Got_Addr_NOW ,PIC_CMD ,PIC_CMD_Size));
+        //sercom1 response Data to BMC
+        SERCOM1_I2C_WriteByte(Packing_Payload_Data(CurrentADDR , I2C_Got_Addr_NOW ,PIC_CMD ,PIC_CMD_Size));
     }
     else if(SERCOM_NOW == SERCOM2)
     {
-        SERCOM2_I2C_WriteByte(Select_FRU_Data(CurrentADDR , I2C_Got_Addr_NOW ,PIC_CMD ,PIC_CMD_Size));
+        //sercom2 response Data to BMC
+        SERCOM2_I2C_WriteByte(Packing_Payload_Data(CurrentADDR , I2C_Got_Addr_NOW ,PIC_CMD ,PIC_CMD_Size));
     }
     else if(SERCOM_NOW == SERCOM3)
     {
-        SERCOM3_I2C_WriteByte(Select_FRU_Data(CurrentADDR , I2C_Got_Addr_NOW ,PIC_CMD ,PIC_CMD_Size));
+        //sercom3 response Data to BMC
+        SERCOM3_I2C_WriteByte(Packing_Payload_Data(CurrentADDR , I2C_Got_Addr_NOW ,PIC_CMD ,PIC_CMD_Size));
     }
     else if(SERCOM_NOW == SERCOM4)
     {
-        SERCOM4_I2C_WriteByte(Select_FRU_Data(CurrentADDR , I2C_Got_Addr_NOW ,PIC_CMD ,PIC_CMD_Size));
+        //sercom4 response Data to BMC
+        SERCOM4_I2C_WriteByte(Packing_Payload_Data(CurrentADDR , I2C_Got_Addr_NOW ,PIC_CMD ,PIC_CMD_Size));
     }
     return isSuccess;
 }
