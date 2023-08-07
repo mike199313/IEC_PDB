@@ -107,6 +107,7 @@
         </logicalFolder>
       </logicalFolder>
       <itemPath>../src/i2c_address.h</itemPath>
+      <itemPath>../src/Purnell_OEM.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -167,6 +168,8 @@
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/fru_address.c</itemPath>
       <itemPath>../src/i2c_address.c</itemPath>
+      <itemPath>../src/opcode_address.c</itemPath>
+      <itemPath>../src/sercom_select.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
