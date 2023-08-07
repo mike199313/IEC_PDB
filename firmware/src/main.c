@@ -27,6 +27,7 @@
 #include <stdlib.h>                     // Defines EXIT_FAILURE
 #include "definitions.h"                // SYS function prototypes
 #include "i2c_address.h"
+#include "Purnell_OEM.h"
 
 
 uint8_t FRUWriteData[1] = {0x00};

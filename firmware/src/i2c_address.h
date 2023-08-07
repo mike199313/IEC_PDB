@@ -17,28 +17,22 @@
 #ifndef _I2C_ADDRESS_H
 #define _I2C_ADDRESS_H
 #include "definitions.h"
-#define FLASH_END_ADDR              0x00040000UL
 
+#define FLASH_END_ADDR              0x00040000UL
 #define FRU_SIZE_BYTES              256  // it must be a multiple of ROW (FLASH_ROW_SIZE_BYTES) 
 #define FRU_START_ADDR              (FLASH_END_ADDR-FRU_SIZE_BYTES)
 #define FRU_SIZE_MASK               0xFF
-#define PSU1_FRU_ADDR               0x52 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
-#define PSU1_FRU_SLAVE_ADDR         0x51 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 8
-#define PSU0_FRU_ADDR               0x50 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
-#define PSU0_FRU_SLAVE_ADDR         0x50 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
-#define PIC_FRU_SLAVE_ADDR          0x55 //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
-#define PIC_OPCODE_SLAVE_ADDR       0x5d //Purnell_PDB_PIC_FW_Spec_V0.02.docx page 9
 
 #define PIC_OPCODE_SIZE_BYTES       5  //at least 1 page(1 page 64byte 2page 128byte)
 #define PIC_FRU_SIZE_BYTES          128 //at least 1 page(1 page 64byte 2page 128byte)
 #define PIC_FRU_START_ADDR          (FRU_START_ADDR-PIC_FRU_SIZE_BYTES)
 #define I2C_SLAVE_ADDR_MASK         0x0d
+
 #define SERCOM1                     1
 #define SERCOM2                     2
 #define SERCOM3                     3
 #define SERCOM4                     4
-#define DATA_LENGTH_INVALID         0xC7
-#define INVALID_COMMAND             0xc1
+
 #define ADDR_BYTE                   2
 
 extern uint8_t I2C_Got_Addr_NOW;

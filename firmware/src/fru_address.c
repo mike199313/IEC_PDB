@@ -27,6 +27,7 @@
 /* TODO:  Include other files here if needed. */
 
 #include "i2c_address.h"
+#include "Purnell_OEM.h"
 
 uint8_t FRU_ADDR;
 

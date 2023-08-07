@@ -55,6 +55,7 @@
     Any additional remarks
  */
 #include "i2c_address.h"
+#include "Purnell_OEM.h"
 
 uint8_t I2C_Got_Addr_NOW;
 

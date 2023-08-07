@@ -107,6 +107,7 @@
         </logicalFolder>
       </logicalFolder>
       <itemPath>../src/i2c_address.h</itemPath>
+      <itemPath>../src/Purnell_OEM.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
