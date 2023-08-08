@@ -39,9 +39,9 @@ uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MINOR_VERSION};
 
 bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW )
 {
-    uint8_t PIC_CMD = UN_KONW_STATUS;
+    static uint8_t PIC_CMD = UN_KONW_STATUS;
     bool isSuccess = true;
-
+    
         switch(event)
         {
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_ADDR_MATCH:
@@ -64,8 +64,8 @@ bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr
                 if (picData.addrIndex < ADDR_BYTE)
                 {
                    
-                    PIC_CMD = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
-                    ((uint8_t*)&picData.currentAddrPtr)[picData.addrIndex++] = PIC_CMD;
+                    ((uint8_t*)&picData.currentAddrPtr)[picData.addrIndex++] = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
+                    PIC_CMD = picData.currentAddrPtr;
                     picData.currentAddrPtr = PIC_OPCODE_START_ADDR;
                     
                 }
