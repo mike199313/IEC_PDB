@@ -150,6 +150,7 @@ void SYS_Initialize ( void* data )
 
     SERCOM4_I2C_Initialize();
 
+    TC0_TimerInitialize();
 
 
 
