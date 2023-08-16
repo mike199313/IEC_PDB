@@ -30,10 +30,14 @@
 #define MINOR_VERSION               0x01
 
 //i2c address
-#define PSU1_FRU_ADDR               0x52 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 8
-#define PSU1_FRU_SLAVE_ADDR         0x51 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 9
 #define PSU0_FRU_ADDR               0x50 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 8
+#define PSU0_PMbus_ADDR             0x58 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 8
 #define PSU0_FRU_SLAVE_ADDR         0x50 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 9
+#define PSU0_PMbus_SLAVE_ADDR       0x58 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 9
+#define PSU1_FRU_ADDR               0x53 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 8
+#define PSU1_PMBus_ADDR             0x5b //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 8
+#define PSU1_FRU_SLAVE_ADDR         0x53 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 9
+#define PSU1_PMBus_SLAVE_ADDR       0x5b //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 9
 #define PIC_FRU_SLAVE_ADDR          0x55 //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 9
 #define PIC_OPCODE_SLAVE_ADDR       0x5d //Purnell_PDB_PIC_FW_Spec_V0.06.docx page 9
 
