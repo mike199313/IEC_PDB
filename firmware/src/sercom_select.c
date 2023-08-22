@@ -57,6 +57,8 @@
 #include "i2c_address.h"
 #include "Purnell_OEM.h"
 
+uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES] = {0x00};
+
 //Confirm the I2C transfer direction
 bool Event_ADDR_Match( uintptr_t SERCOM_NOW )
 {
@@ -84,26 +86,25 @@ bool Event_ADDR_Match( uintptr_t SERCOM_NOW )
 }
 
 //Get the Offset or CMD
-uint8_t GET_SERCOM_I2C_OFFSET( uintptr_t SERCOM_NOW)
+uint8_t GET_SERCOM_I2C_OFFSET( uintptr_t SERCOM_NOW , int CMD_Size)
 {
-    uint8_t PIC_CMD_NOW = UN_KONW_STATUS;
     if(SERCOM_NOW == SERCOM1)
     {
-        PIC_CMD_NOW = SERCOM1_I2C_ReadByte();
+        OPcode_CMD[CMD_Size] = SERCOM1_I2C_ReadByte();
     }
     else if(SERCOM_NOW == SERCOM2)
     {
-        PIC_CMD_NOW = SERCOM2_I2C_ReadByte();
+        OPcode_CMD[CMD_Size] = SERCOM2_I2C_ReadByte();
     }
     else if(SERCOM_NOW == SERCOM3)
     {
-        PIC_CMD_NOW = SERCOM3_I2C_ReadByte();
+        OPcode_CMD[CMD_Size] = SERCOM3_I2C_ReadByte();
     }
     else if(SERCOM_NOW == SERCOM4)
     {
-        PIC_CMD_NOW = SERCOM4_I2C_ReadByte();
+        OPcode_CMD[CMD_Size] = SERCOM4_I2C_ReadByte();
     }
-    return PIC_CMD_NOW;
+    return OPcode_CMD[CMD_Size];
 }
 
 //Get the Packing Payload Data

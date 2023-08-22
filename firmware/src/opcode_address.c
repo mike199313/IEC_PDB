@@ -41,7 +41,7 @@ bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr
 {
     static uint8_t PIC_CMD = UN_KONW_STATUS;
     bool isSuccess = true;
-    
+    static int CMD_Size = 0;
         switch(event)
         {
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_ADDR_MATCH:
@@ -55,25 +55,28 @@ bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr
                     /* Reset the indexes */
                     picData.addrIndex = 0;
                     picData.wrBufferIndex = 0;
+                    CMD_Size = 0;
                 }
                 break;
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_RX_READY:
                 /* Receive request data from BMC */
                 
-                if (picData.addrIndex < ADDR_BYTE)
+                if (picData.addrIndex < CMD_SIZE_BYTE)
                 {
                    
-                    ((uint8_t*)&picData.currentAddrPtr)[picData.addrIndex++] = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
+                    ((uint8_t*)&picData.currentAddrPtr)[picData.addrIndex++] = GET_SERCOM_I2C_OFFSET(SERCOM_NOW , CMD_Size);
                     PIC_CMD = picData.currentAddrPtr;
                     picData.currentAddrPtr = PIC_OPCODE_START_ADDR;
+                    CMD_Size++;
                     
                 }
                 else
                 {   
                     
-                    PIC_CMD = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
+                    PIC_CMD = GET_SERCOM_I2C_OFFSET(SERCOM_NOW , CMD_Size);
                     picData.wrBuffer[(picData.wrBufferIndex & FRU_SIZE_MASK)] = PIC_CMD;
+                    CMD_Size++;
                     picData.wrBufferIndex++;
                 }
                 break;
