@@ -64,13 +64,13 @@ bool SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t SERC
 {
     bool isSuccess = true;
 
-    if((I2C_Got_Addr_NOW == PSU1_FRU_SLAVE_ADDR) || 
-       (I2C_Got_Addr_NOW == PSU0_FRU_SLAVE_ADDR) || 
-       (I2C_Got_Addr_NOW == PIC_FRU_SLAVE_ADDR))
+    if((I2C_Got_Addr_NOW == PSU1_FRU_BMC_SIDE_ADDR) || 
+       (I2C_Got_Addr_NOW == PSU0_FRU_BMC_SIDE_ADDR) || 
+       (I2C_Got_Addr_NOW == PIC_FRU_BMC_SIDE_ADDR))
     {   
         SERCOM_FRU_Callback(event , I2C_Got_Addr_NOW , SERCOM_NOW);
                 
-    }else if(I2C_Got_Addr_NOW == PIC_OPCODE_SLAVE_ADDR)
+    }else if(I2C_Got_Addr_NOW == PIC_OPCODE_BMC_SIDE_ADDR)
     {
         SERCOM_PIC_OPcode_Callback(event , I2C_Got_Addr_NOW , SERCOM_NOW);
     }

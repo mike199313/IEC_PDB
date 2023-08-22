@@ -40,7 +40,7 @@
 #define ODM_FAIL                    -1
 #define ADDR_BYTE                   2
 #define CMD_SIZE_ONE_BYTE           1
-#define PSU_OK                      true
+#define PSU_EXIST                   true
 
 extern uint8_t I2C_Got_Addr_NOW;
 extern int I2C_SLAVE_ADDR_MASK;
