@@ -148,6 +148,47 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                     return GPIO_STATUS[CurrentADDR];
                     break;
                 }
+                else if(PIC_CMD == SET_GPIO_STATUS)
+                {
+                    uint8_t PIN_VALUE = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);
+                    PIN_VALUE = PIN_VALUE - 1;
+                    
+                    if(PIN_VALUE < PIN_NUM)
+                    {
+                        //set input output for GPIO
+                        if(OPcode_CMD[2] == GPIO_INPUT )
+                        {
+                            PORT_PinInputEnable(PIN_VALUE);
+                        }
+                        else if(OPcode_CMD[2] == GPIO_OUTPUT  )
+                        {
+                            PORT_PinOutputEnable(PIN_VALUE);
+                        }
+                        else
+                        {
+                            return INVALID_DATA;
+                            break;
+                        }
+                    
+                        //set high low for GPIO
+                        if((OPcode_CMD[3] == GPIO_HIGH) || (OPcode_CMD[3] == GPIO_LOW))
+                        {
+                            PORT_PinWrite(PIN_VALUE , OPcode_CMD[3]);
+                        }
+                        else
+                        {
+                            return INVALID_DATA;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        return INVALID_DATA;
+                        break;
+                    }
+                    return CC_SUCCESS;
+                    break;
+                }
                 else
                 {
                     //TODO debug message
@@ -162,7 +203,7 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
             }
                 
         default:
-            return INVALID_ADDRESS;
+            return INVALID_DATA;
             break;
     }   
 }
