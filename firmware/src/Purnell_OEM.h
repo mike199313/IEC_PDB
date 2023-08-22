@@ -44,6 +44,7 @@
 //opcode command
 #define GET_PIC_MAJOR               0x01//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 13
 #define GET_PIC_MINOR               0x02//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 13
+#define GET_GPIO_STATUS             0x10//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 13
 
 //complete code
 #define DATA_LENGTH_INVALID         0xC7//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 13

@@ -44,6 +44,7 @@
 
 extern uint8_t I2C_Got_Addr_NOW;
 extern int I2C_SLAVE_ADDR_MASK;
+extern uint8_t PIN_VALUE;
 
 typedef enum
 {
@@ -78,6 +79,7 @@ extern FRU_DATA   picData;
 extern uint8_t PIC_MAJOR_Data[PIC_OPCODE_SIZE_BYTES];
 extern uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES];
 extern uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES];
+extern uint8_t GPIO_STATUS[PIC_OPCODE_SIZE_BYTES];
 
 extern uint8_t PSU_FRU_Data[FRU_SIZE_BYTES];
 extern const uint8_t PIC_FRU_Data[PIC_FRU_SIZE_BYTES];

@@ -180,7 +180,23 @@ uint32_t PORT_GroupRead(PORT_GROUP group)
 {
     return (((port_group_registers_t*)group)->PORT_IN);
 }
+// *****************************************************************************
+/* Function:
+    uint32_t PORT_GroupDIRRead(PORT_GROUP group)
 
+  Summary:
+    Read the pin's DIR in the specified port group.
+
+  Description:
+
+  Remarks:
+    Refer plib_port.h file for more information.
+*/
+
+uint32_t PORT_GroupDIRRead(PORT_GROUP group)
+{
+    return (((port_group_registers_t*)group)->PORT_DIR);
+}
 // *****************************************************************************
 /* Function:
     void PORT_GroupWrite(PORT_GROUP group, uint32_t mask, uint32_t value);

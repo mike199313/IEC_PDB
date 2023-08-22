@@ -83,7 +83,7 @@ bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY:
                 /* Provide response data to BMC */
-                Select_SERCOM(picData.currentAddrPtr++ , I2C_Got_Addr_NOW , SERCOM_NOW , PIC_CMD , picData.addrIndex); 
+                Select_SERCOM(picData.currentAddrPtr++ , I2C_Got_Addr_NOW , SERCOM_NOW , OPcode_CMD[0] , picData.addrIndex); 
                 if (picData.currentAddrPtr >= PIC_OPCODE_SIZE_BYTES)
                 {
                     picData.currentAddrPtr = 0;

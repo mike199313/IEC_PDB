@@ -58,6 +58,7 @@
 #include "Purnell_OEM.h"
 
 uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES] = {0x00};
+uint8_t GPIO_STATUS[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS};
 
 //Confirm the I2C transfer direction
 bool Event_ADDR_Match( uintptr_t SERCOM_NOW )
@@ -135,6 +136,16 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                 else if(PIC_CMD == GET_PIC_MINOR)
                 {
                     return PIC_MINOR_Data[CurrentADDR];
+                    break;
+                }
+                else if(PIC_CMD == GET_GPIO_STATUS)
+                {
+                    uint8_t PIN_VALUE = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);
+                    PIN_VALUE = PIN_VALUE - 1;
+                    GPIO_STATUS[1] = PORT_PinDIRRead(PIN_VALUE);
+                    GPIO_STATUS[2] = PORT_PinLatchRead(PIN_VALUE);
+                    
+                    return GPIO_STATUS[CurrentADDR];
                     break;
                 }
                 else

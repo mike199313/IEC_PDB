@@ -743,6 +743,33 @@ uint32_t PORT_GroupRead(PORT_GROUP group);
 
 // *****************************************************************************
 /* Function:
+    uint32_t PORT_GroupDIRRead(PORT_GROUP group)
+
+  Summary:
+    Read the pin's DIR in the specified port group.
+
+  Description:
+
+  Precondition:
+    The PORT_Initialize() function should have been called. 
+
+  Parameters:
+    group - One of the groups from the enum PORT_GROUP.
+
+  Returns:
+    A 32-bit value representing the hardware state of of the pin's DIR in the
+    selected port group.
+
+  Example:
+
+  Remarks:
+    None.
+*/
+
+uint32_t PORT_GroupDIRRead(PORT_GROUP group);
+
+// *****************************************************************************
+/* Function:
     uint32_t PORT_GroupLatchRead(PORT_GROUP group)
 
   Summary:
@@ -1115,6 +1142,34 @@ static inline void PORT_PinWrite(PORT_PIN pin, bool value)
                     (value ? GET_PIN_MASK(pin) : 0U));
 }
 
+// *****************************************************************************
+/* Function:
+    bool PORT_PinDIRRead(PORT_PIN pin)
+
+  Summary:
+    Read the selected pin DIR value.
+
+  Description:
+    
+
+  Precondition:
+    The PORT_Initialize() function should have been called.
+
+  Parameters:
+    pin - the port pin whose state needs to be read.
+
+  Returns:
+    true - the state at the pin is a logic high.
+    false - the state at the pin is a logic low.
+
+  Remarks:
+    None.
+*/
+
+static inline bool PORT_PinDIRRead(PORT_PIN pin)
+{
+    return ((PORT_GroupDIRRead(GET_PORT_GROUP(pin)) & GET_PIN_MASK(pin)) != 0U);
+}
 
 // *****************************************************************************
 /* Function:
