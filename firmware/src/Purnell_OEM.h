@@ -31,13 +31,13 @@
 
 //i2c address
 #define PSU0_FRU_ADDR               0x50 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 8
-#define PSU0_PMbus_ADDR             0x58 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 8
+#define PSU0_PMBUS_ADDR             0x58 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 8
 #define PSU0_FRU_BMC_SIDE_ADDR      0x50 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 9
-#define PSU0_PMbus_BMC_SIDE_ADDR    0x58 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 9
+#define PSU0_PMBUS_BMC_SIDE_ADDR    0x58 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 9
 #define PSU1_FRU_ADDR               0x53 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 8
-#define PSU1_PMBus_ADDR             0x5b //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 8
+#define PSU1_PMBUS_ADDR             0x5b //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 8
 #define PSU1_FRU_BMC_SIDE_ADDR      0x53 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 9
-#define PSU1_PMBus_BMC_SIDE_ADDR    0x5b //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 9
+#define PSU1_PMBUS_BMC_SIDE_ADDR    0x5b //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 9
 #define PIC_FRU_BMC_SIDE_ADDR       0x55 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 9
 #define PIC_OPCODE_BMC_SIDE_ADDR    0x5d //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 9
 

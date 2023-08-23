@@ -52,8 +52,8 @@ int main ( void )
     uint8_t FRUWriteData[1] = {0x00};
     uint32_t FRUwrLength = 1;
     uint32_t FRUrdLength = 265;
-    bool PSU0presetExist = PSU_EXIST;
-    bool PSU1presetExist = PSU_EXIST;
+    bool PSU0_previoussetExist = PSU_EXIST;
+    bool PSU1_previoussetExist = PSU_EXIST;
 
     while ( true )
     {
@@ -65,11 +65,11 @@ int main ( void )
             PSU1exist = SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
             
             //TODO : GPIO present detect instead of I2C
-            if ((PSU0exist != PSU0presetExist) || (PSU1exist != PSU1presetExist))
+            if ((PSU0exist != PSU0_previoussetExist) || (PSU1exist != PSU1_previoussetExist))
             {
                 Change_Mask_ADDR(PSU0exist , PSU1exist);
-                PSU0presetExist = PSU0exist;
-                PSU1presetExist = PSU1exist;
+                PSU0_previoussetExist = PSU0exist;
+                PSU1_previoussetExist = PSU1exist;
             }
         }
         SYS_Tasks ( );
