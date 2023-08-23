@@ -30,9 +30,6 @@
 #include "Purnell_OEM.h"
 
 
-uint8_t FRUWriteData[1] = {0x00};
-uint32_t FRUwrLength = 1;
-uint32_t FRUrdLength = 265;
 // *****************************************************************************
 // *****************************************************************************
 // Section: Main Entry Point
@@ -44,18 +41,39 @@ int main ( void )
     /* Initialize all modules */
     SYS_Initialize ( NULL );
     
-    
+    TC0_TimerInitialize();
+    TC0_TimerStart();
     
     SERCOM1_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM1);
     SERCOM2_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM2);
     SERCOM3_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM3);
     SERCOM4_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM4);
+    
+    uint8_t FRUWriteData[1] = {0x00};
+    uint32_t FRUwrLength = 1;
+    uint32_t FRUrdLength = 265;
+    bool PSU0presetExist = PSU_EXIST;
+    bool PSU1presetExist = PSU_EXIST;
 
     while ( true )
     {
+        bool PSU0exist;
+        bool PSU1exist;
         /* Maintain state machines of all polled MPLAB Harmony modules. */
+        if (TC0_TimerPeriodHasExpired()) {
+            PSU0exist = SERCOM0_I2C_WriteRead( PSU0_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
+            PSU1exist = SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
+            
+            //TODO : GPIO present detect instead of I2C
+            if ((PSU0exist != PSU0presetExist) || (PSU1exist != PSU1presetExist))
+            {
+                Change_Mask_ADDR(PSU0exist , PSU1exist);
+                PSU0presetExist = PSU0exist;
+                PSU1presetExist = PSU1exist;
+            }
+        }
         SYS_Tasks ( );
-        SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
+        
     }
 
     /* Execution should not come here during normal operation */

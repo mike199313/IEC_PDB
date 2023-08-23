@@ -26,7 +26,9 @@
 #define PIC_FRU_SIZE_BYTES          128 //at least 1 page(1 page 64byte 2page 128byte)
 #define PIC_FRU_START_ADDR          (FRU_START_ADDR-PIC_FRU_SIZE_BYTES)
 #define PIC_OPCODE_START_ADDR       0x00
-#define I2C_SLAVE_ADDR_MASK         0x0d
+#define SLAVE_ADDR_MASK             0x0f //all PSU exist
+#define PSU0_SLAVE_ADDR_MASK        0x0d //only PSU0 exist
+#define PSU1_SLAVE_ADDR_MASK        0x0e //only PSU1 exist
 
 #define SERCOM1                     1
 #define SERCOM2                     2
@@ -38,9 +40,10 @@
 #define ODM_FAIL                    -1
 #define ADDR_BYTE                   2
 #define CMD_SIZE_ONE_BYTE           1
+#define PSU_EXIST                   true
 
 extern uint8_t I2C_Got_Addr_NOW;
-
+extern int I2C_SLAVE_ADDR_MASK;
 
 typedef enum
 {
@@ -81,6 +84,7 @@ extern const uint8_t PIC_FRU_Data[PIC_FRU_SIZE_BYTES];
 uint8_t GET_SERCOM_I2C_OFFSET(uintptr_t SERCOM_NOW);
 uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
 
+bool Change_Mask_ADDR(bool PSU0exist , bool PSU1exist);
 bool Event_ADDR_Match( uintptr_t SERCOM_NOW );
 bool Select_SERCOM(uint16_t CurrentADDR, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
 bool SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );

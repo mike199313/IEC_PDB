@@ -25,7 +25,14 @@
  */
 
 /* TODO:  Include other files here if needed. */
-
+#include <stdio.h>
+#include "config/default/peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.h"
+#include "config/default/peripheral/sercom/i2c_slave/plib_sercom2_i2c_slave.h"
+#include "config/default/peripheral/sercom/i2c_slave/plib_sercom3_i2c_slave.h"
+#include "config/default/peripheral/sercom/i2c_slave/plib_sercom4_i2c_slave.h"
+#include "config/default/interrupts.h"
+#include "i2c_address.h"
+#include "Purnell_OEM.h"
 
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -36,7 +43,7 @@
 /*  A brief description of a section can be given directly below the section
     banner.
  */
-
+int I2C_SLAVE_ADDR_MASK = SLAVE_ADDR_MASK;
 /* ************************************************************************** */
 /** Descriptive Data Item Name
 
@@ -54,28 +61,31 @@
   @Remarks
     Any additional remarks
  */
-#include "i2c_address.h"
-#include "Purnell_OEM.h"
-
-uint8_t I2C_Got_Addr_NOW;
 
 
-bool SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t SERCOM_NOW )
+bool Change_Mask_ADDR(bool PSU0exist , bool PSU1exist)
 {
-    bool isSuccess = true;
-
-    if((I2C_Got_Addr_NOW == PSU1_FRU_BMC_SIDE_ADDR) || 
-       (I2C_Got_Addr_NOW == PSU0_FRU_BMC_SIDE_ADDR) || 
-       (I2C_Got_Addr_NOW == PIC_FRU_BMC_SIDE_ADDR))
-    {   
-        SERCOM_FRU_Callback(event , I2C_Got_Addr_NOW , SERCOM_NOW);
-                
-    }else if(I2C_Got_Addr_NOW == PIC_OPCODE_BMC_SIDE_ADDR)
+    if ((PSU0exist == PSU_EXIST) && (PSU1exist == PSU_EXIST))
     {
-        SERCOM_PIC_OPcode_Callback(event , I2C_Got_Addr_NOW , SERCOM_NOW);
+        I2C_SLAVE_ADDR_MASK = SLAVE_ADDR_MASK;
     }
-    
-    return isSuccess;
+    else if (PSU0exist == PSU_EXIST)
+    {
+        I2C_SLAVE_ADDR_MASK = PSU0_SLAVE_ADDR_MASK;
+    }
+    else if (PSU1exist == PSU_EXIST)
+    {
+        I2C_SLAVE_ADDR_MASK = PSU1_SLAVE_ADDR_MASK;
+    }
+    SERCOM1_I2C_Initialize();
+    SERCOM1_I2C_InterruptHandler();
+    SERCOM2_I2C_Initialize();
+    SERCOM2_I2C_InterruptHandler();
+    SERCOM3_I2C_Initialize();
+    SERCOM3_I2C_InterruptHandler();
+    SERCOM4_I2C_Initialize();
+    SERCOM4_I2C_InterruptHandler();
+    return ODM_OK;
 }
 
 /* *****************************************************************************
