@@ -58,7 +58,6 @@
 #include "Purnell_OEM.h"
 
 uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES] = {0x00};
-uint8_t GPIO_STATUS[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS};
 
 //Confirm the I2C transfer direction
 bool Event_ADDR_Match( uintptr_t SERCOM_NOW )
@@ -108,9 +107,19 @@ uint8_t GET_SERCOM_I2C_OFFSET( uintptr_t SERCOM_NOW , int CMD_Size)
     return OPcode_CMD[CMD_Size];
 }
 
+/*
+ * BCD calculation method description:
+ *  
+ *  first shift 4 bits to the right and multiply by 10 to calculate the tens digit, 
+ *  keep the right 4 bits to get the unit digit, and then add the two to get the decimal
+ * 
+ */
 //Get the Packing Payload Data
 uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size)
 {
+    static uint8_t PIC_MAJOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MAJOR_VERSION};
+    static uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MINOR_VERSION};
+    static uint8_t GPIO_STATUS[PIC_OPCODE_SIZE_BYTES];
     switch(I2C_Got_Addr_NOW)
     {
         case PSU0_FRU_BMC_SIDE_ADDR:
@@ -140,8 +149,8 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                 }
                 else if(PIC_CMD == GET_GPIO_STATUS)
                 {
-                    uint8_t PIN_VALUE = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);
-                    PIN_VALUE = PIN_VALUE - 1;
+                    uint8_t PIN_NUMBER = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal in the way of BCD
+                    PIN_NUMBER = PIN_NUMBER - 1;
                     switch(CurrentADDR)
                     {
                         case 0:
@@ -149,11 +158,11 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                             break;
                             
                         case 1:
-                            GPIO_STATUS[CurrentADDR] = PORT_PinDIRRead(PIN_VALUE);
+                            GPIO_STATUS[CurrentADDR] = PORT_PinDIRRead(PIN_NUMBER);
                             break;        
                                     
                         case 2:
-                            GPIO_STATUS[CurrentADDR] = PORT_PinLatchRead(PIN_VALUE);
+                            GPIO_STATUS[CurrentADDR] = PORT_PinLatchRead(PIN_NUMBER);
                             break;
                     }
                     return GPIO_STATUS[CurrentADDR];
@@ -161,19 +170,19 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                 }
                 else if(PIC_CMD == SET_GPIO_STATUS)
                 {
-                    uint8_t PIN_VALUE = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);
-                    PIN_VALUE = PIN_VALUE - 1;
+                    uint8_t PIN_NUMBER = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal in the way of BCD
+                    PIN_NUMBER = PIN_NUMBER - 1;
                     
-                    if(PIN_VALUE < PIN_NUM)
+                    if(PIN_NUMBER < PIN_NUM_MAX)
                     {
                         //set input output for GPIO
                         if(OPcode_CMD[2] == GPIO_INPUT )
                         {
-                            PORT_PinInputEnable(PIN_VALUE);
+                            PORT_PinInputEnable(PIN_NUMBER);
                         }
                         else if(OPcode_CMD[2] == GPIO_OUTPUT  )
                         {
-                            PORT_PinOutputEnable(PIN_VALUE);
+                            PORT_PinOutputEnable(PIN_NUMBER);
                         }
                         else
                         {
@@ -184,7 +193,7 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                         //set high low for GPIO
                         if((OPcode_CMD[3] == GPIO_HIGH) || (OPcode_CMD[3] == GPIO_LOW))
                         {
-                            PORT_PinWrite(PIN_VALUE , OPcode_CMD[3]);
+                            PORT_PinWrite(PIN_NUMBER , OPcode_CMD[3]);
                         }
                         else
                         {

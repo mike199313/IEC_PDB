@@ -20,7 +20,7 @@
 
 #define FLASH_END_ADDR              0x00040000UL
 #define FRU_SIZE_BYTES              256  // it must be a multiple of ROW (FLASH_ROW_SIZE_BYTES)
-#define PIN_NUM                     64
+#define PIN_NUM_MAX                 64
 #define FRU_START_ADDR              (FLASH_END_ADDR-FRU_SIZE_BYTES)
 #define FRU_SIZE_MASK               0xFF
 #define PIC_OPCODE_SIZE_BYTES       5  //at least 1 page(1 page 64byte 2page 128byte)
@@ -45,7 +45,7 @@
 
 extern uint8_t I2C_Got_Addr_NOW;
 extern int I2C_SLAVE_ADDR_MASK;
-extern uint8_t PIN_VALUE;
+extern uint8_t PIN_NUMBER;
 
 typedef enum
 {
@@ -77,10 +77,7 @@ typedef struct
 extern FRU_DATA   fruData;
 extern FRU_DATA   picData;
 
-extern uint8_t PIC_MAJOR_Data[PIC_OPCODE_SIZE_BYTES];
-extern uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES];
 extern uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES];
-extern uint8_t GPIO_STATUS[PIC_OPCODE_SIZE_BYTES];
 
 extern uint8_t PSU_FRU_Data[FRU_SIZE_BYTES];
 extern const uint8_t PIC_FRU_Data[PIC_FRU_SIZE_BYTES];

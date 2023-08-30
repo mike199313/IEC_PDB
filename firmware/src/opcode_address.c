@@ -32,8 +32,6 @@
 
 FRU_DATA   picData;
 
-uint8_t PIC_MAJOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MAJOR_VERSION};
-uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MINOR_VERSION};
 
 
 
@@ -66,7 +64,6 @@ bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr
                 {
                    
                     ((uint8_t*)&picData.currentAddrPtr)[picData.addrIndex++] = GET_SERCOM_I2C_OFFSET(SERCOM_NOW , CMD_Size);
-                    PIC_CMD = picData.currentAddrPtr;
                     picData.currentAddrPtr = PIC_OPCODE_START_ADDR;
                     CMD_Size++;
                     
