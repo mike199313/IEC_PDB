@@ -142,9 +142,20 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                 {
                     uint8_t PIN_VALUE = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);
                     PIN_VALUE = PIN_VALUE - 1;
-                    GPIO_STATUS[1] = PORT_PinDIRRead(PIN_VALUE);
-                    GPIO_STATUS[2] = PORT_PinLatchRead(PIN_VALUE);
-                    
+                    switch(CurrentADDR)
+                    {
+                        case 0:
+                            GPIO_STATUS[CurrentADDR] = CC_SUCCESS;
+                            break;
+                            
+                        case 1:
+                            GPIO_STATUS[CurrentADDR] = PORT_PinDIRRead(PIN_VALUE);
+                            break;        
+                                    
+                        case 2:
+                            GPIO_STATUS[CurrentADDR] = PORT_PinLatchRead(PIN_VALUE);
+                            break;
+                    }
                     return GPIO_STATUS[CurrentADDR];
                     break;
                 }
