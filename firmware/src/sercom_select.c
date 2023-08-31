@@ -108,9 +108,9 @@ uint8_t GET_SERCOM_I2C_OFFSET( uintptr_t SERCOM_NOW , int CMD_Size)
 }
 
 /*
- * BCD calculation method description:
+ * HCD calculation method description:
  *  
- *  first shift 4 bits to the right and multiply by 10 to calculate the tens digit, 
+ *  first shift 4 bits to the right and multiply by 16 to calculate the decimal, 
  *  keep the right 4 bits to get the unit digit, and then add the two to get the decimal
  * 
  */
@@ -149,28 +149,37 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                 }
                 else if(PIC_CMD == GET_GPIO_STATUS)
                 {
-                    uint8_t PIN_NUMBER = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal in the way of BCD
+                    uint8_t PIN_NUMBER = ((OPcode_CMD[1] >> 4)*16) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal
                     PIN_NUMBER = PIN_NUMBER - 1;
-                    switch(CurrentADDR)
+                    if(PIN_NUMBER < PIN_NUM_MAX)
                     {
-                        case 0:
-                            GPIO_STATUS[CurrentADDR] = CC_SUCCESS;
-                            break;
-                            
-                        case 1:
-                            GPIO_STATUS[CurrentADDR] = PORT_PinDIRRead(PIN_NUMBER);
-                            break;        
-                                    
-                        case 2:
-                            GPIO_STATUS[CurrentADDR] = PORT_PinLatchRead(PIN_NUMBER);
-                            break;
+                        switch(CurrentADDR)
+                        {
+                            case 0:
+                                GPIO_STATUS[CurrentADDR] = CC_SUCCESS;
+                                break;
+
+                            case 1:
+                                GPIO_STATUS[CurrentADDR] = PORT_PinDIRRead(PIN_NUMBER);
+                                break;        
+
+                            case 2:
+                                GPIO_STATUS[CurrentADDR] = PORT_PinLatchRead(PIN_NUMBER);
+                                break;
+                        }
+                        return GPIO_STATUS[CurrentADDR];
+                        break;
                     }
-                    return GPIO_STATUS[CurrentADDR];
-                    break;
+                    else
+                    {
+                        return INVALID_DATA;
+                        break;
+                    }
+                    
                 }
                 else if(PIC_CMD == SET_GPIO_STATUS)
                 {
-                    uint8_t PIN_NUMBER = ((OPcode_CMD[1] >> 4)*10) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal in the way of BCD
+                    uint8_t PIN_NUMBER = ((OPcode_CMD[1] >> 4)*16) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal
                     PIN_NUMBER = PIN_NUMBER - 1;
                     
                     if(PIN_NUMBER < PIN_NUM_MAX)
