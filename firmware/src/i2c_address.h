@@ -19,7 +19,8 @@
 #include "definitions.h"
 
 #define FLASH_END_ADDR              0x00040000UL
-#define FRU_SIZE_BYTES              256  // it must be a multiple of ROW (FLASH_ROW_SIZE_BYTES) 
+#define FRU_SIZE_BYTES              256  // it must be a multiple of ROW (FLASH_ROW_SIZE_BYTES)
+#define PIN_NUM_MAX                 64
 #define FRU_START_ADDR              (FLASH_END_ADDR-FRU_SIZE_BYTES)
 #define FRU_SIZE_MASK               0xFF
 #define PIC_OPCODE_SIZE_BYTES       5  //at least 1 page(1 page 64byte 2page 128byte)
@@ -38,12 +39,13 @@
 #define UN_KONW_STATUS              -1
 #define ODM_OK                      0
 #define ODM_FAIL                    -1
-#define ADDR_BYTE                   2
+#define CMD_SIZE_BYTE               10  //The maximum size of the CMD that can be used
 #define CMD_SIZE_ONE_BYTE           1
 #define PSU_EXIST                   true
 
 extern uint8_t I2C_Got_Addr_NOW;
 extern int I2C_SLAVE_ADDR_MASK;
+extern uint8_t PIN_NUMBER;
 
 typedef enum
 {
@@ -75,13 +77,12 @@ typedef struct
 extern FRU_DATA   fruData;
 extern FRU_DATA   picData;
 
-extern uint8_t PIC_MAJOR_Data[PIC_OPCODE_SIZE_BYTES];
-extern uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES];
+extern uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES];
 
 extern uint8_t PSU_FRU_Data[FRU_SIZE_BYTES];
 extern const uint8_t PIC_FRU_Data[PIC_FRU_SIZE_BYTES];
 
-uint8_t GET_SERCOM_I2C_OFFSET(uintptr_t SERCOM_NOW);
+uint8_t GET_SERCOM_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);
 uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
 
 bool Change_Mask_ADDR(bool PSU0exist , bool PSU1exist);

@@ -70,7 +70,7 @@ uint8_t PSU_FRU_Data[FRU_SIZE_BYTES]=   //data from trn_ac-dc_csu2400ap_release_
 bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW )
 {
     bool isSuccess = true;
-
+    static int CMD_Size = 0;
         switch(event)
         {
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_ADDR_MATCH:
@@ -84,21 +84,24 @@ bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t I2C_
                     /* Reset the indexes */
                     fruData.addrIndex = 0;
                     fruData.wrBufferIndex = 0;
+                    CMD_Size = 0;
                 }
                 break;
 
             case SERCOM_I2C_SLAVE_TRANSFER_EVENT_RX_READY:
                 /* Receive request data from BMC*/
                 
-                if (fruData.addrIndex < ADDR_BYTE)
+                if (fruData.addrIndex < CMD_SIZE_BYTE)
                 {
-                    FRU_ADDR = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
+                    FRU_ADDR = GET_SERCOM_I2C_OFFSET(SERCOM_NOW , CMD_Size);
                     ((uint8_t*)&fruData.currentAddrPtr)[fruData.addrIndex++] = FRU_ADDR;
+                    CMD_Size++;
                 }
                 else
                 {
-                    FRU_ADDR = GET_SERCOM_I2C_OFFSET(SERCOM_NOW);
+                    FRU_ADDR = GET_SERCOM_I2C_OFFSET(SERCOM_NOW , CMD_Size);
                     fruData.wrBuffer[(fruData.wrBufferIndex & FRU_SIZE_MASK)] = FRU_ADDR;
+                    CMD_Size++;
                     fruData.wrBufferIndex++;
                 }
                 break;
