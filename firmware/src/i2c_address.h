@@ -28,8 +28,8 @@
 #define PIC_FRU_START_ADDR          (FRU_START_ADDR-PIC_FRU_SIZE_BYTES)
 #define PIC_OPCODE_START_ADDR       0x00
 #define SLAVE_ADDR_MASK             0x0f //all PSU exist
-#define PSU0_SLAVE_ADDR_MASK        0x0d //only PSU0 exist
-#define PSU1_SLAVE_ADDR_MASK        0x0e //only PSU1 exist
+#define PSU0_SLAVE_ADDR_MASK        0x0e //only PSU0 exist
+#define PSU1_SLAVE_ADDR_MASK        0x0d //only PSU1 exist
 
 #define SERCOM1                     1
 #define SERCOM2                     2

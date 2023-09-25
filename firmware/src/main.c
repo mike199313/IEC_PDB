@@ -61,9 +61,12 @@ int main ( void )
         bool PSU1exist;
         /* Maintain state machines of all polled MPLAB Harmony modules. */
         if (TC0_TimerPeriodHasExpired()) {
-            PSU0exist = SERCOM0_I2C_WriteRead( PSU0_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
-            PSU1exist = SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
-            
+            PSU0exist = PORT_PinRead(PORT_PIN_PA20);
+            PSU1exist = PORT_PinRead(PORT_PIN_PA21);
+            SERCOM0_I2C_WriteRead( PSU0_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
+            while (SERCOM0_I2C_IsBusy( ));
+            SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, FRUWriteData,FRUwrLength ,PSU_FRU_Data ,FRUrdLength );
+            while (SERCOM0_I2C_IsBusy( ));
             //TODO : GPIO present detect instead of I2C
             if ((PSU0exist != PSU0_previoussetExist) || (PSU1exist != PSU1_previoussetExist))
             {
