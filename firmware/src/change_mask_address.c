@@ -63,17 +63,17 @@ int I2C_SLAVE_ADDR_MASK = SLAVE_ADDR_MASK;
  */
 
 
-bool Change_Mask_ADDR(bool PSU0exist , bool PSU1exist)
+bool Change_Mask_ADDR(int PSU0_Is_Present , int PSU1_Is_Present)
 {
-    if ((PSU0exist == PSU_EXIST) && (PSU1exist == PSU_EXIST))
+    if ((PSU0_Is_Present == true) && (PSU1_Is_Present == true))
     {
         I2C_SLAVE_ADDR_MASK = SLAVE_ADDR_MASK;
     }
-    else if (PSU0exist == PSU_EXIST)
+    else if (PSU0_Is_Present == true)
     {
         I2C_SLAVE_ADDR_MASK = PSU0_SLAVE_ADDR_MASK;
     }
-    else if (PSU1exist == PSU_EXIST)
+    else if (PSU1_Is_Present == true)
     {
         I2C_SLAVE_ADDR_MASK = PSU1_SLAVE_ADDR_MASK;
     }
