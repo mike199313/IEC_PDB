@@ -123,11 +123,11 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
     switch(I2C_Got_Addr_NOW)
     {
         case PSU0_FRU_BMC_SIDE_ADDR:
-            return PSU_FRU_Data[CurrentADDR];
+            return PSU0_FRU_Data[CurrentADDR];
             break;
         
         case PSU1_FRU_BMC_SIDE_ADDR:
-            return PSU_FRU_Data[CurrentADDR];
+            return PSU1_FRU_Data[CurrentADDR];
             break;
             
         case PIC_FRU_BMC_SIDE_ADDR:
