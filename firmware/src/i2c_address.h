@@ -78,7 +78,8 @@ extern FRU_DATA   picData;
 
 extern uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES];
 
-extern uint8_t PSU_FRU_Data[FRU_SIZE_BYTES];
+extern uint8_t PSU0_FRU_Data[FRU_SIZE_BYTES];
+extern uint8_t PSU1_FRU_Data[FRU_SIZE_BYTES];
 extern const uint8_t PIC_FRU_Data[PIC_FRU_SIZE_BYTES];
 
 uint8_t GET_SERCOM_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);

@@ -80,7 +80,7 @@ int main ( void )
                     SERCOM0_I2C_WriteRead( PSU0_FRU_ADDR, 
                                            FRUWriteData,
                                            FRUwrLength,
-                                           PSU_FRU_Data,
+                                           PSU0_FRU_Data,
                                            FRUrdLength );
                     while (SERCOM0_I2C_IsBusy( ));
                 }
@@ -90,7 +90,7 @@ int main ( void )
                     SERCOM0_I2C_WriteRead( PSU1_FRU_ADDR, 
                                            FRUWriteData,
                                            FRUwrLength,
-                                           PSU_FRU_Data,
+                                           PSU1_FRU_Data,
                                            FRUrdLength );
                     while (SERCOM0_I2C_IsBusy( ));
                 }
