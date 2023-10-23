@@ -27,7 +27,7 @@
 /* ************************************************************************** */
 //VERSION Data
 #define MAJOR_VERSION               0x00
-#define MINOR_VERSION               0x03
+#define MINOR_VERSION               0x04
 
 //i2c address
 #define PSU0_FRU_ADDR               0x50 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 8
