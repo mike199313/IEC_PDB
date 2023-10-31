@@ -84,9 +84,9 @@ extern void PM_Handler                 ( void ) __attribute__((weak, alias("Dumm
 extern void SYSCTRL_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void WDT_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void RTC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
-extern void EIC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void NVMCTRL_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void EVSYS_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler")));
+extern void SERCOM5_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void TC0_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void TC1_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void TC2_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
@@ -123,7 +123,7 @@ const H3DeviceVectors exception_table=
     .pfnSYSCTRL_Handler            = SYSCTRL_Handler,
     .pfnWDT_Handler                = WDT_Handler,
     .pfnRTC_Handler                = RTC_Handler,
-    .pfnEIC_Handler                = EIC_Handler,
+    .pfnEIC_Handler                = EIC_InterruptHandler,
     .pfnNVMCTRL_Handler            = NVMCTRL_Handler,
     .pfnEVSYS_Handler              = EVSYS_Handler,
     .pfnSERCOM0_Handler            = SERCOM0_I2C_InterruptHandler,
@@ -131,7 +131,7 @@ const H3DeviceVectors exception_table=
     .pfnSERCOM2_Handler            = SERCOM2_I2C_InterruptHandler,
     .pfnSERCOM3_Handler            = SERCOM3_I2C_InterruptHandler,
     .pfnSERCOM4_Handler            = SERCOM4_I2C_InterruptHandler,
-    .pfnSERCOM5_Handler            = SERCOM5_USART_InterruptHandler,
+    .pfnSERCOM5_Handler            = SERCOM5_Handler,
     .pfnTC0_Handler                = TC0_Handler,
     .pfnTC1_Handler                = TC1_Handler,
     .pfnTC2_Handler                = TC2_Handler,

@@ -52,13 +52,14 @@
 #include "peripheral/nvmctrl/plib_nvmctrl.h"
 #include "peripheral/sercom/i2c_slave/plib_sercom2_i2c_slave.h"
 #include "peripheral/sercom/i2c_slave/plib_sercom1_i2c_slave.h"
-#include "peripheral/sercom/i2c_master/plib_sercom0_i2c_master.h"
 #include "peripheral/evsys/plib_evsys.h"
+#include "peripheral/sercom/i2c_master/plib_sercom0_i2c_master.h"
 #include "peripheral/port/plib_port.h"
 #include "peripheral/clock/plib_clock.h"
 #include "peripheral/nvic/plib_nvic.h"
 #include "peripheral/sercom/usart/plib_sercom5_usart.h"
 #include "peripheral/sercom/i2c_slave/plib_sercom4_i2c_slave.h"
+#include "peripheral/eic/plib_eic.h"
 #include "peripheral/tc/plib_tc0.h"
 
 // DOM-IGNORE-BEGIN

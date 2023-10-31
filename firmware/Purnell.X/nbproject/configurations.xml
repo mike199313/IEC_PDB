@@ -10,6 +10,9 @@
             <logicalFolder name="clock" displayName="clock" projectFiles="true">
               <itemPath>../src/config/default/peripheral/clock/plib_clock.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="eic" displayName="eic" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/eic/plib_eic.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="evsys" displayName="evsys" projectFiles="true">
               <itemPath>../src/config/default/peripheral/evsys/plib_evsys.h</itemPath>
             </logicalFolder>
@@ -131,6 +134,9 @@
             <logicalFolder name="clock" displayName="clock" projectFiles="true">
               <itemPath>../src/config/default/peripheral/clock/plib_clock.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="eic" displayName="eic" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/eic/plib_eic.c</itemPath>
+            </logicalFolder>
             <logicalFolder name="evsys" displayName="evsys" projectFiles="true">
               <itemPath>../src/config/default/peripheral/evsys/plib_evsys.c</itemPath>
             </logicalFolder>
@@ -178,6 +184,7 @@
       <itemPath>../src/opcode_address.c</itemPath>
       <itemPath>../src/sercom_select.c</itemPath>
       <itemPath>../src/change_mask_address.c</itemPath>
+      <itemPath>../src/EIC_Callback.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -199,7 +206,7 @@
         <targetDevice>ATSAMD20J18</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>EdbgTool</platformTool>
+        <platformTool>pk4hybrid</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>4.21</languageToolchainVersion>
         <platform>3</platform>
