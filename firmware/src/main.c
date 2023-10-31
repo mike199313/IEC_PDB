@@ -41,6 +41,8 @@ int main ( void )
     /* Initialize all modules */
     SYS_Initialize ( NULL );
     
+    EIC_Initialize();
+    
     TC0_TimerInitialize();
     TC0_TimerStart();
     
@@ -54,14 +56,15 @@ int main ( void )
     uint32_t FRUrdLength = 265;
     static int PSU0_previoussetExist = UN_KONW_STATUS;
     static int PSU1_previoussetExist = UN_KONW_STATUS;
-
+    EIC_CallbackRegister(EIC_PIN_0, EIC_Callback_0, MCU_PB00_PSU0_AC_OK_PIN);
+    EIC_CallbackRegister(EIC_PIN_1, EIC_Callback_1, MCU_PB01_PSU1_AC_OK_PIN);
+    
     while ( true )
     {
         int PSU0_Is_Present;
         int PSU1_Is_Present;
         /* Maintain state machines of all polled MPLAB Harmony modules. */
         if (TC0_TimerPeriodHasExpired()) {
-            
             /*refer http://tao-pdmnet-4:8080/tfs/TAO_BU5_FW5/FW5E/_git/Purnell-DOCS?path=/
             HW_Schematic/Purnell_Schematic/PDB/INTEL_BHS_2U4N_PDB_20230531_decrypted.pdf*/
             //INTEL_BHS_2U4N_PDB_20230531_decrypted.pdf page 9

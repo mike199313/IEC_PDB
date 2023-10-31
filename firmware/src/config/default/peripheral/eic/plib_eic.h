@@ -1,18 +1,23 @@
 /*******************************************************************************
- System Interrupts File
+  External Interrupt Controller (EIC) PLIB
 
-  Company:
+  Company
     Microchip Technology Inc.
 
-  File Name:
-    interrupt.h
+  File Name
+    plib_eic.h
 
-  Summary:
-    Interrupt vectors mapping
+  Summary
+    EIC PLIB Header File.
 
-  Description:
-    This file contains declarations of device vectors used by Harmony 3
- *******************************************************************************/
+  Description
+    This file defines the interface to the EIC peripheral library. This
+    library provides access to and control of the associated peripheral
+    instance.
+
+  Remarks:
+    None.
+*******************************************************************************/
 
 // DOM-IGNORE-BEGIN
 /*******************************************************************************
@@ -36,37 +41,89 @@
 * FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
- *******************************************************************************/
+*******************************************************************************/
 // DOM-IGNORE-END
 
-#ifndef INTERRUPTS_H
-#define INTERRUPTS_H
+/* Guards against multiple inclusion */
+#ifndef PLIB_EIC_H
+#define PLIB_EIC_H
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-#include <stdint.h>
 
+#include "device.h"
+#include <stdbool.h>
+#include <stddef.h>
+
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus // Provide C++ Compatibility
+
+    extern "C" {
+
+#endif
+// DOM-IGNORE-END
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Data Types
+// *****************************************************************************
+// *****************************************************************************
+
+/* EIC Pin Count */
+#define EXTINT_COUNT                        (16U)
+
+typedef enum
+{
+    /* External Interrupt Controller Pin 0 */
+    EIC_PIN_0 = 0,
+
+    /* External Interrupt Controller Pin 1 */
+    EIC_PIN_1 = 1,
+
+    EIC_PIN_MAX = 16
+
+} EIC_PIN;
+
+
+typedef void (*EIC_CALLBACK) (uintptr_t context);
+
+typedef struct
+{
+    /* External Interrupt Pin Callback Handler */
+    EIC_CALLBACK    callback;
+
+    /* External Interrupt Pin Client context */
+    uintptr_t       context;
+
+    /* External Interrupt Pin number */
+    EIC_PIN         eicPinNo;
+
+} EIC_CALLBACK_OBJ;
 
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Handler Routines
+// Section: Interface Routines
 // *****************************************************************************
 // *****************************************************************************
 
-void Reset_Handler (void);
-void NonMaskableInt_Handler (void);
-void HardFault_Handler (void);
-void EIC_InterruptHandler (void);
-void SERCOM0_I2C_InterruptHandler (void);
-void SERCOM1_I2C_InterruptHandler (void);
-void SERCOM2_I2C_InterruptHandler (void);
-void SERCOM3_I2C_InterruptHandler (void);
-void SERCOM4_I2C_InterruptHandler (void);
+void EIC_Initialize(void);
+
+void EIC_InterruptEnable(EIC_PIN pin);
+
+void EIC_InterruptDisable(EIC_PIN pin);
+
+void EIC_CallbackRegister(EIC_PIN pin, EIC_CALLBACK callback, uintptr_t context);
 
 
 
-#endif // INTERRUPTS_H
+#ifdef __cplusplus // Provide C++ Compatibility
+
+    }
+
+#endif
+
+#endif /* PLIB_EIC_H */

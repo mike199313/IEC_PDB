@@ -35,6 +35,10 @@
 #define SERCOM2                     2
 #define SERCOM3                     3
 #define SERCOM4                     4
+#define EIC_CHANNAL0                0
+#define EIC_CHANNAL1                1
+#define MCU_PB00_PSU0_AC_OK_PIN     61
+#define MCU_PB01_PSU1_AC_OK_PIN     62
 
 #define UN_KONW_STATUS              -1
 #define ODM_OK                      0
@@ -91,6 +95,8 @@ bool Select_SERCOM(uint16_t CurrentADDR, uintptr_t I2C_Got_Addr_NOW , uintptr_t 
 bool SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
 bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
 bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+void EIC_Callback_0 ( uintptr_t contextHandle );
+void EIC_Callback_1 ( uintptr_t contextHandle );
 
 #endif /* _I2C_ADDRESS_H */
 
