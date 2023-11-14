@@ -56,6 +56,7 @@
  */
 #include "i2c_address.h"
 #include "Purnell_OEM.h"
+#include <stdio.h>
 
 uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES] = {0x00};
 
@@ -120,6 +121,7 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
     static uint8_t PIC_MAJOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MAJOR_VERSION};
     static uint8_t PIC_MINOR_Data[PIC_OPCODE_SIZE_BYTES] = {CC_SUCCESS , MINOR_VERSION};
     static uint8_t GPIO_STATUS[PIC_OPCODE_SIZE_BYTES];
+    static uint8_t PIN_NUMBER;
     switch(I2C_Got_Addr_NOW)
     {
         case PSU0_FRU_BMC_SIDE_ADDR:
@@ -137,92 +139,83 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
         case PIC_OPCODE_BMC_SIDE_ADDR:
             if(PIC_CMD_Size < CMD_SIZE_ONE_BYTE ) //PIC CMD Size is 0 base 
             {
-                if(PIC_CMD == GET_PIC_MAJOR)
+                switch(PIC_CMD)
                 {
-                    return PIC_MAJOR_Data[CurrentADDR];
-                    break;
-                }
-                else if(PIC_CMD == GET_PIC_MINOR)
-                {
-                    return PIC_MINOR_Data[CurrentADDR];
-                    break;
-                }
-                else if(PIC_CMD == GET_GPIO_STATUS)
-                {
-                    uint8_t PIN_NUMBER = ((OPcode_CMD[1] >> 4)*16) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal
-                    PIN_NUMBER = PIN_NUMBER - 1;
-                    if(PIN_NUMBER < PIN_NUM_MAX)
-                    {
-                        switch(CurrentADDR)
-                        {
-                            case 0:
-                                GPIO_STATUS[CurrentADDR] = CC_SUCCESS;
-                                break;
-
-                            case 1:
-                                GPIO_STATUS[CurrentADDR] = PORT_PinDIRRead(PIN_NUMBER);
-                                break;        
-
-                            case 2:
-                                GPIO_STATUS[CurrentADDR] = PORT_PinLatchRead(PIN_NUMBER);
-                                break;
-                        }
-                        return GPIO_STATUS[CurrentADDR];
-                        break;
-                    }
-                    else
-                    {
-                        return INVALID_DATA;
-                        break;
-                    }
-                    
-                }
-                else if(PIC_CMD == SET_GPIO_STATUS)
-                {
-                    uint8_t PIN_NUMBER = ((OPcode_CMD[1] >> 4)*16) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal
-                    PIN_NUMBER = PIN_NUMBER - 1;
-                    
-                    if(PIN_NUMBER < PIN_NUM_MAX)
-                    {
-                        //set input output for GPIO
-                        if(OPcode_CMD[2] == GPIO_INPUT )
-                        {
-                            PORT_PinInputEnable(PIN_NUMBER);
-                        }
-                        else if(OPcode_CMD[2] == GPIO_OUTPUT  )
-                        {
-                            PORT_PinOutputEnable(PIN_NUMBER);
-                        }
-                        else
-                        {
-                            return INVALID_DATA;
+                        case GET_PIC_MAJOR:
+                            return PIC_MAJOR_Data[CurrentADDR];
+                            break; 
+                            
+                        case GET_PIC_MINOR:
+                            return PIC_MINOR_Data[CurrentADDR];
                             break;
-                        }
-                    
-                        //set high low for GPIO
-                        if((OPcode_CMD[3] == GPIO_HIGH) || (OPcode_CMD[3] == GPIO_LOW))
-                        {
-                            PORT_PinWrite(PIN_NUMBER , OPcode_CMD[3]);
-                        }
-                        else
-                        {
-                            return INVALID_DATA;
+                            
+                        case GET_GPIO_STATUS:
+                            PIN_NUMBER = ((OPcode_CMD[1] >> 4)*16) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal
+                            if(PIN_NUMBER < PIN_NUM_MAX)
+                            {
+                                switch(CurrentADDR)
+                                {
+                                    case 0:
+                                        GPIO_STATUS[CurrentADDR] = CC_SUCCESS;
+                                        break;
+
+                                    case 1:
+                                        GPIO_STATUS[CurrentADDR] = PORT_PinDIRRead(PIN_NUMBER);
+                                        break;        
+
+                                    case 2:
+                                        GPIO_STATUS[CurrentADDR] = PORT_PinLatchRead(PIN_NUMBER);
+                                        break;
+                                }
+                                return GPIO_STATUS[CurrentADDR];
+                                break;
+                            }
+                            else
+                            {
+                                return INVALID_DATA;
+                                break;
+                            }
+                            
+                        case SET_GPIO_STATUS:
+                            PIN_NUMBER = ((OPcode_CMD[1] >> 4)*16) + (OPcode_CMD[1] & 0x0f);//This is to convert Hex to decimal
+                            //set high low for GPIOif (PIN_NUMBER == 55)
+                            
+                            if ((PIN_NUMBER == MCU_PA27_PDB_BD_00_HOTSWAP_EN_PIN && OPcode_CMD[3] == GPIO_LOW) ||
+                                (PIN_NUMBER == MCU_PA28_PDB_BD_01_HOTSWAP_EN_PIN && OPcode_CMD[3] == GPIO_LOW) ||
+                                (PIN_NUMBER == MCU_PB22_PDB_BD_10_HOTSWAP_EN_PIN && OPcode_CMD[3] == GPIO_LOW) ||
+                                (PIN_NUMBER == MCU_PB23_PDB_BD_11_HOTSWAP_EN_PIN && OPcode_CMD[3] == GPIO_LOW))
+                            {
+                                PORT_PinWrite(PIN_NUMBER , GPIO_LOW);
+                            }
+                            printf("HWP_OK");//workaround HWP
+                            if (OPcode_CMD[3] == GPIO_LOW)
+                            {
+                                PORT_PinWrite(PIN_NUMBER , GPIO_LOW);
+                            }
+                            if (OPcode_CMD[3] == GPIO_HIGH)
+                            {
+                                PORT_PinWrite(PIN_NUMBER , GPIO_HIGH);
+                            }
+                            
+                            //set input output for GPIO
+                            if(OPcode_CMD[2] == GPIO_INPUT )
+                            {
+                                PORT_PinInputEnable(PIN_NUMBER);
+                            }
+                            
+                            if(OPcode_CMD[2] == GPIO_OUTPUT  )
+                            {
+                                PORT_PinOutputEnable(PIN_NUMBER);
+                            }
+
+                            
+                            
+                            return CC_SUCCESS;
                             break;
-                        }
-                    }
-                    else
-                    {
-                        return INVALID_DATA;
-                        break;
-                    }
-                    return CC_SUCCESS;
-                    break;
-                }
-                else
-                {
-                    //TODO debug message
-                    return INVALID_COMMAND;
-                    break;
+                            
+                    default:
+                         return INVALID_DATA;
+                         break;
                 }
             }
             else
@@ -230,7 +223,7 @@ uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW 
                 return DATA_LENGTH_INVALID;
                 break;
             }
-                
+                            
         default:
             return INVALID_DATA;
             break;
