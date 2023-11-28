@@ -70,5 +70,5 @@ int write(int handle, void * buffer, size_t count)
            success = SERCOM5_USART_Write(buffer, count);
        }while( !success);
    }
-   return count;
+   return (int)count;
 }

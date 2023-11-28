@@ -37,8 +37,8 @@
 #define SERCOM4                     4
 #define EIC_CHANNAL0                0
 #define EIC_CHANNAL1                1
-#define MCU_PB00_PSU0_AC_OK_PIN     61
-#define MCU_PB01_PSU1_AC_OK_PIN     62
+#define MCU_PB00_PSU0_AC_OK_PIN     32
+#define MCU_PB01_PSU1_AC_OK_PIN     33
 
 #define UN_KONW_STATUS              -1
 #define ODM_OK                      0

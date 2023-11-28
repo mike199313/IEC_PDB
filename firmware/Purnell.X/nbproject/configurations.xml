@@ -115,6 +115,7 @@
       </logicalFolder>
       <itemPath>../src/i2c_address.h</itemPath>
       <itemPath>../src/Purnell_OEM.h</itemPath>
+      <itemPath>../src/pmbus_command.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -185,6 +186,9 @@
       <itemPath>../src/sercom_select.c</itemPath>
       <itemPath>../src/change_mask_address.c</itemPath>
       <itemPath>../src/EIC_Callback.c</itemPath>
+      <itemPath>../src/pmbus_address.c</itemPath>
+      <itemPath>../src/pmbus_sercom_select.c</itemPath>
+      <itemPath>../src/read_pmbus_data.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
