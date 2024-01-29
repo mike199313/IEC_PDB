@@ -48,8 +48,7 @@ int read(int handle, void *buffer, unsigned int len)
 {
     int nChars = 0;
     bool success = false;
-    (void)len;
-    if ((handle == 0)  && (len > 0))
+    if ((handle == 0)  && (len > 0U))
     {
         do
         {
