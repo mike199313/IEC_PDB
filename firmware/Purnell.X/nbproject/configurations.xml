@@ -185,6 +185,7 @@
       <itemPath>../src/sercom_select.c</itemPath>
       <itemPath>../src/change_mask_address.c</itemPath>
       <itemPath>../src/EIC_Callback.c</itemPath>
+      <itemPath>../src/pw_control.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

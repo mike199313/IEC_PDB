@@ -27,7 +27,7 @@
 /* ************************************************************************** */
 //VERSION Data
 #define MAJOR_VERSION               0x00
-#define MINOR_VERSION               0x06
+#define MINOR_VERSION               0x07
 
 //i2c address
 #define PSU0_FRU_ADDR               0x50 //Purnell_PDB_PIC_FW_Spec_V0.07.docx page 8
@@ -50,6 +50,9 @@
 #define GPIO_OUTPUT                 0x01//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 14
 #define GPIO_LOW                    0x00//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 14
 #define GPIO_HIGH                   0x01//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 14
+#define POWER_GOOD                  GPIO_HIGH
+#define FAN_BD_INSERT               GPIO_LOW
+#define FAN_BD_NOT_INSERT           GPIO_HIGH
 
 //complete code
 #define DATA_LENGTH_INVALID         0xC7//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 13

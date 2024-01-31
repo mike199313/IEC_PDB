@@ -37,8 +37,8 @@
 #define SERCOM4                     4
 #define EIC_CHANNAL0                0
 #define EIC_CHANNAL1                1
-#define MCU_PB00_PSU0_AC_OK_PIN     61
-#define MCU_PB01_PSU1_AC_OK_PIN     62
+#define MCU_PB00_PSU0_AC_OK_PIN     32
+#define MCU_PB01_PSU1_AC_OK_PIN     33
 
 #define UN_KONW_STATUS              -1
 #define ODM_OK                      0
@@ -97,6 +97,9 @@ bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t cont
 bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
 void EIC_Callback_0 ( uintptr_t contextHandle );
 void EIC_Callback_1 ( uintptr_t contextHandle );
+void PSU0_Power_Good_to_MB_CPLD (bool PSU0_PW_level);
+void PSU1_Power_Good_to_MB_CPLD (bool PSU1_PW_level);
+void FAN_PRSNT_to_chang_HOTSWAP(bool MCU_PA19_FAN_BD_00_PRSNT_N_level, bool MCU_PA15_FAN_BD_01_PRSNT_N_level, bool MCU_PA25_FAN_BD_10_PRSNT_N_level, bool MCU_PB15_FAN_BD_11_PRSNT_N_level);
 
 #endif /* _I2C_ADDRESS_H */
 

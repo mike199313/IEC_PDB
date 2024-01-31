@@ -59,7 +59,7 @@
 // Section: Global Data
 // *****************************************************************************
 // *****************************************************************************
-static SERCOM_I2C_SLAVE_OBJ sercom2I2CSObj;
+volatile static SERCOM_I2C_SLAVE_OBJ sercom2I2CSObj;
 // *****************************************************************************
 // *****************************************************************************
 // Section: SERCOM2 I2C Implementation
@@ -194,13 +194,15 @@ void SERCOM2_I2C_AckActionSet(SERCOM_I2C_SLAVE_ACK_ACTION_SEND ackAction)
     }
 }
 
-void SERCOM2_I2C_InterruptHandler(void)
+void __attribute__((used)) SERCOM2_I2C_InterruptHandler(void)
 {
     uint32_t intFlags = SERCOM2_REGS->I2CS.SERCOM_INTFLAG;
     SERCOM_I2C_SLAVE_TRANSFER_EVENT event = SERCOM_I2C_SLAVE_TRANSFER_EVENT_NONE;
 
     if((intFlags & SERCOM2_REGS->I2CS.SERCOM_INTENSET) != 0U)
     {
+        uintptr_t context = sercom2I2CSObj.context;
+
         if ((intFlags & SERCOM_I2CS_INTFLAG_AMATCH_Msk) != 0U)
         {
             sercom2I2CSObj.isBusy = true;
@@ -221,7 +223,7 @@ void SERCOM2_I2C_InterruptHandler(void)
             }
             else
             {
-                if ((SERCOM2_I2C_LastByteAckStatusGet() == SERCOM_I2C_SLAVE_ACK_STATUS_RECEIVED_ACK) || (sercom2I2CSObj.isFirstRxAfterAddressPending == true))
+                if ((sercom2I2CSObj.isFirstRxAfterAddressPending == true) || (SERCOM2_I2C_LastByteAckStatusGet() == SERCOM_I2C_SLAVE_ACK_STATUS_RECEIVED_ACK))
                 {
                     sercom2I2CSObj.isFirstRxAfterAddressPending = false;
                     event = SERCOM_I2C_SLAVE_TRANSFER_EVENT_TX_READY;
@@ -236,8 +238,7 @@ void SERCOM2_I2C_InterruptHandler(void)
 
         if (sercom2I2CSObj.callback != NULL)
         {
-            bool status = sercom2I2CSObj.callback(event, sercom2I2CSObj.context);
-            (void)status;
+            (void)sercom2I2CSObj.callback(event, context);
         }
     }
     SERCOM2_REGS->I2CS.SERCOM_INTFLAG = (uint8_t)intFlags;

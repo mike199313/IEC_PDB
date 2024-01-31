@@ -101,23 +101,23 @@
 #define MCU_PA03_PSU1_PDBL_00_AC_OK_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 3U)) & 0x01U)
 #define MCU_PA03_PSU1_PDBL_00_AC_OK_PIN                  PORT_PIN_PA03
 
-/*** Macros for GPIO_PB04 pin ***/
-#define GPIO_PB04_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 4U))
-#define GPIO_PB04_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 4U))
-#define GPIO_PB04_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 4U))
-#define GPIO_PB04_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 4U))
-#define GPIO_PB04_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 4U))
-#define GPIO_PB04_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 4U)) & 0x01U)
-#define GPIO_PB04_PIN                  PORT_PIN_PB04
+/*** Macros for MCU_PB04_PSU0_PDBR_10_PW_OK pin ***/
+#define MCU_PB04_PSU0_PDBR_10_PW_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 4U))
+#define MCU_PB04_PSU0_PDBR_10_PW_OK_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 4U))
+#define MCU_PB04_PSU0_PDBR_10_PW_OK_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 4U))
+#define MCU_PB04_PSU0_PDBR_10_PW_OK_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 4U))
+#define MCU_PB04_PSU0_PDBR_10_PW_OK_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 4U))
+#define MCU_PB04_PSU0_PDBR_10_PW_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 4U)) & 0x01U)
+#define MCU_PB04_PSU0_PDBR_10_PW_OK_PIN                  PORT_PIN_PB04
 
-/*** Macros for GPIO_PB05 pin ***/
-#define GPIO_PB05_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 5U))
-#define GPIO_PB05_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 5U))
-#define GPIO_PB05_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 5U))
-#define GPIO_PB05_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 5U))
-#define GPIO_PB05_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 5U))
-#define GPIO_PB05_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 5U)) & 0x01U)
-#define GPIO_PB05_PIN                  PORT_PIN_PB05
+/*** Macros for MCU_PB05_PSU1_PDBR_10_PW_OK pin ***/
+#define MCU_PB05_PSU1_PDBR_10_PW_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 5U))
+#define MCU_PB05_PSU1_PDBR_10_PW_OK_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 5U))
+#define MCU_PB05_PSU1_PDBR_10_PW_OK_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 5U))
+#define MCU_PB05_PSU1_PDBR_10_PW_OK_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 5U))
+#define MCU_PB05_PSU1_PDBR_10_PW_OK_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 5U))
+#define MCU_PB05_PSU1_PDBR_10_PW_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 5U)) & 0x01U)
+#define MCU_PB05_PSU1_PDBR_10_PW_OK_PIN                  PORT_PIN_PB05
 
 /*** Macros for MCU_PB06_PSU0_PDBR_10_AC_OK pin ***/
 #define MCU_PB06_PSU0_PDBR_10_AC_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 6U))
@@ -137,41 +137,41 @@
 #define MCU_PB07_PSU1_PDBR_10_AC_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 7U)) & 0x01U)
 #define MCU_PB07_PSU1_PDBR_10_AC_OK_PIN                  PORT_PIN_PB07
 
-/*** Macros for GPIO_PB08 pin ***/
-#define GPIO_PB08_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 8U))
-#define GPIO_PB08_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 8U))
-#define GPIO_PB08_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 8U))
-#define GPIO_PB08_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 8U))
-#define GPIO_PB08_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 8U))
-#define GPIO_PB08_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 8U)) & 0x01U)
-#define GPIO_PB08_PIN                  PORT_PIN_PB08
+/*** Macros for MCU_PB08_PSU0_PDBR_11_PW_OK pin ***/
+#define MCU_PB08_PSU0_PDBR_11_PW_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 8U))
+#define MCU_PB08_PSU0_PDBR_11_PW_OK_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 8U))
+#define MCU_PB08_PSU0_PDBR_11_PW_OK_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 8U))
+#define MCU_PB08_PSU0_PDBR_11_PW_OK_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 8U))
+#define MCU_PB08_PSU0_PDBR_11_PW_OK_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 8U))
+#define MCU_PB08_PSU0_PDBR_11_PW_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 8U)) & 0x01U)
+#define MCU_PB08_PSU0_PDBR_11_PW_OK_PIN                  PORT_PIN_PB08
 
-/*** Macros for GPIO_PB09 pin ***/
-#define GPIO_PB09_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 9U))
-#define GPIO_PB09_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 9U))
-#define GPIO_PB09_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 9U))
-#define GPIO_PB09_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 9U))
-#define GPIO_PB09_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 9U))
-#define GPIO_PB09_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 9U)) & 0x01U)
-#define GPIO_PB09_PIN                  PORT_PIN_PB09
+/*** Macros for MCU_PB09_PSU1_PDBR_11_PW_OK pin ***/
+#define MCU_PB09_PSU1_PDBR_11_PW_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 9U))
+#define MCU_PB09_PSU1_PDBR_11_PW_OK_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 9U))
+#define MCU_PB09_PSU1_PDBR_11_PW_OK_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 9U))
+#define MCU_PB09_PSU1_PDBR_11_PW_OK_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 9U))
+#define MCU_PB09_PSU1_PDBR_11_PW_OK_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 9U))
+#define MCU_PB09_PSU1_PDBR_11_PW_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 9U)) & 0x01U)
+#define MCU_PB09_PSU1_PDBR_11_PW_OK_PIN                  PORT_PIN_PB09
 
-/*** Macros for GPIO_PA04 pin ***/
-#define GPIO_PA04_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 4U))
-#define GPIO_PA04_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 4U))
-#define GPIO_PA04_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 4U))
-#define GPIO_PA04_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 4U))
-#define GPIO_PA04_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 4U))
-#define GPIO_PA04_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 4U)) & 0x01U)
-#define GPIO_PA04_PIN                  PORT_PIN_PA04
+/*** Macros for MCU_PA04_PSU0_PDBL_01_PW_OK pin ***/
+#define MCU_PA04_PSU0_PDBL_01_PW_OK_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 4U))
+#define MCU_PA04_PSU0_PDBL_01_PW_OK_LOW()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 4U))
+#define MCU_PA04_PSU0_PDBL_01_PW_OK_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 4U))
+#define MCU_PA04_PSU0_PDBL_01_PW_OK_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 4U))
+#define MCU_PA04_PSU0_PDBL_01_PW_OK_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 4U))
+#define MCU_PA04_PSU0_PDBL_01_PW_OK_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 4U)) & 0x01U)
+#define MCU_PA04_PSU0_PDBL_01_PW_OK_PIN                  PORT_PIN_PA04
 
-/*** Macros for GPIO_PA05 pin ***/
-#define GPIO_PA05_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 5U))
-#define GPIO_PA05_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 5U))
-#define GPIO_PA05_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 5U))
-#define GPIO_PA05_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 5U))
-#define GPIO_PA05_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 5U))
-#define GPIO_PA05_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 5U)) & 0x01U)
-#define GPIO_PA05_PIN                  PORT_PIN_PA05
+/*** Macros for MCU_PA05_PSU1_PDBL_01_PW_OK pin ***/
+#define MCU_PA05_PSU1_PDBL_01_PW_OK_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 5U))
+#define MCU_PA05_PSU1_PDBL_01_PW_OK_LOW()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 5U))
+#define MCU_PA05_PSU1_PDBL_01_PW_OK_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 5U))
+#define MCU_PA05_PSU1_PDBL_01_PW_OK_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 5U))
+#define MCU_PA05_PSU1_PDBL_01_PW_OK_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 5U))
+#define MCU_PA05_PSU1_PDBL_01_PW_OK_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 5U)) & 0x01U)
+#define MCU_PA05_PSU1_PDBL_01_PW_OK_PIN                  PORT_PIN_PA05
 
 /*** Macros for MCU_PA06_PSU0_PDBL_01_AC_OK pin ***/
 #define MCU_PA06_PSU0_PDBL_01_AC_OK_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 6U))
@@ -318,8 +318,8 @@
 #define MCU_PA25_FAN_BD_10_PRSNT_N_PIN                  PORT_PIN_PA25
 
 /*** Macros for MCU_PB22_PDB_BD_10_HOTSWAP_EN pin ***/
-#define MCU_PB22_PDB_BD_10_HOTSWAP_EN_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 22U))
-#define MCU_PB22_PDB_BD_10_HOTSWAP_EN_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 22U))
+#define MCU_PB22_PDB_BD_10_HOTSWAP_ENABLE_GPIO_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 22U))
+#define MCU_PB22_PDB_BD_10_HOTSWAP_DISABLE_GPIO_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 22U))
 #define MCU_PB22_PDB_BD_10_HOTSWAP_EN_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 22U))
 #define MCU_PB22_PDB_BD_10_HOTSWAP_EN_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 22U))
 #define MCU_PB22_PDB_BD_10_HOTSWAP_EN_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 22U))
@@ -327,8 +327,8 @@
 #define MCU_PB22_PDB_BD_10_HOTSWAP_EN_PIN                  PORT_PIN_PB22
 
 /*** Macros for MCU_PB23_PDB_BD_11_HOTSWAP_EN pin ***/
-#define MCU_PB23_PDB_BD_11_HOTSWAP_EN_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 23U))
-#define MCU_PB23_PDB_BD_11_HOTSWAP_EN_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 23U))
+#define MCU_PB23_PDB_BD_11_HOTSWAP_ENABLE_GPIO_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 23U))
+#define MCU_PB23_PDB_BD_11_HOTSWAP_DISABLE_GPIO_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 23U))
 #define MCU_PB23_PDB_BD_11_HOTSWAP_EN_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 23U))
 #define MCU_PB23_PDB_BD_11_HOTSWAP_EN_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 23U))
 #define MCU_PB23_PDB_BD_11_HOTSWAP_EN_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 23U))
@@ -336,8 +336,8 @@
 #define MCU_PB23_PDB_BD_11_HOTSWAP_EN_PIN                  PORT_PIN_PB23
 
 /*** Macros for  MCU_PA27_PDB_BD_00_HOTSWAP_EN pin ***/
-#define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 27U))
-#define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 27U))
+#define  MCU_PA27_PDB_BD_00_HOTSWAP_ENABLE_GPIO_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 27U))
+#define  MCU_PA27_PDB_BD_00_HOTSWAP_DISABLE_GPIO_LOW()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 27U))
 #define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 27U))
 #define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 27U))
 #define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 27U))
@@ -345,8 +345,8 @@
 #define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_PIN                  PORT_PIN_PA27
 
 /*** Macros for  MCU_PA28_PDB_BD_01_HOTSWAP_EN pin ***/
-#define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 28U))
-#define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 28U))
+#define  MCU_PA28_PDB_BD_01_HOTSWAP_ENABLE_GPIO_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 28U))
+#define  MCU_PA28_PDB_BD_01_HOTSWAP_DISABLE_GPIO_LOW()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 28U))
 #define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 28U))
 #define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 28U))
 #define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 28U))
@@ -371,41 +371,41 @@
 #define GPIO_PA31_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 31U)) & 0x01U)
 #define GPIO_PA31_PIN                  PORT_PIN_PA31
 
-/*** Macros for GPIO_PB30 pin ***/
-#define GPIO_PB30_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 30U))
-#define GPIO_PB30_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 30U))
-#define GPIO_PB30_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 30U))
-#define GPIO_PB30_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 30U))
-#define GPIO_PB30_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 30U))
-#define GPIO_PB30_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 30U)) & 0x01U)
-#define GPIO_PB30_PIN                  PORT_PIN_PB30
+/*** Macros for MCU_PB30_PSU0_PW_OK pin ***/
+#define MCU_PB30_PSU0_PW_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 30U))
+#define MCU_PB30_PSU0_PW_OK_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 30U))
+#define MCU_PB30_PSU0_PW_OK_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 30U))
+#define MCU_PB30_PSU0_PW_OK_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 30U))
+#define MCU_PB30_PSU0_PW_OK_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 30U))
+#define MCU_PB30_PSU0_PW_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 30U)) & 0x01U)
+#define MCU_PB30_PSU0_PW_OK_PIN                  PORT_PIN_PB30
 
-/*** Macros for GPIO_PB31 pin ***/
-#define GPIO_PB31_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 31U))
-#define GPIO_PB31_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 31U))
-#define GPIO_PB31_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 31U))
-#define GPIO_PB31_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 31U))
-#define GPIO_PB31_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 31U))
-#define GPIO_PB31_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 31U)) & 0x01U)
-#define GPIO_PB31_PIN                  PORT_PIN_PB31
+/*** Macros for MCU_PB31_PSU1_PW_OK pin ***/
+#define MCU_PB31_PSU1_PW_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 31U))
+#define MCU_PB31_PSU1_PW_OK_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 31U))
+#define MCU_PB31_PSU1_PW_OK_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 31U))
+#define MCU_PB31_PSU1_PW_OK_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 31U))
+#define MCU_PB31_PSU1_PW_OK_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 31U))
+#define MCU_PB31_PSU1_PW_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 31U)) & 0x01U)
+#define MCU_PB31_PSU1_PW_OK_PIN                  PORT_PIN_PB31
 
-/*** Macros for GPIO_PB02 pin ***/
-#define GPIO_PB02_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 2U))
-#define GPIO_PB02_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 2U))
-#define GPIO_PB02_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 2U))
-#define GPIO_PB02_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 2U))
-#define GPIO_PB02_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 2U))
-#define GPIO_PB02_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 2U)) & 0x01U)
-#define GPIO_PB02_PIN                  PORT_PIN_PB02
+/*** Macros for MCU_PB02_PSU0_PDBL_00_PW_OK pin ***/
+#define MCU_PB02_PSU0_PDBL_00_PW_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 2U))
+#define MCU_PB02_PSU0_PDBL_00_PW_OK_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 2U))
+#define MCU_PB02_PSU0_PDBL_00_PW_OK_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 2U))
+#define MCU_PB02_PSU0_PDBL_00_PW_OK_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 2U))
+#define MCU_PB02_PSU0_PDBL_00_PW_OK_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 2U))
+#define MCU_PB02_PSU0_PDBL_00_PW_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 2U)) & 0x01U)
+#define MCU_PB02_PSU0_PDBL_00_PW_OK_PIN                  PORT_PIN_PB02
 
-/*** Macros for GPIO_PB03 pin ***/
-#define GPIO_PB03_Set()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 3U))
-#define GPIO_PB03_Clear()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 3U))
-#define GPIO_PB03_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 3U))
-#define GPIO_PB03_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 3U))
-#define GPIO_PB03_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 3U))
-#define GPIO_PB03_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 3U)) & 0x01U)
-#define GPIO_PB03_PIN                  PORT_PIN_PB03
+/*** Macros for MCU_PB03_PSU1_PDBL_00_PW_OK pin ***/
+#define MCU_PB03_PSU1_PDBL_00_PW_OK_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 3U))
+#define MCU_PB03_PSU1_PDBL_00_PW_OK_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 3U))
+#define MCU_PB03_PSU1_PDBL_00_PW_OK_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 3U))
+#define MCU_PB03_PSU1_PDBL_00_PW_OK_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 3U))
+#define MCU_PB03_PSU1_PDBL_00_PW_OK_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 3U))
+#define MCU_PB03_PSU1_PDBL_00_PW_OK_Get()               (((PORT_REGS->GROUP[1].PORT_IN >> 3U)) & 0x01U)
+#define MCU_PB03_PSU1_PDBL_00_PW_OK_PIN                  PORT_PIN_PB03
 
 // *****************************************************************************
 /* PORT Group

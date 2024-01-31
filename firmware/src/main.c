@@ -56,6 +56,23 @@ int main ( void )
     uint32_t FRUrdLength = 265;
     static int PSU0_previoussetExist = UN_KONW_STATUS;
     static int PSU1_previoussetExist = UN_KONW_STATUS;
+    
+    static bool previous_MCU_PA19_FAN_BD_00_PRSNT_N_level = UN_KONW_STATUS;
+    static bool previous_MCU_PA15_FAN_BD_01_PRSNT_N_level = UN_KONW_STATUS;
+    static bool previous_MCU_PA25_FAN_BD_10_PRSNT_N_level = UN_KONW_STATUS;
+    static bool previous_MCU_PB15_FAN_BD_11_PRSNT_N_level = UN_KONW_STATUS;
+    
+    static bool previous_PSU0_PW_level = UN_KONW_STATUS;
+    static bool previous_PSU1_PW_level = UN_KONW_STATUS;
+    
+    bool MCU_PA19_FAN_BD_00_PRSNT_N_level;
+    bool MCU_PA15_FAN_BD_01_PRSNT_N_level;
+    bool MCU_PA25_FAN_BD_10_PRSNT_N_level;
+    bool MCU_PB15_FAN_BD_11_PRSNT_N_level;
+    
+    bool PSU0_PW_level;
+    bool PSU1_PW_level;
+    
     EIC_CallbackRegister(EIC_PIN_0, EIC_Callback_0, MCU_PB00_PSU0_AC_OK_PIN);
     EIC_CallbackRegister(EIC_PIN_1, EIC_Callback_1, MCU_PB01_PSU1_AC_OK_PIN);
     
@@ -73,6 +90,42 @@ int main ( void )
             
             PSU0_Is_Present = PORT_PinRead(PORT_PIN_PA20);
             PSU1_Is_Present = PORT_PinRead(PORT_PIN_PA21);
+            
+            MCU_PA19_FAN_BD_00_PRSNT_N_level = MCU_PA19_FAN_BD_00_PRSNT_N_Get();
+            MCU_PA15_FAN_BD_01_PRSNT_N_level = MCU_PA15_FAN_BD_01_PRSNT_N_Get();
+            MCU_PA25_FAN_BD_10_PRSNT_N_level = MCU_PA25_FAN_BD_10_PRSNT_N_Get();
+            MCU_PB15_FAN_BD_11_PRSNT_N_level = MCU_PB15_FAN_BD_11_PRSNT_N_Get();
+            
+            PSU0_PW_level = MCU_PB30_PSU0_PW_OK_Get();
+            PSU1_PW_level = MCU_PB31_PSU1_PW_OK_Get();
+            
+            if ((previous_MCU_PA19_FAN_BD_00_PRSNT_N_level != MCU_PA19_FAN_BD_00_PRSNT_N_level) ||
+                (previous_MCU_PA15_FAN_BD_01_PRSNT_N_level != MCU_PA15_FAN_BD_01_PRSNT_N_level) ||
+                (previous_MCU_PA25_FAN_BD_10_PRSNT_N_level != MCU_PA25_FAN_BD_10_PRSNT_N_level) ||
+                (previous_MCU_PB15_FAN_BD_11_PRSNT_N_level != MCU_PB15_FAN_BD_11_PRSNT_N_level))
+            {
+                FAN_PRSNT_to_chang_HOTSWAP(MCU_PA19_FAN_BD_00_PRSNT_N_level,
+                                            MCU_PA15_FAN_BD_01_PRSNT_N_level,
+                                            MCU_PA25_FAN_BD_10_PRSNT_N_level,
+                                            MCU_PB15_FAN_BD_11_PRSNT_N_level);
+                
+                previous_MCU_PA19_FAN_BD_00_PRSNT_N_level = MCU_PA19_FAN_BD_00_PRSNT_N_level;
+                previous_MCU_PA15_FAN_BD_01_PRSNT_N_level = MCU_PA15_FAN_BD_01_PRSNT_N_level;
+                previous_MCU_PA25_FAN_BD_10_PRSNT_N_level = MCU_PA25_FAN_BD_10_PRSNT_N_level;
+                previous_MCU_PB15_FAN_BD_11_PRSNT_N_level = MCU_PB15_FAN_BD_11_PRSNT_N_level;
+            }
+            
+            if(previous_PSU0_PW_level != PSU0_PW_level)
+            {
+                PSU0_Power_Good_to_MB_CPLD(PSU0_PW_level);
+                previous_PSU0_PW_level = PSU0_PW_level;
+            }
+            
+            if (previous_PSU1_PW_level != PSU1_PW_level)
+            {
+                PSU1_Power_Good_to_MB_CPLD(PSU1_PW_level);
+                previous_PSU1_PW_level = PSU1_PW_level;
+            }
             
             if ((PSU0_Is_Present != PSU0_previoussetExist) || 
                 (PSU1_Is_Present != PSU1_previoussetExist))
