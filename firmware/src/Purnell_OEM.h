@@ -51,9 +51,8 @@
 #define GPIO_LOW                    0x00//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 14
 #define GPIO_HIGH                   0x01//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 14
 #define POWER_GOOD                  GPIO_HIGH
-#define HOTSWAP_ENABLE              GPIO_LOW
-#define HOTSWAP_DISABLE             GPIO_HIGH
-#define GPIO_INIT                   GPIO_LOW
+#define FAN_BD_INSERT               GPIO_LOW
+#define FAN_BD_NOT_INSERT           GPIO_HIGH
 
 //complete code
 #define DATA_LENGTH_INVALID         0xC7//Purnell_PDB_PIC_FW_Spec_V0.07.docx page 13

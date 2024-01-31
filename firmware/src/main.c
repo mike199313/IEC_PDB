@@ -57,13 +57,13 @@ int main ( void )
     static int PSU0_previoussetExist = UN_KONW_STATUS;
     static int PSU1_previoussetExist = UN_KONW_STATUS;
     
-    static bool previous_MCU_PA19_FAN_BD_00_PRSNT_N_level = GPIO_INIT;
-    static bool previous_MCU_PA15_FAN_BD_01_PRSNT_N_level = GPIO_INIT;
-    static bool previous_MCU_PA25_FAN_BD_10_PRSNT_N_level = GPIO_INIT;
-    static bool previous_MCU_PB15_FAN_BD_11_PRSNT_N_level = GPIO_INIT;
+    static bool previous_MCU_PA19_FAN_BD_00_PRSNT_N_level = UN_KONW_STATUS;
+    static bool previous_MCU_PA15_FAN_BD_01_PRSNT_N_level = UN_KONW_STATUS;
+    static bool previous_MCU_PA25_FAN_BD_10_PRSNT_N_level = UN_KONW_STATUS;
+    static bool previous_MCU_PB15_FAN_BD_11_PRSNT_N_level = UN_KONW_STATUS;
     
-    static bool previous_PSU0_PW_level = GPIO_INIT;
-    static bool previous_PSU1_PW_level = GPIO_INIT;
+    static bool previous_PSU0_PW_level = UN_KONW_STATUS;
+    static bool previous_PSU1_PW_level = UN_KONW_STATUS;
     
     bool MCU_PA19_FAN_BD_00_PRSNT_N_level;
     bool MCU_PA15_FAN_BD_01_PRSNT_N_level;

@@ -81,7 +81,6 @@
 */
 void PSU0_Power_Good_to_MB_CPLD (bool PSU0_PW_level)
 {
-    PSU0_PW_level = MCU_PB30_PSU0_PW_OK_Get();
             
     if (PSU0_PW_level == GPIO_HIGH)
     {
@@ -124,7 +123,6 @@ void PSU0_Power_Good_to_MB_CPLD (bool PSU0_PW_level)
 
 void PSU1_Power_Good_to_MB_CPLD (bool PSU1_PW_level)
 {
-    PSU1_PW_level = MCU_PB31_PSU1_PW_OK_Get();
     
     if (PSU1_PW_level == GPIO_HIGH)
     {
@@ -173,35 +171,36 @@ void FAN_PRSNT_to_chang_HOTSWAP(bool MCU_PA19_FAN_BD_00_PRSNT_N_level,
                                 bool MCU_PA25_FAN_BD_10_PRSNT_N_level, 
                                 bool MCU_PB15_FAN_BD_11_PRSNT_N_level)
 {
-    if (MCU_PA19_FAN_BD_00_PRSNT_N_level == HOTSWAP_ENABLE)
+    //FAN_BD_INSERT is GPIO_LOW , FAN_BD_NOT_INSERT is GPIO_HIGH
+    if (MCU_PA19_FAN_BD_00_PRSNT_N_level == FAN_BD_INSERT)
     {
-        MCU_PA27_PDB_BD_00_HOTSWAP_EN_HIGH();
-    }else if (MCU_PA19_FAN_BD_00_PRSNT_N_level == HOTSWAP_DISABLE)
+        MCU_PA27_PDB_BD_00_HOTSWAP_ENABLE_GPIO_HIGH();
+    }else if (MCU_PA19_FAN_BD_00_PRSNT_N_level == FAN_BD_NOT_INSERT)
     {
-        MCU_PA27_PDB_BD_00_HOTSWAP_EN_LOW();
+        MCU_PA27_PDB_BD_00_HOTSWAP_DISABLE_GPIO_LOW();
     }
 
-    if (MCU_PA15_FAN_BD_01_PRSNT_N_level == HOTSWAP_ENABLE)
+    if (MCU_PA15_FAN_BD_01_PRSNT_N_level == FAN_BD_INSERT)
     {
-        MCU_PA28_PDB_BD_01_HOTSWAP_EN_HIGH();
-    }else if (MCU_PA15_FAN_BD_01_PRSNT_N_level == HOTSWAP_DISABLE)
+        MCU_PA28_PDB_BD_01_HOTSWAP_ENABLE_GPIO_HIGH();
+    }else if (MCU_PA15_FAN_BD_01_PRSNT_N_level == FAN_BD_NOT_INSERT)
     {
-        MCU_PA28_PDB_BD_01_HOTSWAP_EN_LOW();
+        MCU_PA28_PDB_BD_01_HOTSWAP_DISABLE_GPIO_LOW();
     }
 
-    if (MCU_PA25_FAN_BD_10_PRSNT_N_level == HOTSWAP_ENABLE)
+    if (MCU_PA25_FAN_BD_10_PRSNT_N_level == FAN_BD_INSERT)
     {
-        MCU_PB22_PDB_BD_10_HOTSWAP_EN_HIGH();
-    }else if (MCU_PA25_FAN_BD_10_PRSNT_N_level == HOTSWAP_DISABLE)
+        MCU_PB22_PDB_BD_10_HOTSWAP_ENABLE_GPIO_HIGH();
+    }else if (MCU_PA25_FAN_BD_10_PRSNT_N_level == FAN_BD_NOT_INSERT)
     {
-        MCU_PB22_PDB_BD_10_HOTSWAP_EN_LOW();
+        MCU_PB22_PDB_BD_10_HOTSWAP_DISABLE_GPIO_LOW();
     }
-    if (MCU_PB15_FAN_BD_11_PRSNT_N_level == HOTSWAP_ENABLE)
+    if (MCU_PB15_FAN_BD_11_PRSNT_N_level == FAN_BD_INSERT)
     {
-        MCU_PB23_PDB_BD_11_HOTSWAP_EN_HIGH();
-    }else if (MCU_PB15_FAN_BD_11_PRSNT_N_level == HOTSWAP_DISABLE)
+        MCU_PB23_PDB_BD_11_HOTSWAP_ENABLE_GPIO_HIGH();
+    }else if (MCU_PB15_FAN_BD_11_PRSNT_N_level == FAN_BD_NOT_INSERT)
     {
-        MCU_PB23_PDB_BD_11_HOTSWAP_EN_LOW();
+        MCU_PB23_PDB_BD_11_HOTSWAP_DISABLE_GPIO_LOW();
     }
 }
 /* *****************************************************************************

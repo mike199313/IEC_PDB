@@ -318,8 +318,8 @@
 #define MCU_PA25_FAN_BD_10_PRSNT_N_PIN                  PORT_PIN_PA25
 
 /*** Macros for MCU_PB22_PDB_BD_10_HOTSWAP_EN pin ***/
-#define MCU_PB22_PDB_BD_10_HOTSWAP_EN_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 22U))
-#define MCU_PB22_PDB_BD_10_HOTSWAP_EN_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 22U))
+#define MCU_PB22_PDB_BD_10_HOTSWAP_ENABLE_GPIO_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 22U))
+#define MCU_PB22_PDB_BD_10_HOTSWAP_DISABLE_GPIO_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 22U))
 #define MCU_PB22_PDB_BD_10_HOTSWAP_EN_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 22U))
 #define MCU_PB22_PDB_BD_10_HOTSWAP_EN_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 22U))
 #define MCU_PB22_PDB_BD_10_HOTSWAP_EN_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 22U))
@@ -327,8 +327,8 @@
 #define MCU_PB22_PDB_BD_10_HOTSWAP_EN_PIN                  PORT_PIN_PB22
 
 /*** Macros for MCU_PB23_PDB_BD_11_HOTSWAP_EN pin ***/
-#define MCU_PB23_PDB_BD_11_HOTSWAP_EN_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 23U))
-#define MCU_PB23_PDB_BD_11_HOTSWAP_EN_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 23U))
+#define MCU_PB23_PDB_BD_11_HOTSWAP_ENABLE_GPIO_HIGH()               (PORT_REGS->GROUP[1].PORT_OUTSET = ((uint32_t)1U << 23U))
+#define MCU_PB23_PDB_BD_11_HOTSWAP_DISABLE_GPIO_LOW()             (PORT_REGS->GROUP[1].PORT_OUTCLR = ((uint32_t)1U << 23U))
 #define MCU_PB23_PDB_BD_11_HOTSWAP_EN_Toggle()            (PORT_REGS->GROUP[1].PORT_OUTTGL = ((uint32_t)1U << 23U))
 #define MCU_PB23_PDB_BD_11_HOTSWAP_EN_OutputEnable()      (PORT_REGS->GROUP[1].PORT_DIRSET = ((uint32_t)1U << 23U))
 #define MCU_PB23_PDB_BD_11_HOTSWAP_EN_InputEnable()       (PORT_REGS->GROUP[1].PORT_DIRCLR = ((uint32_t)1U << 23U))
@@ -336,8 +336,8 @@
 #define MCU_PB23_PDB_BD_11_HOTSWAP_EN_PIN                  PORT_PIN_PB23
 
 /*** Macros for  MCU_PA27_PDB_BD_00_HOTSWAP_EN pin ***/
-#define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 27U))
-#define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_LOW()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 27U))
+#define  MCU_PA27_PDB_BD_00_HOTSWAP_ENABLE_GPIO_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 27U))
+#define  MCU_PA27_PDB_BD_00_HOTSWAP_DISABLE_GPIO_LOW()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 27U))
 #define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 27U))
 #define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 27U))
 #define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 27U))
@@ -345,8 +345,8 @@
 #define  MCU_PA27_PDB_BD_00_HOTSWAP_EN_PIN                  PORT_PIN_PA27
 
 /*** Macros for  MCU_PA28_PDB_BD_01_HOTSWAP_EN pin ***/
-#define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 28U))
-#define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_LOW()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 28U))
+#define  MCU_PA28_PDB_BD_01_HOTSWAP_ENABLE_GPIO_HIGH()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 28U))
+#define  MCU_PA28_PDB_BD_01_HOTSWAP_DISABLE_GPIO_LOW()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 28U))
 #define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 28U))
 #define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 28U))
 #define  MCU_PA28_PDB_BD_01_HOTSWAP_EN_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 28U))
