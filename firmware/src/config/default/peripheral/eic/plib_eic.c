@@ -176,4 +176,3 @@ void EIC_InterruptHandler(void)
         }
     }
 }
-
