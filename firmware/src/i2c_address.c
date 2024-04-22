@@ -60,24 +60,101 @@
 uint8_t I2C_Got_Addr_NOW;
 
 
-bool SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t SERCOM_NOW )
+bool SERCOM1_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t SERCOM_NOW )
 {
     bool isSuccess = true;
-
-    if((I2C_Got_Addr_NOW == PSU1_FRU_BMC_SIDE_ADDR) || 
-       (I2C_Got_Addr_NOW == PSU0_FRU_BMC_SIDE_ADDR) || 
-       (I2C_Got_Addr_NOW == PIC_FRU_BMC_SIDE_ADDR))
-    {   
-        SERCOM_FRU_Callback(event , I2C_Got_Addr_NOW , SERCOM_NOW);
-                
-    }else if(I2C_Got_Addr_NOW == PIC_OPCODE_BMC_SIDE_ADDR)
-    {
-        SERCOM_PIC_OPcode_Callback(event , I2C_Got_Addr_NOW , SERCOM_NOW);
-    }
     
+    switch (I2C_Got_Addr_NOW) {
+        case PSU1_FRU_BMC_SIDE_ADDR:
+        case PSU0_FRU_BMC_SIDE_ADDR:
+        case PIC_FRU_BMC_SIDE_ADDR:
+            SERCOM1_FRU_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+
+        case PIC_OPCODE_BMC_SIDE_ADDR:
+            SERCOM1_PIC_OPcode_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+
+        case PSU1_PMBUS_BMC_SIDE_ADDR:
+        case PSU0_PMBUS_BMC_SIDE_ADDR:
+            SERCOM1_PMbus_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+    }
+
     return isSuccess;
 }
 
+bool SERCOM2_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t SERCOM_NOW )
+{
+    bool isSuccess = true;
+    
+    switch (I2C_Got_Addr_NOW) {
+        case PSU1_FRU_BMC_SIDE_ADDR:
+        case PSU0_FRU_BMC_SIDE_ADDR:
+        case PIC_FRU_BMC_SIDE_ADDR:
+            SERCOM2_FRU_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+
+        case PIC_OPCODE_BMC_SIDE_ADDR:
+            SERCOM2_PIC_OPcode_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+
+        case PSU1_PMBUS_BMC_SIDE_ADDR:
+        case PSU0_PMBUS_BMC_SIDE_ADDR:
+            SERCOM2_PMbus_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+    }
+
+    return isSuccess;
+}
+
+bool SERCOM3_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t SERCOM_NOW )
+{
+    bool isSuccess = true;
+    
+    switch (I2C_Got_Addr_NOW) {
+        case PSU1_FRU_BMC_SIDE_ADDR:
+        case PSU0_FRU_BMC_SIDE_ADDR:
+        case PIC_FRU_BMC_SIDE_ADDR:
+            SERCOM3_FRU_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+
+        case PIC_OPCODE_BMC_SIDE_ADDR:
+            SERCOM3_PIC_OPcode_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+
+        case PSU1_PMBUS_BMC_SIDE_ADDR:
+        case PSU0_PMBUS_BMC_SIDE_ADDR:
+            SERCOM3_PMbus_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+    }
+   
+    return isSuccess;
+}
+
+bool SERCOM4_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t SERCOM_NOW )
+{
+    bool isSuccess = true;
+    
+    switch (I2C_Got_Addr_NOW) {
+        case PSU1_FRU_BMC_SIDE_ADDR:
+        case PSU0_FRU_BMC_SIDE_ADDR:
+        case PIC_FRU_BMC_SIDE_ADDR:
+            SERCOM4_FRU_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+
+        case PIC_OPCODE_BMC_SIDE_ADDR:
+            SERCOM4_PIC_OPcode_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+
+        case PSU1_PMBUS_BMC_SIDE_ADDR:
+        case PSU0_PMBUS_BMC_SIDE_ADDR:
+            SERCOM4_PMbus_Callback(event, I2C_Got_Addr_NOW, SERCOM_NOW);
+            break;
+    }
+  
+    return isSuccess;
+}
 /* *****************************************************************************
  End of File
  */

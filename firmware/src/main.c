@@ -25,8 +25,10 @@
 #include <stddef.h>                     // Defines NULL
 #include <stdbool.h>                    // Defines true
 #include <stdlib.h>                     // Defines EXIT_FAILURE
+#include <string.h>
 #include "definitions.h"                // SYS function prototypes
 #include "i2c_address.h"
+#include "pmbus_command.h"
 #include "Purnell_OEM.h"
 
 
@@ -35,10 +37,13 @@
 // Section: Main Entry Point
 // *****************************************************************************
 // *****************************************************************************
+DataMap PSU_Data;
 
 int main ( void )
 {
     /* Initialize all modules */
+    int PSU_read_time = 0; 
+    int bring_up = 0;
     SYS_Initialize ( NULL );
     
     EIC_Initialize();
@@ -46,14 +51,16 @@ int main ( void )
     TC0_TimerInitialize();
     TC0_TimerStart();
     
-    SERCOM1_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM1);
-    SERCOM2_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM2);
-    SERCOM3_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM3);
-    SERCOM4_I2C_CallbackRegister(SERCOM_I2C_Callback, SERCOM4);
+    SERCOM1_I2C_CallbackRegister(SERCOM1_I2C_Callback, SERCOM1);
+    SERCOM2_I2C_CallbackRegister(SERCOM2_I2C_Callback, SERCOM2);
+    SERCOM3_I2C_CallbackRegister(SERCOM3_I2C_Callback, SERCOM3);
+    SERCOM4_I2C_CallbackRegister(SERCOM4_I2C_Callback, SERCOM4);
     
     uint8_t FRUWriteData[1] = {0x00};
     uint32_t FRUwrLength = 1;
     uint32_t FRUrdLength = 265;
+    uint8_t PSU0_Flag_PMbus_CMD[PIC_OPCODE_SIZE_BYTES];
+    uint8_t PSU1_Flag_PMbus_CMD[PIC_OPCODE_SIZE_BYTES];
     static int PSU0_previoussetExist = UN_KONW_STATUS;
     static int PSU1_previoussetExist = UN_KONW_STATUS;
     
@@ -80,6 +87,25 @@ int main ( void )
     {
         int PSU0_Is_Present;
         int PSU1_Is_Present;
+        
+        switch(PSU_Flag)
+        {
+            case 1:
+                memcpy(PSU0_Flag_PMbus_CMD, OPcode_CMD_MW, sizeof(Ms_W_Cmd_length));
+                SERCOM0_I2C_Write(PSU0_PMBUS_ADDR , PSU0_Flag_PMbus_CMD , Ms_W_Cmd_length);
+                while (SERCOM0_I2C_IsBusy( ));  /*Mike add PSU0 Master write busy flag release*/
+                PSU_Flag = 0;
+                break;
+            case 2:           
+                memcpy(PSU1_Flag_PMbus_CMD, OPcode_CMD_MW, sizeof(Ms_W_Cmd_length));
+                SERCOM0_I2C_Write(PSU1_PMBUS_ADDR , PSU1_Flag_PMbus_CMD , Ms_W_Cmd_length);
+                while (SERCOM0_I2C_IsBusy( ));  /*Mike add PSU1 Master write busy flag release*/
+                PSU_Flag = 0;
+                break;
+            default:
+                break;
+        }
+
         /* Maintain state machines of all polled MPLAB Harmony modules. */
         if (TC0_TimerPeriodHasExpired()) {
             /*refer http://tao-pdmnet-4:8080/tfs/TAO_BU5_FW5/FW5E/_git/Purnell-DOCS?path=/
@@ -90,7 +116,18 @@ int main ( void )
             
             PSU0_Is_Present = PORT_PinRead(PORT_PIN_PA20);
             PSU1_Is_Present = PORT_PinRead(PORT_PIN_PA21);
-            
+
+            if (PSU_read_time == 30)
+            {
+                Read_PSU0_PMbus_Data(&PSU_Data);
+            }
+            else if (PSU_read_time == 60)
+            {
+                Read_PSU1_PMbus_Data(&PSU_Data);
+                PSU_read_time = 0;
+            }
+            PSU_read_time++;
+
             MCU_PA19_FAN_BD_00_PRSNT_N_level = MCU_PA19_FAN_BD_00_PRSNT_N_Get();
             MCU_PA15_FAN_BD_01_PRSNT_N_level = MCU_PA15_FAN_BD_01_PRSNT_N_Get();
             MCU_PA25_FAN_BD_10_PRSNT_N_level = MCU_PA25_FAN_BD_10_PRSNT_N_Get();
@@ -155,6 +192,12 @@ int main ( void )
                 PSU0_previoussetExist = PSU0_Is_Present;
                 PSU1_previoussetExist = PSU1_Is_Present;
             }
+            if (bring_up < 45)
+            {
+                Read_PSU0_PMbus_Data(&PSU_Data);
+                Read_PSU1_PMbus_Data(&PSU_Data);
+            }
+            bring_up++;
         }
         SYS_Tasks ( );
         
