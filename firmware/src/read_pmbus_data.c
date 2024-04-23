@@ -417,10 +417,6 @@ void Read_PSU0_PMbus_Data(DataMap *PSU)
         PSU->psu1_table[CmdArrayPtr[i][0]].key = PSU0_DataArrayPtr[i].key;
         PSU->psu1_table[CmdArrayPtr[i][0]].cmd = CmdArrayPtr[i][0];
         memset(PSU_PMbus_Data, UN_PMBUS_STATUS, sizeof(PSU_PMbus_Data));
-        if (CmdArrayPtr[i][0] == 0x8d || CmdArrayPtr[i][0] == 0x8e || CmdArrayPtr[i][0] == 0x8f)
-        {
-            printf("PDB I2C Master RW PSU1 temp command : 0x%x , data Byte 0: 0x%x, data Byte 1: 0x%x  \r\n", CmdArrayPtr[i][0], PSU->psu1_table[CmdArrayPtr[i][0]].key[0], PSU->psu1_table[CmdArrayPtr[i][0]].key[1]);
-        }
     }
     PSU->psu1_table[CAPABILITY].key = PSU0_CAPABILITY_Data;
     PSU->psu1_table[CLEAR_FAULTS].key = PSU0_CLEAR_FAULTS_Data;
@@ -562,10 +558,6 @@ void Read_PSU1_PMbus_Data(DataMap *PSU)
         PSU->psu2_table[CmdArrayPtr[i][0]].key = PSU1_DataArrayPtr[i].key;
         PSU->psu2_table[CmdArrayPtr[i][0]].cmd = CmdArrayPtr[i][0];
         memset(PSU_PMbus_Data, UN_PMBUS_STATUS, sizeof(PSU_PMbus_Data));
-        if (CmdArrayPtr[i][0] == 0x8d || CmdArrayPtr[i][0] == 0x8e || CmdArrayPtr[i][0] == 0x8f)
-        {
-            printf("PDB I2C Master RW PSU2 temp command : 0x%x , data Byte 0: 0x%x, data Byte 1: 0x%x  \r\n", CmdArrayPtr[i][0], PSU->psu2_table[CmdArrayPtr[i][0]].key[0], PSU->psu2_table[CmdArrayPtr[i][0]].key[1]);
-        }
     }
     PSU->psu2_table[CAPABILITY].key = PSU1_CAPABILITY_Data;
     PSU->psu2_table[CLEAR_FAULTS].key = PSU1_CLEAR_FAULTS_Data;
