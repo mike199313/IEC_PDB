@@ -43,7 +43,6 @@ int main ( void )
 {
     /* Initialize all modules */
     int PSU_read_time = 0;
-    int bring_up = 0;
     SYS_Initialize ( NULL );
 
     EIC_Initialize();
@@ -83,6 +82,9 @@ int main ( void )
     EIC_CallbackRegister(EIC_PIN_0, EIC_Callback_0, MCU_PB00_PSU0_AC_OK_PIN);
     EIC_CallbackRegister(EIC_PIN_1, EIC_Callback_1, MCU_PB01_PSU1_AC_OK_PIN);
 
+    Read_PSU0_PMbus_Data(&PSU_Data);
+    Read_PSU1_PMbus_Data(&PSU_Data);
+    //   initial psu0 / psu1 data array one times to avoid bmc kernel runtime init pmbus fail
     while ( true )
     {
         int PSU0_Is_Present;
@@ -192,12 +194,6 @@ int main ( void )
                 PSU0_previoussetExist = PSU0_Is_Present;
                 PSU1_previoussetExist = PSU1_Is_Present;
             }
-            if (bring_up < 45)
-            {
-                Read_PSU0_PMbus_Data(&PSU_Data);
-                Read_PSU1_PMbus_Data(&PSU_Data);
-            }
-            bring_up++;
         }
         SYS_Tasks ( );
 
