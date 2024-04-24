@@ -414,16 +414,16 @@ void Read_PSU0_PMbus_Data(DataMap *PSU)
         SERCOM0_I2C_WriteRead( PSU0_PMBUS_ADDR , (uint8_t*)CmdArrayPtr[i], PMbuswrLength , PSU_PMbus_Data , PMbusrdLength);
         while (SERCOM0_I2C_IsBusy( ));
         memcpy(PSU0_DataArrayPtr[i].key, PSU_PMbus_Data, PSU0_DataArrayPtr[i].value);
-        PSU->psu1_table[CmdArrayPtr[i][0]].key = PSU0_DataArrayPtr[i].key;
-        PSU->psu1_table[CmdArrayPtr[i][0]].cmd = CmdArrayPtr[i][0];
+        PSU->psu0_table[CmdArrayPtr[i][0]].key = PSU0_DataArrayPtr[i].key;
+        PSU->psu0_table[CmdArrayPtr[i][0]].cmd = CmdArrayPtr[i][0];
         memset(PSU_PMbus_Data, UN_PMBUS_STATUS, sizeof(PSU_PMbus_Data));
     }
-    PSU->psu1_table[CAPABILITY].key = PSU0_CAPABILITY_Data;
-    PSU->psu1_table[CLEAR_FAULTS].key = PSU0_CLEAR_FAULTS_Data;
-    PSU->psu1_table[PAGE_PLUS_WRITE].key = PSU0_PAGE_PLUS_WRITE_Data;
-    PSU->psu1_table[CAPABILITY].cmd = CAPABILITY;
-    PSU->psu1_table[CLEAR_FAULTS].cmd = CLEAR_FAULTS;
-    PSU->psu1_table[PAGE_PLUS_WRITE].cmd = PAGE_PLUS_WRITE;
+    PSU->psu0_table[CAPABILITY].key = PSU0_CAPABILITY_Data;
+    PSU->psu0_table[CLEAR_FAULTS].key = PSU0_CLEAR_FAULTS_Data;
+    PSU->psu0_table[PAGE_PLUS_WRITE].key = PSU0_PAGE_PLUS_WRITE_Data;
+    PSU->psu0_table[CAPABILITY].cmd = CAPABILITY;
+    PSU->psu0_table[CLEAR_FAULTS].cmd = CLEAR_FAULTS;
+    PSU->psu0_table[PAGE_PLUS_WRITE].cmd = PAGE_PLUS_WRITE;
 }
 
 void Read_PSU1_PMbus_Data(DataMap *PSU)
@@ -555,16 +555,16 @@ void Read_PSU1_PMbus_Data(DataMap *PSU)
         SERCOM0_I2C_WriteRead( PSU1_PMBUS_ADDR , (uint8_t*)CmdArrayPtr[i], PMbuswrLength , PSU_PMbus_Data , PMbusrdLength);
         while (SERCOM0_I2C_IsBusy( ));
         memcpy(PSU1_DataArrayPtr[i].key, PSU_PMbus_Data, PSU1_DataArrayPtr[i].value);
-        PSU->psu2_table[CmdArrayPtr[i][0]].key = PSU1_DataArrayPtr[i].key;
-        PSU->psu2_table[CmdArrayPtr[i][0]].cmd = CmdArrayPtr[i][0];
+        PSU->psu1_table[CmdArrayPtr[i][0]].key = PSU1_DataArrayPtr[i].key;
+        PSU->psu1_table[CmdArrayPtr[i][0]].cmd = CmdArrayPtr[i][0];
         memset(PSU_PMbus_Data, UN_PMBUS_STATUS, sizeof(PSU_PMbus_Data));
     }
-    PSU->psu2_table[CAPABILITY].key = PSU1_CAPABILITY_Data;
-    PSU->psu2_table[CLEAR_FAULTS].key = PSU1_CLEAR_FAULTS_Data;
-    PSU->psu2_table[PAGE_PLUS_WRITE].key = PSU1_PAGE_PLUS_WRITE_Data;
-    PSU->psu2_table[CAPABILITY].cmd = CAPABILITY;
-    PSU->psu2_table[CLEAR_FAULTS].cmd = CLEAR_FAULTS;
-    PSU->psu2_table[PAGE_PLUS_WRITE].cmd = PAGE_PLUS_WRITE;
+    PSU->psu1_table[CAPABILITY].key = PSU1_CAPABILITY_Data;
+    PSU->psu1_table[CLEAR_FAULTS].key = PSU1_CLEAR_FAULTS_Data;
+    PSU->psu1_table[PAGE_PLUS_WRITE].key = PSU1_PAGE_PLUS_WRITE_Data;
+    PSU->psu1_table[CAPABILITY].cmd = CAPABILITY;
+    PSU->psu1_table[CLEAR_FAULTS].cmd = CLEAR_FAULTS;
+    PSU->psu1_table[PAGE_PLUS_WRITE].cmd = PAGE_PLUS_WRITE;
 }
 
 /* *****************************************************************************

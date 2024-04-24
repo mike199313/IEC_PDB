@@ -393,8 +393,8 @@ typedef struct{
 }KeyValue;
 
 typedef struct {
+    KeyValue psu0_table[MFR_MAX_TEMP_3 + 1];
     KeyValue psu1_table[MFR_MAX_TEMP_3 + 1];
-    KeyValue psu2_table[MFR_MAX_TEMP_3 + 1];
 }DataMap;
 
 extern DataMap PSU_Data;

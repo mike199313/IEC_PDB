@@ -72,9 +72,9 @@ void SERCOM1_PSU_Data_Return(DataMap *PSU, uint16_t CurrentADDR,  uintptr_t I2C_
         switch(I2C_Got_Addr_NOW)
             {       
             case PSU0_PMBUS_BMC_SIDE_ADDR:
-                if (PSU->psu1_table[PMbus_CMD].cmd == PMbus_CMD)
+                if (PSU->psu0_table[PMbus_CMD].cmd == PMbus_CMD)
                 {
-                    SERCOM1_I2C_WriteByte(PSU->psu1_table[PMbus_CMD].key[CurrentADDR]);
+                    SERCOM1_I2C_WriteByte(PSU->psu0_table[PMbus_CMD].key[CurrentADDR]);
                     break;
                 }
                 else
@@ -83,9 +83,9 @@ void SERCOM1_PSU_Data_Return(DataMap *PSU, uint16_t CurrentADDR,  uintptr_t I2C_
                     break;
                 }
             case PSU1_PMBUS_BMC_SIDE_ADDR:
-                if (PSU->psu2_table[PMbus_CMD].cmd == PMbus_CMD)
+                if (PSU->psu1_table[PMbus_CMD].cmd == PMbus_CMD)
                 {
-                    SERCOM1_I2C_WriteByte(PSU->psu2_table[PMbus_CMD].key[CurrentADDR]);
+                    SERCOM1_I2C_WriteByte(PSU->psu1_table[PMbus_CMD].key[CurrentADDR]);
                     break;
                 }
                 else
@@ -113,9 +113,9 @@ void SERCOM2_PSU_Data_Return(DataMap *PSU, uint16_t CurrentADDR,  uintptr_t I2C_
         switch(I2C_Got_Addr_NOW)
             {       
             case PSU0_PMBUS_BMC_SIDE_ADDR:
-                if (PSU->psu1_table[PMbus_CMD].cmd == PMbus_CMD)
+                if (PSU->psu0_table[PMbus_CMD].cmd == PMbus_CMD)
                 {
-                    SERCOM2_I2C_WriteByte(PSU->psu1_table[PMbus_CMD].key[CurrentADDR]);
+                    SERCOM2_I2C_WriteByte(PSU->psu0_table[PMbus_CMD].key[CurrentADDR]);
                     break;
                 }
                 else
@@ -124,9 +124,9 @@ void SERCOM2_PSU_Data_Return(DataMap *PSU, uint16_t CurrentADDR,  uintptr_t I2C_
                     break;
                 }
             case PSU1_PMBUS_BMC_SIDE_ADDR:
-                if (PSU->psu2_table[PMbus_CMD].cmd == PMbus_CMD)
+                if (PSU->psu1_table[PMbus_CMD].cmd == PMbus_CMD)
                 {
-                    SERCOM2_I2C_WriteByte(PSU->psu2_table[PMbus_CMD].key[CurrentADDR]);
+                    SERCOM2_I2C_WriteByte(PSU->psu1_table[PMbus_CMD].key[CurrentADDR]);
                     break;
                 }
                 else
@@ -153,9 +153,9 @@ void SERCOM3_PSU_Data_Return(DataMap *PSU, uint16_t CurrentADDR,  uintptr_t I2C_
         switch(I2C_Got_Addr_NOW)
             {       
             case PSU0_PMBUS_BMC_SIDE_ADDR:
-                if (PSU->psu1_table[PMbus_CMD].cmd == PMbus_CMD)
+                if (PSU->psu0_table[PMbus_CMD].cmd == PMbus_CMD)
                 {
-                    SERCOM3_I2C_WriteByte(PSU->psu1_table[PMbus_CMD].key[CurrentADDR]);
+                    SERCOM3_I2C_WriteByte(PSU->psu0_table[PMbus_CMD].key[CurrentADDR]);
                     break;
                 }
                 else
@@ -164,9 +164,9 @@ void SERCOM3_PSU_Data_Return(DataMap *PSU, uint16_t CurrentADDR,  uintptr_t I2C_
                     break;
                 }
             case PSU1_PMBUS_BMC_SIDE_ADDR:
-                if (PSU->psu2_table[PMbus_CMD].cmd == PMbus_CMD)
+                if (PSU->psu1_table[PMbus_CMD].cmd == PMbus_CMD)
                 {
-                    SERCOM3_I2C_WriteByte(PSU->psu2_table[PMbus_CMD].key[CurrentADDR]);
+                    SERCOM3_I2C_WriteByte(PSU->psu1_table[PMbus_CMD].key[CurrentADDR]);
                     break;
                 }
                 else
@@ -193,9 +193,9 @@ void SERCOM4_PSU_Data_Return(DataMap *PSU, uint16_t CurrentADDR,  uintptr_t I2C_
         switch(I2C_Got_Addr_NOW)
             {       
             case PSU0_PMBUS_BMC_SIDE_ADDR:
-                if (PSU->psu1_table[PMbus_CMD].cmd == PMbus_CMD)
+                if (PSU->psu0_table[PMbus_CMD].cmd == PMbus_CMD)
                 {
-                    SERCOM4_I2C_WriteByte(PSU->psu1_table[PMbus_CMD].key[CurrentADDR]);
+                    SERCOM4_I2C_WriteByte(PSU->psu0_table[PMbus_CMD].key[CurrentADDR]);
                     break;
                 }
                 else
@@ -204,9 +204,9 @@ void SERCOM4_PSU_Data_Return(DataMap *PSU, uint16_t CurrentADDR,  uintptr_t I2C_
                     break;
                 }
             case PSU1_PMBUS_BMC_SIDE_ADDR:
-                if (PSU->psu2_table[PMbus_CMD].cmd == PMbus_CMD)
+                if (PSU->psu1_table[PMbus_CMD].cmd == PMbus_CMD)
                 {
-                    SERCOM4_I2C_WriteByte(PSU->psu2_table[PMbus_CMD].key[CurrentADDR]);
+                    SERCOM4_I2C_WriteByte(PSU->psu1_table[PMbus_CMD].key[CurrentADDR]);
                     break;
                 }
                 else
