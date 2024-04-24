@@ -250,8 +250,6 @@ uint8_t PSU1_PAGE_PLUS_WRITE_Data[PMBUS_TWO_SIZE_BYTES] = {[0 ... (PMBUS_TWO_SIZ
 uint8_t PSU1_READ_EIN_Data[PMBUS_SIX_SIZE_BYTES] = {[0 ... (PMBUS_SIX_SIZE_BYTES-1)] = UN_PMBUS_STATUS};
 uint8_t PSU1_READ_EOUT_Data[PMBUS_SIX_SIZE_BYTES] = {[0 ... (PMBUS_SIX_SIZE_BYTES-1)] = UN_PMBUS_STATUS};
 
-uint8_t PSU_PMbus_Data[PMBUS_SIX_SIZE_BYTES] = {[0 ... (PMBUS_SIX_SIZE_BYTES-1)] = UN_PMBUS_STATUS};
-
 //extern volatile struct KeyValue * volatile PSU_data_array;
 KeyValue PSU0_DataArrayPtr[] = {{PSU0_PMBUS_PAGE_Data,PMBUS_TWO_SIZE_BYTES}, {PSU0_VOUT_MODE_Data,PMBUS_TWO_SIZE_BYTES}, {PSU0_FAN_CONFIG_12_Data,PMBUS_TWO_SIZE_BYTES}, {PSU0_FAN_COMMAND_1_Data,PMBUS_THREE_SIZE_BYTES}, {PSU0_IOUT_OC_FAULT_LIMIT_Data,PMBUS_THREE_SIZE_BYTES}, {PSU0_IOUT_OC_WARNING_LIMIT_Data,PMBUS_THREE_SIZE_BYTES}, 
 {PSU0_OT_WARN_LIMIT_Data,PMBUS_THREE_SIZE_BYTES}, {PSU0_IIN_OC_WARN_LIMIT_Data,PMBUS_THREE_SIZE_BYTES}, {PSU0_POUT_OP_FAULT_LIMIT_Data,PMBUS_THREE_SIZE_BYTES}, {PSU0_PIN_OP_WARN_LIMIT_Data,PMBUS_THREE_SIZE_BYTES}, {PSU0_STATUS_WORD_Data,PMBUS_THREE_SIZE_BYTES}, {PSU0_STATUS_VOUT_Data,PMBUS_TWO_SIZE_BYTES}, {PSU0_STATUS_IOUT_Data,PMBUS_TWO_SIZE_BYTES}, {PSU0_STATUS_INPUT_Data,PMBUS_TWO_SIZE_BYTES}, 
@@ -289,6 +287,7 @@ void Read_PSU0_PMbus_Data(DataMap *PSU)
 {
     uint32_t PMbuswrLength = 1;
     uint32_t PMbusrdLength = PMBUS_SIX_SIZE_BYTES;
+    uint8_t PSU_PMbus_Data_Buff[PMBUS_SIX_SIZE_BYTES] = {[0 ... (PMBUS_SIX_SIZE_BYTES-1)] = UN_PMBUS_STATUS};
 
     uint8_t PMBUS_CAPABILITY_CMD[CMD_SIZE_ONE_BYTE] = {CAPABILITY};
     uint8_t PMBUS_CLEAR_FAULTS_CMD[CMD_SIZE_ONE_BYTE] = {CLEAR_FAULTS};
@@ -409,16 +408,16 @@ void Read_PSU0_PMbus_Data(DataMap *PSU)
     PMBUS_MFR_ID_CMD, PMBUS_MFR_MODEL_CMD, PMBUS_MFR_REVISION_CMD, PMBUS_MFR_LOCATION_CMD, PMBUS_MFR_DATE_CMD, PMBUS_MFR_SERIAL_CMD, IC_DEVICE_ID_CMD, IC_DEVICE_REV_CMD, MFR_MAX_TEMP_3_CMD, READ_EIN_CMD, READ_EOUT_CMD};    
 
     for (size_t i = 0; i < sizeof( CmdArrayPtr )/sizeof( CmdArrayPtr[0] ) ; i++ ) {       
-        SERCOM0_I2C_WriteRead( PSU0_PMBUS_ADDR , (uint8_t*)CmdArrayPtr[i], PMbuswrLength , PSU_PMbus_Data , PMbusrdLength);
+        SERCOM0_I2C_WriteRead( PSU0_PMBUS_ADDR , (uint8_t*)CmdArrayPtr[i], PMbuswrLength, PSU_PMbus_Data_Buff, PMbusrdLength);
         while (SERCOM0_I2C_IsBusy( ));
-        memcpy(PSU0_DataArrayPtr[i].key, PSU_PMbus_Data, PSU0_DataArrayPtr[i].value);
+        memcpy(PSU0_DataArrayPtr[i].key, PSU_PMbus_Data_Buff, PSU0_DataArrayPtr[i].value);
         if (CmdArrayPtr[i][0] == CAPABILITY)   //If command match capability
         {
             PSU0_DataArrayPtr[i].key[0] = PSU0_DataArrayPtr[i].key[0] & CAPABILITY_DISABLE_PEC_MASK;   //psu0 byte 0 is capability data & disable mask to disable pmbus pec check
         }
         PSU->psu0_table[CmdArrayPtr[i][0]].key = PSU0_DataArrayPtr[i].key;
         PSU->psu0_table[CmdArrayPtr[i][0]].cmd = CmdArrayPtr[i][0];
-        memset(PSU_PMbus_Data, UN_PMBUS_STATUS, sizeof(PSU_PMbus_Data));
+        memset(PSU_PMbus_Data_Buff, UN_PMBUS_STATUS, sizeof(PSU_PMbus_Data_Buff));
     }
 }
 
@@ -426,6 +425,7 @@ void Read_PSU1_PMbus_Data(DataMap *PSU)
 {
     uint32_t PMbuswrLength = 1;
     uint32_t PMbusrdLength = PMBUS_SIX_SIZE_BYTES;
+    uint8_t PSU_PMbus_Data_Buff[PMBUS_SIX_SIZE_BYTES] = {[0 ... (PMBUS_SIX_SIZE_BYTES-1)] = UN_PMBUS_STATUS};
 
     uint8_t PMBUS_CAPABILITY_CMD[CMD_SIZE_ONE_BYTE] = {CAPABILITY};
     uint8_t PMBUS_CLEAR_FAULTS_CMD[CMD_SIZE_ONE_BYTE] = {CLEAR_FAULTS};
@@ -546,16 +546,16 @@ void Read_PSU1_PMbus_Data(DataMap *PSU)
     PMBUS_MFR_ID_CMD, PMBUS_MFR_MODEL_CMD, PMBUS_MFR_REVISION_CMD, PMBUS_MFR_LOCATION_CMD, PMBUS_MFR_DATE_CMD, PMBUS_MFR_SERIAL_CMD, IC_DEVICE_ID_CMD, IC_DEVICE_REV_CMD, MFR_MAX_TEMP_3_CMD, READ_EIN_CMD, READ_EOUT_CMD};
 
     for (size_t i = 0; i < sizeof( CmdArrayPtr )/sizeof( CmdArrayPtr[0] ) ; i++ ) {       
-        SERCOM0_I2C_WriteRead( PSU1_PMBUS_ADDR , (uint8_t*)CmdArrayPtr[i], PMbuswrLength , PSU_PMbus_Data , PMbusrdLength);
+        SERCOM0_I2C_WriteRead( PSU1_PMBUS_ADDR , (uint8_t*)CmdArrayPtr[i], PMbuswrLength, PSU_PMbus_Data_Buff, PMbusrdLength);
         while (SERCOM0_I2C_IsBusy( ));
-        memcpy(PSU1_DataArrayPtr[i].key, PSU_PMbus_Data, PSU1_DataArrayPtr[i].value);
+        memcpy(PSU1_DataArrayPtr[i].key, PSU_PMbus_Data_Buff, PSU1_DataArrayPtr[i].value);
         if (CmdArrayPtr[i][0] == CAPABILITY)   //If command match capability
         {
             PSU1_DataArrayPtr[i].key[0] = PSU1_DataArrayPtr[i].key[0] & CAPABILITY_DISABLE_PEC_MASK;   //psu1 byte 0 is capability data & disable mask to disable pmbus pec check
         }
         PSU->psu1_table[CmdArrayPtr[i][0]].key = PSU1_DataArrayPtr[i].key;
         PSU->psu1_table[CmdArrayPtr[i][0]].cmd = CmdArrayPtr[i][0];
-        memset(PSU_PMbus_Data, UN_PMBUS_STATUS, sizeof(PSU_PMbus_Data));
+        memset(PSU_PMbus_Data_Buff, UN_PMBUS_STATUS, sizeof(PSU_PMbus_Data_Buff));
     }
 }
 
