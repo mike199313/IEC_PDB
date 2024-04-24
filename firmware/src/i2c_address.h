@@ -48,6 +48,8 @@
 #define ODM_FAIL                    -1
 #define CMD_SIZE_BYTE               10  //The maximum size of the CMD that can be used
 #define CMD_SIZE_ONE_BYTE           1
+#define PSU0_POLLING_TASK_TIME         30  //0.5 * 30 = 15 seconds   TC0_TimerPeriodHasExpired() function execution time == 0.5 seconds
+#define PSU1_POLLING_TASK_TIME         60  //0.5 * 60 = 30 seconds   TC0_TimerPeriodHasExpired() function execution time == 0.5 seconds
 
 extern uint8_t I2C_Got_Addr_NOW;
 extern int I2C_SLAVE_ADDR_MASK;
@@ -105,7 +107,7 @@ uint8_t GET_SERCOM3_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);
 uint8_t GET_SERCOM4_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);
 uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
 
-void PSU_Flag_Ms_W(uintptr_t I2C_Got_Addr_NOW); /*Mike add PSU_Flag_Assert header*/
+void PSU_Flag_Ms_W(uintptr_t I2C_Got_Addr_NOW);
 bool SERCOM1_PMbus_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
 bool SERCOM2_PMbus_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
 bool SERCOM3_PMbus_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
