@@ -51,6 +51,10 @@
 #define PSU0_POLLING_TASK_TIME         30  //0.5 * 30 = 15 seconds   TC0_TimerPeriodHasExpired() function execution time == 0.5 seconds
 #define PSU1_POLLING_TASK_TIME         60  //0.5 * 60 = 30 seconds   TC0_TimerPeriodHasExpired() function execution time == 0.5 seconds
 
+#define BIT(nr)         (1U << (nr))   /* reference linux c define BIT funcion */
+#define CAPABILITY_PEC_BIT         BIT(7)
+#define CAPABILITY_DISABLE_PEC_MASK       !(CAPABILITY_PEC_BIT)  //Accroding spec PMBus. Power System Management Protocol Specification Part II – Command Language Page.59 section 11.12. CAPABILITY Bits 7 is Packet Error Checking , we set this value as zero to let Packet Error Checking not supported
+
 extern uint8_t I2C_Got_Addr_NOW;
 extern int I2C_SLAVE_ADDR_MASK;
 extern uint8_t PIN_NUMBER;
