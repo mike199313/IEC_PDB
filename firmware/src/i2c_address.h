@@ -30,6 +30,9 @@
 #define SLAVE_ADDR_MASK             0x0f //all PSU exist
 #define PSU0_SLAVE_ADDR_MASK        0x0e //only PSU0 exist
 #define PSU1_SLAVE_ADDR_MASK        0x0d //only PSU1 exist
+#define PMBUS_TWO_SIZE_BYTES        2
+#define PMBUS_THREE_SIZE_BYTES      3
+#define PMBUS_SIX_SIZE_BYTES        6
 
 #define SERCOM1                     1
 #define SERCOM2                     2
@@ -45,6 +48,12 @@
 #define ODM_FAIL                    -1
 #define CMD_SIZE_BYTE               10  //The maximum size of the CMD that can be used
 #define CMD_SIZE_ONE_BYTE           1
+#define PSU0_POLLING_TASK_TIME         30  //0.5 * 30 = 15 seconds   TC0_TimerPeriodHasExpired() function execution time == 0.5 seconds
+#define PSU1_POLLING_TASK_TIME         60  //0.5 * 60 = 30 seconds   TC0_TimerPeriodHasExpired() function execution time == 0.5 seconds
+
+#define BIT(nr)         (1U << (nr))   /* reference linux c define BIT funcion */
+#define CAPABILITY_PEC_BIT         BIT(7)
+#define CAPABILITY_DISABLE_PEC_MASK       !(CAPABILITY_PEC_BIT)  //Accroding spec PMBus. Power System Management Protocol Specification Part II – Command Language Page.59 section 11.12. CAPABILITY Bits 7 is Packet Error Checking , we set this value as zero to let Packet Error Checking not supported
 
 extern uint8_t I2C_Got_Addr_NOW;
 extern int I2C_SLAVE_ADDR_MASK;
@@ -80,21 +89,52 @@ typedef struct
 extern FRU_DATA   fruData;
 extern FRU_DATA   picData;
 
+extern uint32_t Ms_W_Cmd_length;
+extern int PSU_Flag;
+extern uint8_t* OPcode_CMD_MW;
 extern uint8_t OPcode_CMD[PIC_OPCODE_SIZE_BYTES];
+extern uint8_t SERCOM1_CMD[PIC_OPCODE_SIZE_BYTES];
+extern uint8_t SERCOM2_CMD[PIC_OPCODE_SIZE_BYTES];
+extern uint8_t SERCOM3_CMD[PIC_OPCODE_SIZE_BYTES];
+extern uint8_t SERCOM4_CMD[PIC_OPCODE_SIZE_BYTES];
+extern uint8_t PSU0_Flag_PMbus_CMD[PIC_OPCODE_SIZE_BYTES];
+extern uint8_t PSU1_Flag_PMbus_CMD[PIC_OPCODE_SIZE_BYTES];
 
 extern uint8_t PSU0_FRU_Data[FRU_SIZE_BYTES];
 extern uint8_t PSU1_FRU_Data[FRU_SIZE_BYTES];
 extern const uint8_t PIC_FRU_Data[PIC_FRU_SIZE_BYTES];
 
 uint8_t GET_SERCOM_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);
+uint8_t GET_SERCOM1_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);
+uint8_t GET_SERCOM2_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);
+uint8_t GET_SERCOM3_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);
+uint8_t GET_SERCOM4_I2C_OFFSET(uintptr_t SERCOM_NOW , int CMD_Size);
 uint8_t Packing_Payload_Data(uint16_t CurrentADDR ,  uintptr_t I2C_Got_Addr_NOW ,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
 
+void PSU_Flag_Ms_W(uintptr_t I2C_Got_Addr_NOW);
+bool SERCOM1_PMbus_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM2_PMbus_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM3_PMbus_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM4_PMbus_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
 bool Change_Mask_ADDR(int PSU0exist , int PSU1exist);
 bool Event_ADDR_Match( uintptr_t SERCOM_NOW );
+bool SERCOM1_ADDR_Match();
+bool SERCOM2_ADDR_Match();
+bool SERCOM3_ADDR_Match();
+bool SERCOM4_ADDR_Match();
 bool Select_SERCOM(uint16_t CurrentADDR, uintptr_t I2C_Got_Addr_NOW , uintptr_t SERCOM_NOW,uint8_t PIC_CMD ,uint8_t PIC_CMD_Size);
-bool SERCOM_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
-bool SERCOM_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
-bool SERCOM_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM1_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM2_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM3_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM4_I2C_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle );
+bool SERCOM1_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM2_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM3_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM4_FRU_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM1_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM2_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM3_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
+bool SERCOM4_PIC_OPcode_Callback ( SERCOM_I2C_SLAVE_TRANSFER_EVENT event, uintptr_t contextHandle, uintptr_t SERCOM_NOW );
 void EIC_Callback_0 ( uintptr_t contextHandle );
 void EIC_Callback_1 ( uintptr_t contextHandle );
 void PSU0_Power_Good_to_MB_CPLD (bool PSU0_PW_level);
